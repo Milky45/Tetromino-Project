@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KorSkill" Collapsed="true">
+    <Position X="1.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAACAAAAAAAQEAAAAAAAEBAAAAAgAAQAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Character Skills\Kor Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PackHatSkill" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAACAAAAAAAQUAAAAAAAEBCAAAAgAgQAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Character Skills\PackHat Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="4.75" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ScorchSkill" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAACAAAAAAAQEAAAAAAAEBAAAAAgAAQAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Character Skills\Scorch Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TetroSkill" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAACABACAAAAAAAQGAAAQAAAEBAAAAAgAAQEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Character Skills\Tetro Skill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeatSnare" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARQAAAAACAAABCSAAAAABAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Light Show\Beat Snare Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeatSyncManager" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAACAQAEBQABAAABwAAAAAAQAMAAABAAQAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Light Show\Beat Sync Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BorderVisuals" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIASQQQACEAABACAAIAAACAAAAAAAIEAIAAAAAIAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Light Show\Boarder Visuals.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterSelector" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IMACAAgAFCAAAwBAQABRwAAcARAgAEAoCQUIQCgACEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\Character Selector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputManager" Collapsed="true">
+    <Position X="6" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAABAAAAAAwAIAAAIAAQAAAAAAAAAAAAQAAAACA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\Input Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRTFilter" Collapsed="true">
+    <Position X="6" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgAAAAAAAAAAAAAAAAAAAAAEAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\CRT Filter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LobbyPauseEvents" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAEAAAAAAAAAQEAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\Lobby Pause Events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="P1Settings" Collapsed="true">
+    <Position X="6" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgQEAABAACIAAACAAQAAAAAAAAAAAAAAAAAFACAACEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\P1 Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="P2Settings" Collapsed="true">
+    <Position X="4.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgQEAABAACIAAAKAAAAAAAAAAAAAAAAAAAAFACAACEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\P2 Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerReady" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAQAAgAAAAgAAgBAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\Player Ready.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RoomSettings" Collapsed="true">
+    <Position X="6" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAchABSIgAAEIgAAACQAgAAAEIIIgIIAAECAIAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Lobby\Room Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GamePause" Collapsed="true">
+    <Position X="3.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAACAAAAAAAAAAAAAAAAACACAAQAAgAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Pause\Game Pause.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pausebtnevents" Collapsed="true">
+    <Position X="3.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAARQgAQAAACAASAAAAAAAAAAAAAAQEkAgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Pause\Pause btn events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlueRGB" Collapsed="true">
+    <Position X="3.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCKAgAASAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\RGB Animation\Blue RGB anim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RedRGB" Collapsed="true">
+    <Position X="3.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCKAgAASAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\RGB Animation\Red RGB anim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RGB" Collapsed="true">
+    <Position X="2.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAgAACAAAAAAAAAAAAgACAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\RGB Animation\RGB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

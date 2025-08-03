@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AmmoDisplay" Collapsed="true">
+    <Position X="2" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAQAAAAQAABAAAAAAAghAAAAAgDAyAAAAQAQQAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\Ammo Display.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="AudioSettings" Collapsed="true">
+    <Position X="2" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABAAAAgGAAAAAAAAAAACAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\Audio Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BlindingDebuffEffect" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAIAICAgAAAAAAIIABAAAABAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\Blind Debuff Effect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardManager" Collapsed="true">
+    <Position X="5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBAAAAAAAAAACABAAgtAAAAAgABAAAQIQQQBAEAgAgA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\BoardManageP1r.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardManagerP2" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBAAAAAAAAAACABAAgtAAAAAgABAAAQIQQQBAEAgAgA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\BoardManagerP2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="2" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IWQhkAABAWQAgWUMAUICSCSCiABHAGJ7KhBCKQAwOEk=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManagerP2" Collapsed="true">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IWQhkAABAWQAiWUIAUICSCSCgABHAGJbKhBCKQAwOEk=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\GameManagerP2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameOverSave" Collapsed="true">
+    <Position X="8" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAAAAAAAAAgAgAAAAAAAAAAAAACAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\GameOverSave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PieceController" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAACEABAAABAQBIAACCACAoCAIIgAQCEBAKlE=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\PieceController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PieceControllerP2" Collapsed="true">
+    <Position X="9.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAACEABAAABAQBIAACCACAoCAIIgAQCEBAKlE=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\PieceControllerP2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VsGameOverManager" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAgQgEFCAEAA0EAMAQgAiUCAAAgSAAIAEAQCAQmQA=</HashCode>
+      <FileName>Assets\Scripts\Game\VS Mode\Vs Game\Vs Game Over Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AudioManager" Collapsed="true">
+    <Position X="5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkAAeAACAAAAABCAACAAAAAAUEAAQASAQQCAQAgAwEA=</HashCode>
+      <FileName>Assets\Scripts\Game\Shared Scripts\AudioManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GhostPieceController" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAIAACAAAAgAAAIAQQAABAAAE=</HashCode>
+      <FileName>Assets\Scripts\Game\Shared Scripts\GhostPieceController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HoldDisplayUI" Collapsed="true">
+    <Position X="1" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Shared Scripts\HoldDisplayUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="2.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="NextDisplayUI" Collapsed="true">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Shared Scripts\NextDisplayUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TetrominoData">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAgAAAAAAAAAICAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Shared Scripts\TetrominoData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimerDisplay" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAACBAAABAEAAAAAAIAABAAAAAAAAAAgAAAQA=</HashCode>
+      <FileName>Assets\Scripts\Game\Shared Scripts\TimerDisplay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="TetrominoType">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACyFAAE=</HashCode>
+      <FileName>Assets\Scripts\Game\Shared Scripts\Tetromino.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

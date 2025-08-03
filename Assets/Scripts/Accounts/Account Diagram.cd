@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AccountSettingsUI">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAKABAAAEAAAAAAAAAAAAAAAAAAAIAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Accounts\AccountSeettingsUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="5.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="AccountCreator">
+    <Position X="3.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAAAEAAAAAAAAAAAAAACAAAAIAQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Accounts\AcountCreator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginUser">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAACAAAAAFAAAAgAAAAAAAAAIAABIIAIAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Accounts\Login User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginValidator">
+    <Position X="10" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAAAAAACBAAAAAgAAAAAAAGABAAAARAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Accounts\Login Validator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadP1Stats" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAgAAAAACAgAAABAAAAAAAAAAAAAACoAQAAAFAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Accounts\Load P1 Stats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadP2Stats" Collapsed="true">
+    <Position X="8.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAgAAAAACAgAAABAAAAAAAAAAAAAACoAQAAAFAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Accounts\Load P2 Stats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginLoader">
+    <Position X="1.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAEAAAIAAAAAAEAAAgAAAAEAAgACAAAAAABAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Accounts\Login Loader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

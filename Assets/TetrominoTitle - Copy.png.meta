@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 6458a843318621c41bda6db7324e97fc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5010694284135362902
+    second: TetrominoTitle - Copy_0
+  - first:
+      213: 604319004254698078
+    second: TetrominoTitle - Copy_1
+  - first:
+      213: -4866178687872812477
+    second: TetrominoTitle - Copy_2
+  - first:
+      213: 4945962708277858892
+    second: TetrominoTitle - Copy_3
+  - first:
+      213: -6377279372304265347
+    second: TetrominoTitle - Copy_4
+  - first:
+      213: -6055137789871899647
+    second: TetrominoTitle - Copy_5
+  - first:
+      213: 1136090860843293710
+    second: TetrominoTitle - Copy_6
+  - first:
+      213: -7030629792905609090
+    second: TetrominoTitle - Copy_7
+  - first:
+      213: 3920325871015406809
+    second: TetrominoTitle - Copy_8
+  - first:
+      213: -2179194669275071987
+    second: TetrominoTitle - Copy_9
+  - first:
+      213: -1706056265160940215
+    second: TetrominoTitle - Copy_10
+  - first:
+      213: 2213591956898527473
+    second: TetrominoTitle - Copy_11
+  - first:
+      213: -1444000918061949007
+    second: TetrominoTitle - Copy_12
+  - first:
+      213: 2896211803148616341
+    second: TetrominoTitle - Copy_13
+  - first:
+      213: 2669778720194911839
+    second: TetrominoTitle - Copy_14
+  - first:
+      213: -4799193257591156917
+    second: TetrominoTitle - Copy_15
+  - first:
+      213: -1473536781961287822
+    second: TetrominoTitle - Copy_16
+  - first:
+      213: -8138248669718286927
+    second: TetrominoTitle - Copy_17
+  - first:
+      213: -5795410755424657025
+    second: TetrominoTitle - Copy_18
+  - first:
+      213: 2360214100623935265
+    second: TetrominoTitle - Copy_19
+  - first:
+      213: -7383408571851808270
+    second: TetrominoTitle - Copy_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 49
+        width: 74
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 651f7f357ef898540800000000000000
+      internalID: 5010694284135362902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_1
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 49
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a7e9bbee8f26800800000000000000
+      internalID: 604319004254698078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_2
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 49
+        width: 74
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34ab3c7f34cd77cb0800000000000000
+      internalID: -4866178687872812477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_3
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 49
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c421b3bd0e693a440800000000000000
+      internalID: 4945962708277858892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_4
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 49
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7fc06cf23a5f77a0800000000000000
+      internalID: -6377279372304265347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_5
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 49
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10c34a8f244d7fba0800000000000000
+      internalID: -6055137789871899647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_6
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 49
+        width: 74
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0cd1216e9434cf00800000000000000
+      internalID: 1136090860843293710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_7
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 49
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e704596047f2e6e90800000000000000
+      internalID: -7030629792905609090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_8
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 49
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dca5a1eb9bc76630800000000000000
+      internalID: 3920325871015406809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_9
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 36
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0a3f618ef1f1c1e0800000000000000
+      internalID: -2179194669275071987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_10
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 36
+        width: 80
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 945a04cadded258e0800000000000000
+      internalID: -1706056265160940215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_11
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 36
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f8399c182248be10800000000000000
+      internalID: 2213591956898527473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_12
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 36
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bf549fc0d0e5fbe0800000000000000
+      internalID: -1444000918061949007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_13
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 36
+        width: 32
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59287f84a49613820800000000000000
+      internalID: 2896211803148616341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_14
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 36
+        width: 56
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5e5d16d995fc0520800000000000000
+      internalID: 2669778720194911839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_15
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 36
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4f44d0d827d56db0800000000000000
+      internalID: -4799193257591156917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_16
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 36
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277a9bb9a12fc8be0800000000000000
+      internalID: -1473536781961287822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_17
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 36
+        width: 68
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bd65a304f12f0f80800000000000000
+      internalID: -8138248669718286927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_18
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 36
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f716f639f90929fa0800000000000000
+      internalID: -5795410755424657025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_19
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 36
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 127ce85383a21c020800000000000000
+      internalID: 2360214100623935265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrominoTitle - Copy_20
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 36
+        width: 56
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f1e23bd50dd88990800000000000000
+      internalID: -7383408571851808270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TetrominoTitle - Copy_0: 5010694284135362902
+      TetrominoTitle - Copy_1: 604319004254698078
+      TetrominoTitle - Copy_10: -1706056265160940215
+      TetrominoTitle - Copy_11: 2213591956898527473
+      TetrominoTitle - Copy_12: -1444000918061949007
+      TetrominoTitle - Copy_13: 2896211803148616341
+      TetrominoTitle - Copy_14: 2669778720194911839
+      TetrominoTitle - Copy_15: -4799193257591156917
+      TetrominoTitle - Copy_16: -1473536781961287822
+      TetrominoTitle - Copy_17: -8138248669718286927
+      TetrominoTitle - Copy_18: -5795410755424657025
+      TetrominoTitle - Copy_19: 2360214100623935265
+      TetrominoTitle - Copy_2: -4866178687872812477
+      TetrominoTitle - Copy_20: -7383408571851808270
+      TetrominoTitle - Copy_3: 4945962708277858892
+      TetrominoTitle - Copy_4: -6377279372304265347
+      TetrominoTitle - Copy_5: -6055137789871899647
+      TetrominoTitle - Copy_6: 1136090860843293710
+      TetrominoTitle - Copy_7: -7030629792905609090
+      TetrominoTitle - Copy_8: 3920325871015406809
+      TetrominoTitle - Copy_9: -2179194669275071987
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

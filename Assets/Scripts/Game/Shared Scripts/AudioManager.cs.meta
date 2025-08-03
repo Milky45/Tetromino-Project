@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: d24e5999a84782a4aa9cbf62c252b6f5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - musicSource: {instanceID: 0}
+  - sfxSource: {instanceID: 0}
+  - moveClip: {fileID: 8300000, guid: ada58eb93d622db4e8f42f981c7cb229, type: 3}
+  - rotateClip: {fileID: 8300000, guid: 6f161da0a78fd2f4c91863691fa34f8f, type: 3}
+  - dropClip: {fileID: 8300000, guid: 2e91e9dc6d48cdc4cba5672a41a372ed, type: 3}
+  - holdClip: {fileID: 8300000, guid: 6c1acb8dbc81d3242b4dbdcc97c1fe44, type: 3}
+  - clear1: {fileID: 8300000, guid: 79e61cb348a24864ab8d7dcc3e581b80, type: 3}
+  - clear2: {fileID: 8300000, guid: 8fdd1dedc74239243b91623f02ae4708, type: 3}
+  - clear3: {fileID: 8300000, guid: 8bacd35599beeb84783835427019ad58, type: 3}
+  - clear4: {fileID: 8300000, guid: 3ad1c439cd8258d49874520a2572bfb3, type: 3}
+  - clear5: {fileID: 8300000, guid: 5ee3268219754474b8a1d2a9d93f78a1, type: 3}
+  - clear6: {fileID: 8300000, guid: dd110b9041f1dd54ca1345cdeed0d8d2, type: 3}
+  - clear7: {fileID: 8300000, guid: 794c0b9282262e74fa7fa20b6f1e33d1, type: 3}
+  - clear8: {fileID: 8300000, guid: dd110b9041f1dd54ca1345cdeed0d8d2, type: 3}
+  - clear9: {fileID: 8300000, guid: df0c80fe04d9bc04cab4e34d5e3ebaa3, type: 3}
+  - clear10: {fileID: 8300000, guid: d0cfa7eafec6cfc4eb02071b4996a150, type: 3}
+  - clear11: {fileID: 8300000, guid: ac0ab9c9c2b28c3499ae09c88d5fe14d, type: 3}
+  - clear12: {fileID: 8300000, guid: 2aa57627aedc7e747a255c299e08dae7, type: 3}
+  - clear13: {fileID: 8300000, guid: a970a77978ae6b94e90ee0f941967dd2, type: 3}
+  - invalid: {fileID: 8300000, guid: 7ecc43837d38f6f4cb3ee0db9918cfdb, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

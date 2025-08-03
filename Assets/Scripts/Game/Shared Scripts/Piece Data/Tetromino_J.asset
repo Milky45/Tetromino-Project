@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e45cd79cf8c70e4ebd01c31475053bb, type: 3}
+  m_Name: Tetromino_J
+  m_EditorClassIdentifier: 
+  ghostTile: {fileID: 11400000, guid: 2372896fe984aba40b918ff35884ea31, type: 2}
+  tetromino: 5
+  tile: {fileID: 11400000, guid: 5c61e23d620fb8d46a79d4aa988d69f8, type: 2}
+  cells:
+  - {x: 0, y: 0}
+  - {x: -1, y: 0}
+  - {x: 1, y: 0}
+  - {x: -1, y: 1}
