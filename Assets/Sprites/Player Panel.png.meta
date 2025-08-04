@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: d0aedf88a3fb659459615a878c81e3ff
+guid: 0ea5b331459f0574ea53ba19440627bf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8206221175921151716
-    second: grenade 0_0
+      213: -5893522487953257465
+    second: Player Panel_0
+  - first:
+      213: 3319912297108983410
+    second: Player Panel_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +49,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 45
+  spritePixelsToUnits: 10
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,10 +75,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -96,30 +99,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: grenade 0_0
+      name: Player Panel_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 50
-        height: 51
+        y: 50
+        width: 115
+        height: 50
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c117ee4a155ad1e80800000000000000
-      internalID: -8206221175921151716
+      spriteID: 70c05cdb580063ea0800000000000000
+      internalID: -5893522487953257465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player Panel_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 113
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ec1a205a2b21e20800000000000000
+      internalID: 3319912297108983410
       vertices: []
       indices: 
       edges: []
@@ -138,8 +150,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: df028d175e4659b459d64fc462c01f02
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      grenade 0_0: -8206221175921151716
+      Player Panel_0: -5893522487953257465
+      Player Panel_1: 3319912297108983410
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
