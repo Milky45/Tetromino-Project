@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c48e6bd315c83d54e88e1ef09400f9c4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tetrominoData: {instanceID: 0}
+  - gameManager: {instanceID: 0}
+  - boardManager: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

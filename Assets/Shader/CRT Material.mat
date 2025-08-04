@@ -29,11 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _RGBOffset: 0.001
+    - _RGBOffset: 0.0008
     - _ScanlineFrequency: 600
-    - _ScanlineIntensity: 0.3
+    - _ScanlineIntensity: 0.2
     - _ScanlineScrollSpeed: 2
     m_Colors:
-    - _ScreenOffset: {r: 0.0000027611884, g: -0.0009999991, b: 0, a: 0}
+    - _ScreenOffset: {r: -0.00048910856, g: 0.0009696357, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

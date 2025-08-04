@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - 1st player name
+  - P1
   layers:
   - Default
   - TransparentFX
