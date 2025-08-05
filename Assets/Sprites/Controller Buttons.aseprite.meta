@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aab82e7bc0987c741b6efecd7f12cacb
+guid: 8e66a1075631c7345b780e4e69ddfced
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Poker chip
+  - name: Controller Buttons
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5051546, y: -0.056818184}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 140
-      height: 37
-    spriteID: e553c12e3cf4e9b43b6836668c5a6454
+      width: 97
+      height: 88
+    spriteID: e0ccce4788bbfb04194f08697efa4ff1
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,21 +147,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1867943847
-    name: Poker chip
+    guid: -685245643
+    name: Controller Buttons
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Poker chip
+    - name: Controller Buttons
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 140
-        height: 37
-      spriteId: e553c12e3cf4e9b43b6836668c5a6454
+        x: 11
+        y: 5
+        width: 97
+        height: 88
+      spriteId: e0ccce4788bbfb04194f08697efa4ff1
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 140, y: 37}
-  previousTextureSize: {x: 256, y: 64}
+  canvasSize: {x: 120, y: 100}
+  previousTextureSize: {x: 128, y: 128}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aab82e7bc0987c741b6efecd7f12cacb
+guid: f79a8f9751121c745836e532b9f6d867
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Poker chip
+  - name: Bullet
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.48717952, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 140
-      height: 37
-    spriteID: e553c12e3cf4e9b43b6836668c5a6454
+      width: 195
+      height: 56
+    spriteID: 6bfe1e840c5923c4792b1c86bd57c903
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,21 +147,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1867943847
-    name: Poker chip
+    guid: -976773162
+    name: Bullet
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Poker chip
+    - name: Bullet
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
+        x: 5
         y: 0
-        width: 140
-        height: 37
-      spriteId: e553c12e3cf4e9b43b6836668c5a6454
+        width: 195
+        height: 56
+      spriteId: 6bfe1e840c5923c4792b1c86bd57c903
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 140, y: 37}
+  canvasSize: {x: 200, y: 56}
   previousTextureSize: {x: 256, y: 64}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aab82e7bc0987c741b6efecd7f12cacb
+guid: cb17b86f75f452e46ac0528929fca93b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Poker chip
+  - name: All Purpose Panel
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 140
-      height: 37
-    spriteID: e553c12e3cf4e9b43b6836668c5a6454
+      width: 25
+      height: 25
+    spriteID: 8151cb825e739df4c9d97e71d5856f11
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,21 +147,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1867943847
-    name: Poker chip
+    guid: -1580397735
+    name: All Purpose Panel
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Poker chip
+    - name: All Purpose Panel
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
-        width: 140
-        height: 37
-      spriteId: e553c12e3cf4e9b43b6836668c5a6454
+        width: 25
+        height: 25
+      spriteId: 8151cb825e739df4c9d97e71d5856f11
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -180,5 +180,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 140, y: 37}
-  previousTextureSize: {x: 256, y: 64}
+  canvasSize: {x: 25, y: 25}
+  previousTextureSize: {x: 64, y: 64}

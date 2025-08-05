@@ -1,22 +1,13 @@
 fileFormatVersion: 2
-guid: 90d53a89de10e044da094717b3c2a5b2
+guid: a31c9fac4e230ad48b056d77427d70b8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8885611506626520347
-    second: Heart Panel_0
+      213: 2208703988740019828
+    second: Bullet_0
   - first:
-      213: -3724238239244174014
-    second: Heart Panel_1
-  - first:
-      213: -1249469240841418263
-    second: Heart Panel_2
-  - first:
-      213: -82189104594613075
-    second: Heart Panel_3
-  - first:
-      213: 5733760507594803591
-    second: Heart Panel_4
+      213: 4385501425044414559
+    second: Bullet_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 20
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,133 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Heart Panel_0
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 88
-        width: 91
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5ea1767a967ffa480800000000000000
-      internalID: -8885611506626520347
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Heart Panel_1
+      name: Bullet_0
       rect:
         serializedVersion: 2
         x: 5
-        y: 60
-        width: 28
-        height: 25
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 3
+        width: 18
+        height: 50
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24dbce2ad09d05cc0800000000000000
-      internalID: -3724238239244174014
+      spriteID: 47656d65394e6ae10800000000000000
+      internalID: 2208703988740019828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Heart Panel_2
+      name: Bullet_1
       rect:
         serializedVersion: 2
-        x: 33
-        y: 60
-        width: 28
-        height: 25
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9e9cedd685ef8aee0800000000000000
-      internalID: -1249469240841418263
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Heart Panel_3
-      rect:
-        serializedVersion: 2
-        x: 61
-        y: 60
-        width: 28
-        height: 25
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dac0b30e1710cdef0800000000000000
-      internalID: -82189104594613075
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Heart Panel_4
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 33
-        width: 24
-        height: 21
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7890a5a8dc8629f40800000000000000
-      internalID: 5733760507594803591
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Heart Panel_5
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 30
         y: 0
-        width: 93
-        height: 29
+        width: 170
+        height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 764633ba34824934cbcb40c8d31cfd20
-      internalID: -823689239
+      spriteID: f50edb98f4e6cdc30800000000000000
+      internalID: 4385501425044414559
       vertices: []
       indices: 
       edges: []
@@ -247,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 889f57b3cd951894ab9863e49843f141
+    spriteID: b49bdb332a2ce1844b6e063d3de4b2e9
     internalID: 0
     vertices: []
     indices: 
@@ -257,12 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Heart Panel_0: -8885611506626520347
-      Heart Panel_1: -3724238239244174014
-      Heart Panel_2: -1249469240841418263
-      Heart Panel_3: -82189104594613075
-      Heart Panel_4: 5733760507594803591
-      Heart Panel_5: -823689239
+      Bullet_0: 2208703988740019828
+      Bullet_1: 4385501425044414559
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
