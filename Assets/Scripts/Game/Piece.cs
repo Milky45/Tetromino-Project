@@ -40,16 +40,15 @@ public class Piece : MonoBehaviour
     public void Start()
     {
         // Get the PlayerInput component from this GameObject or its parent
-        playerInput = GetComponent<PlayerInput>();
-        if (playerInput == null)
+        if (gameManager.player.isPlayer1)
         {
-            playerInput = GetComponentInParent<PlayerInput>();
+            GameObject playerObj = GameObject.FindGameObjectWithTag("P1");
+            playerInput = playerObj.GetComponent<PlayerInput>();
         }
-        
-        if (playerInput == null)
+        else
         {
-            Debug.LogError("PlayerInput component not found on Piece or its parent!");
-            return;
+            GameObject playerObj = GameObject.FindGameObjectWithTag("P2");
+            playerInput = playerObj.GetComponent<PlayerInput>();
         }
 
         // Get input actions from the PlayerInput component
@@ -172,7 +171,7 @@ public class Piece : MonoBehaviour
             int yPos = position.y + cell.y;
             if (yPos > 7)
             {
-                gameManager.GameOver();
+                gameManager.LoseLife();
                 Destroy(this.gameObject); // Just in case
                 return;
             }

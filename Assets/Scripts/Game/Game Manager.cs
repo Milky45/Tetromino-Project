@@ -8,6 +8,7 @@ public class Game_Manager : MonoBehaviour
     public Player player;
     public PvP pvp;
     public PlayerInput playerInput;
+    public GameDisplay gameDisplay; // Reference to GameDisplay for UI updates
 
     // Tetromino Data
     private TetrominoData heldTetromino;
@@ -31,13 +32,23 @@ public class Game_Manager : MonoBehaviour
     public bool isPaused;
     public bool isGameOver;
 
+    // EMP Cooldown Timer
+    private float empCooldownTimer = 0f;
+
     private void Awake()
     {
-        // Initialize managers in the object hierarchy
-        playerInput = GetComponent<PlayerInput>();
-        boardManager = FindFirstObjectByType<Board_Manager>();
-        pvp = FindFirstObjectByType<PvP>();
-        player = FindFirstObjectByType<Player>();
+        // Find the PlayerInput by tag "P1" or "P2"
+        if (player.isPlayer1)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("P1");
+            playerInput = playerObj.GetComponent<PlayerInput>();
+        }
+        else
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("P2");
+            playerInput = playerObj.GetComponent<PlayerInput>();
+        }
+
     }
 
     public void Start()
@@ -45,8 +56,11 @@ public class Game_Manager : MonoBehaviour
         currentGravityDelay = initialGravityDelay;
         int randomIndex = Random.Range(0, tetrominoSet.Length);
         nextTetromino = tetrominoSet[randomIndex];
-        //AmmoBox.AmmoUpdateP1();
-        //AmmoBox.GrenadeUpdateP1();
+        gameDisplay.EMP_CD_Update(0f); // Initialize EMP cooldown display
+        gameDisplay.Ammo_Update(player.attackAmmo); // Initialize ammo display
+        gameDisplay.UpdateChips(player.score); // Initialize chips display
+        gameDisplay.UpdateHeartIcons(player.lives);
+        gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log initial tetromino status
         SpawnNextPiece();
     }
 
@@ -75,6 +89,25 @@ public class Game_Manager : MonoBehaviour
             {
                 player.isInverted = false;
                 Debug.Log("Controls returned to normal.");
+            }
+        }
+
+        // Update EMP cooldown timer
+        if (player.empOnCooldown)
+        {
+            empCooldownTimer -= delta;
+            empCooldownTimer = Mathf.Max(empCooldownTimer, 0f);
+            
+            // Update the UI display
+            if (gameDisplay != null)
+            {
+                gameDisplay.EMP_CD_Update(empCooldownTimer);
+            }
+            
+            // Check if cooldown is finished
+            if (empCooldownTimer <= 0f)
+            {
+                ResetEmpCooldown();
             }
         }
 
@@ -115,10 +148,11 @@ public class Game_Manager : MonoBehaviour
         GameObject pieceObj = new GameObject($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
         pieceObj.transform.parent = this.transform; // Make it a child of Game_Manager
         Piece controller = pieceObj.AddComponent<Piece>();
-        controller.board = boardManager;
         controller.data = currentTetromino;
         controller.position = new Vector2Int(0, boardManager.Bounds.yMax - 4);
         controller.gameManager = this;
+        controller.board = boardManager;
+        gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after next changes
     }
 
     public void TryHoldPiece(TetrominoData current, Piece controller)
@@ -141,12 +175,14 @@ public class Game_Manager : MonoBehaviour
         if (heldTetromino == null)
         {
             heldTetromino = current;
+            gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after hold
             SpawnNextPiece();
         }
         else
         {
             TetrominoData temp = heldTetromino;
             heldTetromino = current;
+            gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after swap
             SpawnHeldPiece(temp);
         }
 
@@ -170,12 +206,13 @@ public class Game_Manager : MonoBehaviour
         GameObject pieceObj = new GameObject($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
         pieceObj.transform.parent = this.transform; // Make it a child of Game_Manager
         Piece controller = pieceObj.AddComponent<Piece>();
-        controller.board = boardManager;
         controller.data = data;
         controller.position = new Vector2Int(0, boardManager.Bounds.yMax - 4);
         controller.gameManager = this;
-
+        controller.board = boardManager;
         currentTetromino = data;
+        
+        gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after held piece spawn
     }
     private void ApplyDeadLine()
     {
@@ -228,7 +265,7 @@ public class Game_Manager : MonoBehaviour
                     }
                 }
                 player.lastComboMilestone = milestone;
-                //AmmoBox.AmmoUpdateP1();
+                gameDisplay.Ammo_Update(player.attackAmmo);
             }
             if (player.comboCount >= 4 && !player.hasEmpGrenade && !player.empOnCooldown)
             {
@@ -258,7 +295,7 @@ public class Game_Manager : MonoBehaviour
             //comboText.text = "";
         }
 
-        //scoreDisplay.text = $"{player.score}";
+        gameDisplay.UpdateChips(player.score);
     }
 
     public void ReceiveDeadLine()
@@ -282,10 +319,24 @@ public class Game_Manager : MonoBehaviour
         ApplyDeadLine();
     }
 
+    public void StartEmpCooldown()
+    {
+        player.empOnCooldown = true;
+        empCooldownTimer = player.empCooldownDuration;
+        Debug.Log($"EMP cooldown started for {player.empCooldownDuration} seconds!");
+    }
+
     public void ResetEmpCooldown()
     {
         player.empOnCooldown = false;
-        //comboText.text = "";
+        empCooldownTimer = 0f;
+        
+        // Update the UI display to show 0 or clear the text
+        if (gameDisplay != null)
+        {
+            gameDisplay.EMP_CD_Update(0f);
+        }
+        
         Debug.Log("EMP cooldown reset!");
     }
     public void TriggerHardDropLockout()
@@ -309,6 +360,63 @@ public class Game_Manager : MonoBehaviour
     }
 
 
+    public void LoseLife()
+    {
+        player.lives--;
+        Debug.Log($"Player lost a life! Lives remaining: {player.lives}");
+        
+        // Update UI to show remaining lives
+        if (gameDisplay != null)
+        {
+            gameDisplay.UpdateHeartIcons(player.lives);
+        }
+        
+        if (player.lives <= 0)
+        {
+            // No more lives, game is truly over
+            GameOver();
+        }
+        else
+        {
+            // Reset the board and continue the game
+            ResetBoardAfterLifeLoss();
+        }
+    }
+    
+    private void ResetBoardAfterLifeLoss()
+    {
+        // Clear the board
+        boardManager.ClearAll();
+        boardManager.ghost_tilemap.ClearAllTiles();
+        
+        // Reset game state
+        heldTetromino = null;
+        player.holdUsed = false;
+        player.comboCount = 0;
+        player.lastComboMilestone = 0;
+        player.attackAmmo = 0;
+        player.hasEmpGrenade = false;
+        
+        // Reset gravity to initial value
+        currentGravityDelay = initialGravityDelay;
+        gravityTime = 0f;
+        
+        // Clear any existing piece
+        GameObject existingPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
+        if (existingPiece) Destroy(existingPiece);
+        
+        // Reset pending deadlines
+        player.pendingDeadLines = 0;
+        
+        // Spawn a new piece to continue the game
+        int randomIndex = Random.Range(0, tetrominoSet.Length);
+        nextTetromino = tetrominoSet[randomIndex];
+        gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after board reset
+        SpawnNextPiece();
+        
+        Debug.Log("Board reset after life loss. Game continues!");
+    }
+
     public void GameOver()
     {
         isGameOver = true;
@@ -322,5 +430,7 @@ public class Game_Manager : MonoBehaviour
         if (existingPiece) Destroy(existingPiece);
         int randomIndex = Random.Range(0, tetrominoSet.Length);
         nextTetromino = tetrominoSet[randomIndex];
+        
+        Debug.Log("Game Over! No more lives remaining.");
     }
 }

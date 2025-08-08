@@ -4,10 +4,10 @@ using System.Linq;
 
 public class PvP : MonoBehaviour
 {
-    private Game_Manager gameManager;
+    public Game_Manager gameManager;
 
-    private Player player;
-    private Player opponent;
+    public Player player;
+    public Player opponent;
 
     PlayerInput playerInput;
     InputAction empGrenadeAction;
@@ -15,13 +15,20 @@ public class PvP : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = FindFirstObjectByType<Game_Manager>();
-        player = FindFirstObjectByType<Player>();
-
         // assign oponent based on the opposite isPlayer1 value
         opponent = FindObjectsByType<Player>(FindObjectsSortMode.None).FirstOrDefault(p => p != player);
 
-        playerInput = GetComponent<PlayerInput>();
+        if (player.isPlayer1)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("P1");
+            playerInput = playerObj.GetComponent<PlayerInput>();
+        }
+        else
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("P2");
+            playerInput = playerObj.GetComponent<PlayerInput>();
+        }
+
         empGrenadeAction = playerInput.actions["EMP"];
         attackAction = playerInput.actions["Attack"];
 
@@ -34,14 +41,11 @@ public class PvP : MonoBehaviour
         if (player.hasEmpGrenade && !player.empOnCooldown)
         {
             player.hasEmpGrenade = false;
-            player.empOnCooldown = true;
             Debug.Log("EMP Grenade used!");
 
-            //empAnim.ThrowP1();
 
-            Invoke(nameof(gameManager.ResetEmpCooldown), player.empCooldownDuration);
+            gameManager.StartEmpCooldown();
 
-            //AmmoBox.GrenadeUpdateP1();
         }
         else
         {
@@ -55,7 +59,7 @@ public class PvP : MonoBehaviour
         {
             player.isInverted = true;
             gameManager.invertTimer = duration;
-            var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<PieceController>();
+            var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
             if (activePiece != null)
                 activePiece.Clear();
             // comboText.color = Color.red;
@@ -94,7 +98,7 @@ public class PvP : MonoBehaviour
                 opponentPiece.Set(); // Re-set the piece tiles after push
             }
 
-            //AmmoBox.AmmoUpdateP1();
+            gameManager.gameDisplay.Ammo_Update(player.attackAmmo);
             Debug.Log("Attack sent!");
 
 

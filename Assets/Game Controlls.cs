@@ -189,6 +189,15 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""73a332a2-e6c6-47ce-8202-e863f2b96e75"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""251481ef-e4e3-43e1-b0f2-cebc221b1c6d"",
                     ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9cf85688-ff7d-4ac1-8437-ec224d34c091"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -216,8 +236,30 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""66ca4f62-513f-4a16-8893-351ce0990157"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""df176e9f-2a05-4935-96f0-e0c08f3fcb61"",
                     ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28a23ee3-dd31-4ed0-8030-38467b28f49c"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -238,6 +280,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""80d59ac9-88f0-47af-b2e9-1812247c2737"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EMP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""bde4a926-f757-49b4-85bd-ce97090f1c01"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -249,8 +302,30 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e3e02213-925c-4be1-890f-99cf7fde79c8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hard Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c760d9fc-bb69-42fa-93a3-421c5875ea18"",
                     ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4b29f0e-0a16-41ca-ae27-6fcd83df9bb9"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -304,6 +379,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2d0109c7-6866-47fc-9cd1-93ac7552ff41"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6630784-0323-4211-a903-0f50b0795acf"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2b247b0b-3434-4640-8d50-97c55259b9b9"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
@@ -317,6 +414,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""fec93294-68e8-4cbd-9326-bb7d3c6a1cf7"",
                     ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3647317e-627c-40fa-b2c1-00c750a78f22"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b706c95-0565-4d0c-a1ee-748c3bbb92e2"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -345,6 +464,284 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""action"": ""Move Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57a68a49-1a09-40ac-8bca-57df6c17e5e0"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c665943-6b76-4f56-88ff-9908c74ce78b"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe72662e-e063-47bc-a1db-517a01d9f3af"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98088253-ef0d-471d-b6cb-006b049294e5"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c2c04a0-ea06-49e7-9346-a849ea9f44c7"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04778c54-690c-4d38-a61f-ed41afe2765c"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Lobby Controls"",
+            ""id"": ""2dcaa9db-f47f-40a8-91cf-3b1bf4f4fb85"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""34d8a6c7-2d21-459e-a833-9f128385697a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Room Settings"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2fd670f-f22b-4949-99bf-853d0f37a1d9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""bce30e1b-3073-4310-bb60-18b75fcf06be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""2df14ab6-3fdc-47ed-981f-1c9472a32ebc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Next Skin"",
+                    ""type"": ""Button"",
+                    ""id"": ""1872a53d-7bd3-4138-a570-73e591d13650"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Previous Skin"",
+                    ""type"": ""Button"",
+                    ""id"": ""5aa1bbaf-b2f1-49b5-b5f3-c7e3534ec7be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""0534420b-6ba3-412a-8663-af7b0dfe2e1d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Random"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb466174-6703-4c1d-8249-c7d5d6a1f1e7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ee3e9aea-2e48-4a97-b2d6-850d88198852"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c225b7fc-9e30-4757-9972-6432dc2b113f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cd22333-bc8c-4eaa-bff7-3b9524a93abc"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Room Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b9dffe3-2135-49cc-b76a-7478745ddb46"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Room Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c16e844-9ed6-4d29-8460-9ca258bc2c07"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bc353e3-6645-4705-8461-1fbcfc967d39"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bfef61b-3463-482c-a0c1-722205bf8f87"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""017aa3f0-08cb-4f5f-82b4-380b3846cf57"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c90672c4-eac6-4d7c-a6ae-3ab7d9c323d8"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next Skin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1f99392-8b45-4024-81da-d299223e5143"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous Skin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91d66554-b9f0-4b4b-bcb7-9be479c1a0c8"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2ffe5ae-fd22-4032-aca7-a98af2de7fae"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Random"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -364,11 +761,23 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         m_PlayerMovement_MoveLeft = m_PlayerMovement.FindAction("Move Left", throwIfNotFound: true);
         m_PlayerMovement_MoveRight = m_PlayerMovement.FindAction("Move Right", throwIfNotFound: true);
         m_PlayerMovement_MoveDown = m_PlayerMovement.FindAction("Move Down", throwIfNotFound: true);
+        m_PlayerMovement_MoveUp = m_PlayerMovement.FindAction("Move Up", throwIfNotFound: true);
+        // Lobby Controls
+        m_LobbyControls = asset.FindActionMap("Lobby Controls", throwIfNotFound: true);
+        m_LobbyControls_Pause = m_LobbyControls.FindAction("Pause", throwIfNotFound: true);
+        m_LobbyControls_RoomSettings = m_LobbyControls.FindAction("Room Settings", throwIfNotFound: true);
+        m_LobbyControls_Confirm = m_LobbyControls.FindAction("Confirm", throwIfNotFound: true);
+        m_LobbyControls_Back = m_LobbyControls.FindAction("Back", throwIfNotFound: true);
+        m_LobbyControls_NextSkin = m_LobbyControls.FindAction("Next Skin", throwIfNotFound: true);
+        m_LobbyControls_PreviousSkin = m_LobbyControls.FindAction("Previous Skin", throwIfNotFound: true);
+        m_LobbyControls_Ready = m_LobbyControls.FindAction("Ready", throwIfNotFound: true);
+        m_LobbyControls_Random = m_LobbyControls.FindAction("Random", throwIfNotFound: true);
     }
 
     ~@GameControlls()
     {
         UnityEngine.Debug.Assert(!m_PlayerMovement.enabled, "This will cause a leak and performance issues, GameControlls.PlayerMovement.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_LobbyControls.enabled, "This will cause a leak and performance issues, GameControlls.LobbyControls.Disable() has not been called.");
     }
 
     /// <summary>
@@ -455,6 +864,7 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_MoveLeft;
     private readonly InputAction m_PlayerMovement_MoveRight;
     private readonly InputAction m_PlayerMovement_MoveDown;
+    private readonly InputAction m_PlayerMovement_MoveUp;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player Movement".
     /// </summary>
@@ -510,6 +920,10 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerMovement/MoveDown".
         /// </summary>
         public InputAction @MoveDown => m_Wrapper.m_PlayerMovement_MoveDown;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMovement/MoveUp".
+        /// </summary>
+        public InputAction @MoveUp => m_Wrapper.m_PlayerMovement_MoveUp;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -569,6 +983,9 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
             @MoveDown.started += instance.OnMoveDown;
             @MoveDown.performed += instance.OnMoveDown;
             @MoveDown.canceled += instance.OnMoveDown;
+            @MoveUp.started += instance.OnMoveUp;
+            @MoveUp.performed += instance.OnMoveUp;
+            @MoveUp.canceled += instance.OnMoveUp;
         }
 
         /// <summary>
@@ -613,6 +1030,9 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
             @MoveDown.started -= instance.OnMoveDown;
             @MoveDown.performed -= instance.OnMoveDown;
             @MoveDown.canceled -= instance.OnMoveDown;
+            @MoveUp.started -= instance.OnMoveUp;
+            @MoveUp.performed -= instance.OnMoveUp;
+            @MoveUp.canceled -= instance.OnMoveUp;
         }
 
         /// <summary>
@@ -646,6 +1066,179 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerMovementActions" /> instance referencing this action map.
     /// </summary>
     public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+
+    // Lobby Controls
+    private readonly InputActionMap m_LobbyControls;
+    private List<ILobbyControlsActions> m_LobbyControlsActionsCallbackInterfaces = new List<ILobbyControlsActions>();
+    private readonly InputAction m_LobbyControls_Pause;
+    private readonly InputAction m_LobbyControls_RoomSettings;
+    private readonly InputAction m_LobbyControls_Confirm;
+    private readonly InputAction m_LobbyControls_Back;
+    private readonly InputAction m_LobbyControls_NextSkin;
+    private readonly InputAction m_LobbyControls_PreviousSkin;
+    private readonly InputAction m_LobbyControls_Ready;
+    private readonly InputAction m_LobbyControls_Random;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Lobby Controls".
+    /// </summary>
+    public struct LobbyControlsActions
+    {
+        private @GameControlls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public LobbyControlsActions(@GameControlls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_LobbyControls_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/RoomSettings".
+        /// </summary>
+        public InputAction @RoomSettings => m_Wrapper.m_LobbyControls_RoomSettings;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/Confirm".
+        /// </summary>
+        public InputAction @Confirm => m_Wrapper.m_LobbyControls_Confirm;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/Back".
+        /// </summary>
+        public InputAction @Back => m_Wrapper.m_LobbyControls_Back;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/NextSkin".
+        /// </summary>
+        public InputAction @NextSkin => m_Wrapper.m_LobbyControls_NextSkin;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/PreviousSkin".
+        /// </summary>
+        public InputAction @PreviousSkin => m_Wrapper.m_LobbyControls_PreviousSkin;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/Ready".
+        /// </summary>
+        public InputAction @Ready => m_Wrapper.m_LobbyControls_Ready;
+        /// <summary>
+        /// Provides access to the underlying input action "LobbyControls/Random".
+        /// </summary>
+        public InputAction @Random => m_Wrapper.m_LobbyControls_Random;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_LobbyControls; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="LobbyControlsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(LobbyControlsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="LobbyControlsActions" />
+        public void AddCallbacks(ILobbyControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LobbyControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LobbyControlsActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @RoomSettings.started += instance.OnRoomSettings;
+            @RoomSettings.performed += instance.OnRoomSettings;
+            @RoomSettings.canceled += instance.OnRoomSettings;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @Back.started += instance.OnBack;
+            @Back.performed += instance.OnBack;
+            @Back.canceled += instance.OnBack;
+            @NextSkin.started += instance.OnNextSkin;
+            @NextSkin.performed += instance.OnNextSkin;
+            @NextSkin.canceled += instance.OnNextSkin;
+            @PreviousSkin.started += instance.OnPreviousSkin;
+            @PreviousSkin.performed += instance.OnPreviousSkin;
+            @PreviousSkin.canceled += instance.OnPreviousSkin;
+            @Ready.started += instance.OnReady;
+            @Ready.performed += instance.OnReady;
+            @Ready.canceled += instance.OnReady;
+            @Random.started += instance.OnRandom;
+            @Random.performed += instance.OnRandom;
+            @Random.canceled += instance.OnRandom;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="LobbyControlsActions" />
+        private void UnregisterCallbacks(ILobbyControlsActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @RoomSettings.started -= instance.OnRoomSettings;
+            @RoomSettings.performed -= instance.OnRoomSettings;
+            @RoomSettings.canceled -= instance.OnRoomSettings;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @Back.started -= instance.OnBack;
+            @Back.performed -= instance.OnBack;
+            @Back.canceled -= instance.OnBack;
+            @NextSkin.started -= instance.OnNextSkin;
+            @NextSkin.performed -= instance.OnNextSkin;
+            @NextSkin.canceled -= instance.OnNextSkin;
+            @PreviousSkin.started -= instance.OnPreviousSkin;
+            @PreviousSkin.performed -= instance.OnPreviousSkin;
+            @PreviousSkin.canceled -= instance.OnPreviousSkin;
+            @Ready.started -= instance.OnReady;
+            @Ready.performed -= instance.OnReady;
+            @Ready.canceled -= instance.OnReady;
+            @Random.started -= instance.OnRandom;
+            @Random.performed -= instance.OnRandom;
+            @Random.canceled -= instance.OnRandom;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="LobbyControlsActions.UnregisterCallbacks(ILobbyControlsActions)" />.
+        /// </summary>
+        /// <seealso cref="LobbyControlsActions.UnregisterCallbacks(ILobbyControlsActions)" />
+        public void RemoveCallbacks(ILobbyControlsActions instance)
+        {
+            if (m_Wrapper.m_LobbyControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="LobbyControlsActions.AddCallbacks(ILobbyControlsActions)" />
+        /// <seealso cref="LobbyControlsActions.RemoveCallbacks(ILobbyControlsActions)" />
+        /// <seealso cref="LobbyControlsActions.UnregisterCallbacks(ILobbyControlsActions)" />
+        public void SetCallbacks(ILobbyControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LobbyControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LobbyControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="LobbyControlsActions" /> instance referencing this action map.
+    /// </summary>
+    public LobbyControlsActions @LobbyControls => new LobbyControlsActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player Movement" which allows adding and removing callbacks.
     /// </summary>
@@ -730,5 +1323,76 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Move Up" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMoveUp(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Lobby Controls" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="LobbyControlsActions.AddCallbacks(ILobbyControlsActions)" />
+    /// <seealso cref="LobbyControlsActions.RemoveCallbacks(ILobbyControlsActions)" />
+    public interface ILobbyControlsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Room Settings" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRoomSettings(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Back" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Next Skin" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNextSkin(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Previous Skin" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPreviousSkin(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ready" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReady(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Random" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRandom(InputAction.CallbackContext context);
     }
 }
