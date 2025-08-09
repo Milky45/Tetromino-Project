@@ -6,6 +6,8 @@ public class PvP : MonoBehaviour
 {
     public Game_Manager gameManager;
 
+    public Game_Manager opponentGameManager;
+
     public Player player;
     public Player opponent;
 
@@ -38,11 +40,13 @@ public class PvP : MonoBehaviour
     public void TryUseEmpGrenade()
     {
         if (gameManager.isPaused) return;
+        if (gameManager.isTimeStopped) return;
+
         if (player.hasEmpGrenade && !player.empOnCooldown)
         {
             player.hasEmpGrenade = false;
             Debug.Log("EMP Grenade used!");
-
+            opponent.gameManager.pvp.ApplyInvertControlDebuff(10f);
 
             gameManager.StartEmpCooldown();
 
@@ -72,6 +76,7 @@ public class PvP : MonoBehaviour
     public void TryAttack()
     {
         if (gameManager.isPaused) return;
+        if (gameManager.isTimeStopped) return;
 
         if (player.atkOnCooldown)
         {

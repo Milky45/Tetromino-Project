@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class DodokeSkill : MonoBehaviour
 {
@@ -11,61 +12,86 @@ public class DodokeSkill : MonoBehaviour
     public float SkillDuration = 10f;
     public float Temp_Z_Position;
 
+    public CharacterManager characterManager;
+    public Game_Manager gameManager;
+    public GameDisplay gameDisplay;
+
+    [Header("Input")]
+    public PlayerInput playerInput;
+    private InputAction skillAction;
+
     [Header("Cooldown Settings")]
-    public float cooldownTime = 60f;
+    public float cooldownTime = 25f;
     private float cooldownTimer = 0f;
     public bool isOnCooldown = true;
 
-    [Header("Cooldown UI")]
-    public TextMeshProUGUI cooldownText; // <-- Assign in inspector
-    private string cooldownTempText;
-    private string originalText;
-
-    private void Start()
+    public int cost = 300;
+    
+     private void Awake()
     {
-        originalText = cooldownText.text;
+        characterManager = GetComponent<CharacterManager>();
+        if (characterManager.isPlayer1)
+        {
+            gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
+            gameDisplay = gameManager.gameDisplay;
+            playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
+        }
+        else
+        {
+            gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
+            gameDisplay = gameManager.gameDisplay;
+            playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
+        }
+
+        MainTileMap = gameDisplay.mainTileMap;
+        GhostTileMap = gameDisplay.ghostTileMap;
+
+        isOnCooldown = true;
         cooldownTimer = cooldownTime;
+
+        skillAction = playerInput.actions.FindAction("Skill");
+        skillAction.performed += ctx => ActivateSkill();
+
+        gameDisplay.costText.text = cost.ToString();
     }
 
-    void Update()
+    private void Update()
     {
+        cost += 100 * gameManager.inflationCtr;
         if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
-
-            cooldownTempText = Mathf.CeilToInt(cooldownTimer).ToString();
-            if (cooldownText != null)
-            {
-                cooldownText.text = cooldownTempText;
-                cooldownText.color = Color.red; // Set to red while counting down
-            }
+            gameDisplay.SkillCooldownUpdate(cooldownTimer);
 
             if (cooldownTimer <= 0f)
             {
                 isOnCooldown = false;
-
-                if (cooldownText != null)
-                {
-                    cooldownText.text = "OK"; // Should be "0"
-                    cooldownText.color = Color.green; // Restore original color
-                }
+                Debug.Log("Skill cooldown ended. Skill is ready to use.");
             }
+            Debug.Log($"Remaining Time for skill: {cooldownTimer}");
         }
     }
-
+    
     public void ActivateSkill()
     {
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");
-            AudioManager.Instance.sfxSource.PlayOneShot(AudioManager.Instance.invalid);
             return;
-
         }
-        Debug.Log("Dodoke skill activated!");
+        if (gameManager.player.score < cost)
+        {
+            Debug.Log("Not enough chips to activate this skill");
+            return;
+        }
+        if (gameManager.isTimeStopped) return;
+        
+        gameManager.player.score -= cost;
+        gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
+
         StartCoroutine(BoardFlip());
     }
 

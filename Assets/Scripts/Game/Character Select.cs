@@ -78,10 +78,10 @@ public class CharacterSelect : MonoBehaviour
             }
         }
         playerInput = GetComponent<PlayerInput>();
-        moveLeft = playerInput.actions["Move Left"];
-        moveRight = playerInput.actions["Move Right"];
-        moveUp = playerInput.actions["Move Up"];
-        moveDown = playerInput.actions["Move Down"];
+        moveLeft = playerInput.actions["Left"];
+        moveRight = playerInput.actions["Right"];
+        moveUp = playerInput.actions["Up"];
+        moveDown = playerInput.actions["Down"];
         confirmAction = playerInput.actions["Confirm"];
         backAction = playerInput.actions["Back"];
         pauseAction = playerInput.actions["Pause"];

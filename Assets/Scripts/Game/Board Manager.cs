@@ -8,7 +8,7 @@ public class Board_Manager : MonoBehaviour
     public TileBase[] tile_types;
     public Vector2Int boardSize = new Vector2Int(10, 24);
     public int LinesCleared { get; private set; } = 0;
-    private int receivedDeadLineCount = 0;
+    public int receivedDeadLineCount = 0;
     public RectInt Bounds => new RectInt(-boardSize.x / 2, -boardSize.y / 2, boardSize.x, boardSize.y);
 
     [SerializeField] private Player player; // Assign this in the inspector
@@ -159,7 +159,7 @@ public class Board_Manager : MonoBehaviour
         receivedDeadLineCount -= linesToRemove;
     }
 
-    private void ClearLineFromWorldY(int worldY)
+    public void ClearLineFromWorldY(int worldY)
     {
         for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
         {

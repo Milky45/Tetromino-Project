@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -90,6 +91,7 @@ public class Piece : MonoBehaviour
     {
         if (!isActiveAndEnabled) return;
         if (gameManager.isPaused) return;
+        if (gameManager.isTimeStopped == true) return;
 
         moveTimer += Time.deltaTime;
         gravityTimer += Time.deltaTime;
@@ -183,6 +185,7 @@ public class Piece : MonoBehaviour
 
     public bool TryMove(Vector2Int direction)
     {
+        
         Clear();
 
         Vector2Int newPos = position + direction;
@@ -202,6 +205,8 @@ public class Piece : MonoBehaviour
     private void TryRotate(int direction)
     {
         if (gameManager.isPaused) return;
+        if (gameManager.isTimeStopped == true) return;
+
         Clear();
         Vector2Int[] rotatedCells = new Vector2Int[cells.Length];
 
@@ -296,6 +301,8 @@ public class Piece : MonoBehaviour
     private void HardDrop()
     {
         if (gameManager.isPaused) return;
+        if (gameManager.isTimeStopped == true) return;
+
         while (TryMove(Vector2Int.down))
         {
             // Keep moving down while it's valid

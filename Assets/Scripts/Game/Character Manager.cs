@@ -56,16 +56,26 @@ public class CharacterManager : MonoBehaviour
                 Debug.Log("TetroSkill script assigned for character index 0");
                 break;
             case 1:
+                gameObject.AddComponent<PackHatSkill>();
+                Debug.Log("PackhatSkill script assigned for character index 1");
                 break;
             case 2:
+                gameObject.AddComponent<ScorchSkill>();
+                Debug.Log("ScorchSkill script assigned for character index 2");
                 break;
             case 3:
+                gameObject.AddComponent<DodokeSkill>();
+                Debug.Log("DodokeSkill script assigned for character index 3");
                 break;
             case 4:
                 break;
             case 5:
+                gameObject.AddComponent<NullSkill>();
+                Debug.Log("NullSkill script assigned for character index 5");
                 break;
             case 6:
+                gameObject.AddComponent<EthanSkill>();
+                Debug.Log("EthanSkill script assigned for character index 5");
                 break;
             default:
                 Debug.LogWarning($"No skill script assigned for character index: {characterIndex}");

@@ -1,20 +1,21 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
-public class ScorchSkill : MonoBehaviour
+public class EthanSkill : MonoBehaviour
 {
     public CharacterManager characterManager;
     public Game_Manager gameManager;
+    public Game_Manager opponent;
     public GameDisplay gameDisplay;
-    public Board_Manager boardManager;
 
     [Header("Input")]
     public PlayerInput playerInput;
     private InputAction skillAction;
 
+
     [Header("Cooldown Settings")]
-    public float cooldownTime = 40f;
+    public float cooldownTime = 65f;
     private float cooldownTimer = 0f;
     public bool isOnCooldown = true;
 
@@ -28,19 +29,22 @@ public class ScorchSkill : MonoBehaviour
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
-            
+            opponent = gameManager.pvp.opponentGameManager;
+
+
         }
         else
         {
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
+            opponent = gameManager.pvp.opponentGameManager;
         }
-        boardManager = gameManager.boardManager;
+
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
 
-        gameManager.player.maxAmmo = 15;
+        gameManager.player.maxAmmo = 7;
 
         skillAction = playerInput.actions.FindAction("Skill");
         skillAction.performed += ctx => ActivateSkill();
@@ -64,6 +68,7 @@ public class ScorchSkill : MonoBehaviour
             Debug.Log($"Remaining Time for skill: {cooldownTimer}");
         }
     }
+
     public void ActivateSkill()
     {
         if (isOnCooldown)
@@ -77,62 +82,21 @@ public class ScorchSkill : MonoBehaviour
             return;
         }
         if (gameManager.isTimeStopped) return;
-        
+
         gameManager.player.score -= cost;
         gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
-
-        ClearBottomLines();
+        StartCoroutine(TimeStopOpponent(12f));
     }
 
-    public void ClearBottomLines()
+    public IEnumerator TimeStopOpponent(float durationSeconds)
     {
-        var activePiece = GameObject.Find($"ActivePiece{(gameManager.player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
-        if (activePiece != null)
-            activePiece.Clear();
-        int linesToRemove = 5;
-        int linesCleared = 0;
-        int y = -boardManager.boardSize.y / 2;
+        opponent.isTimeStopped = true;
+        yield return new WaitForSeconds(durationSeconds);
+        opponent.isTimeStopped = false;
 
-        while (linesCleared < linesToRemove && y < boardManager.boardSize.y / 2)
-        {
-            bool hasAnyTile = false;
-            bool isDeadLine = true;
-
-            for (int x = -boardManager.boardSize.x / 2; x < boardManager.boardSize.x / 2; x++)
-            {
-                Vector3Int pos = new Vector3Int(x, y, 0);
-                if (boardManager.main_tilemap.HasTile(pos))
-                {
-                    hasAnyTile = true;
-
-                    if (boardManager.main_tilemap.GetTile(pos) != boardManager.tile_types[7])
-                    {
-                        isDeadLine = false;
-                    }
-                }
-            }
-
-            if (hasAnyTile)
-            {
-                boardManager.ClearLineFromWorldY(y);
-                linesCleared++;
-
-                if (isDeadLine)
-                {
-                    boardManager.receivedDeadLineCount--;
-                    boardManager.receivedDeadLineCount = Mathf.Max(boardManager.receivedDeadLineCount, 0);
-                }
-            }
-            else
-            {
-                y++;
-                continue;
-            }
-        }if (activePiece != null)
-        {
-            activePiece.Set();
-        }
+        Debug.Log("Time unfroze.");
     }
+
 }

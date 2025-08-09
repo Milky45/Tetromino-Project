@@ -25,12 +25,15 @@ public class Game_Manager : MonoBehaviour
     private float lockoutDuration = 0.1f;
     public float invertTimer = 0f;
     private float g_IncreaseInt = 60f; // gravity increase interval
-    private float currentGravityDelay;
-    private float initialGravityDelay = 1.0f; // initial gravity delay
-    private float minGravityDelay = 0.3f; // minimum gravity delay
+    public float currentGravityDelay;
+    private float initialGravityDelay = 0.8f; // initial gravity delay
+    private float minGravityDelay = 0.25f; // minimum gravity delay
     private float moveSens = 0.1f;
     public bool isPaused;
+    public bool isTimeStopped = false;
     public bool isGameOver;
+
+    public int inflationCtr = 0;
 
     // EMP Cooldown Timer
     private float empCooldownTimer = 0f;
@@ -67,6 +70,8 @@ public class Game_Manager : MonoBehaviour
     public void Update()
     {
         if (isPaused) return;
+        if (isTimeStopped) return;
+
         float delta = Time.deltaTime;
         timeElapsed += delta;
         gravityTime += delta;
@@ -114,8 +119,9 @@ public class Game_Manager : MonoBehaviour
         if (gravityTime >= g_IncreaseInt)
         {
             gravityTime = 0f;
-            currentGravityDelay -= 0.1f;
+            currentGravityDelay -= 0.2f;
             currentGravityDelay = Mathf.Max(currentGravityDelay, minGravityDelay);
+            inflationCtr++;
         }
     }
 
@@ -158,6 +164,8 @@ public class Game_Manager : MonoBehaviour
     public void TryHoldPiece(TetrominoData current, Piece controller)
     {
         if (isPaused) return;
+        if (isTimeStopped) return;
+        
         var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
 
         if (activePiece != null)
@@ -385,6 +393,8 @@ public class Game_Manager : MonoBehaviour
     
     private void ResetBoardAfterLifeLoss()
     {
+        GameObject existingPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
+        if (existingPiece) Destroy(existingPiece);
         // Clear the board
         boardManager.ClearAll();
         boardManager.ghost_tilemap.ClearAllTiles();
@@ -397,13 +407,9 @@ public class Game_Manager : MonoBehaviour
         player.attackAmmo = 0;
         player.hasEmpGrenade = false;
         
-        // Reset gravity to initial value
-        currentGravityDelay = initialGravityDelay;
-        gravityTime = 0f;
         
         // Clear any existing piece
-        GameObject existingPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
-        if (existingPiece) Destroy(existingPiece);
+
         
         // Reset pending deadlines
         player.pendingDeadLines = 0;
@@ -412,7 +418,8 @@ public class Game_Manager : MonoBehaviour
         int randomIndex = Random.Range(0, tetrominoSet.Length);
         nextTetromino = tetrominoSet[randomIndex];
         gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after board reset
-        SpawnNextPiece();
+        
+        Invoke(nameof(SpawnNextPiece), 3f);
         
         Debug.Log("Board reset after life loss. Game continues!");
     }

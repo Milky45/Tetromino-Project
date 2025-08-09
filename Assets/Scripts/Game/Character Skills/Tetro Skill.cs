@@ -29,6 +29,8 @@ public class TetroSkill : MonoBehaviour
     public GameDisplay gameDisplay;
     private Coroutine pulseRoutine;
 
+    public int cost = 300;
+
 
     private void Awake()
     {
@@ -74,10 +76,13 @@ public class TetroSkill : MonoBehaviour
         // Start cooldown at the beginning
         isOnCooldown = true;
         cooldownTimer = cooldownTime + 35;
+
+        gameDisplay.costText.text = cost.ToString();
     }
 
     void Update()
     {
+        cost += 100 * gameManager.inflationCtr;
         if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;
@@ -106,10 +111,19 @@ public class TetroSkill : MonoBehaviour
             //AudioManager.Instance.sfxSource.PlayOneShot(AudioManager.Instance.invalid);
             return;
         }
+        if (gameManager.player.score < cost)
+        {
+            Debug.Log("Not enough chips to activate this skill");
+            return;
+        }
+        if (gameManager.isTimeStopped) return;
+        
         ballRenderer.enabled = true;
+        gameManager.player.score -= cost;
+        gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
-        
+
         animBall.SetTrigger("Activate");
 
     }

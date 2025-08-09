@@ -10,12 +10,15 @@ public class GameDisplay : MonoBehaviour
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI empCDText;
     public TextMeshProUGUI skillCDText;
+    public TextMeshProUGUI chipsText;
+    public TextMeshProUGUI costText;
+
+    public Transform mainTileMap;
+    public Transform ghostTileMap;
 
     public SpriteRenderer[] heartIcons = new SpriteRenderer[3];
     public GameObject[] NextBlock = new GameObject[7];
     public GameObject[] HeldBlock = new GameObject[8];
-
-    public TextMeshProUGUI chipsText;
 
 
 
@@ -49,7 +52,7 @@ public class GameDisplay : MonoBehaviour
         }
         else
         {
-            empCDText.text = $"{timeLeft:F1}";
+            empCDText.text = $"{timeLeft:F0}";
         }
     }
 
@@ -69,14 +72,13 @@ public class GameDisplay : MonoBehaviour
 
     public void Ammo_Update(int ammoCount)
     {
-        ammoText.text = $"{ammoCount}/10";
+        ammoText.text = $"{ammoCount}/{gameManager.player.maxAmmo}";
     }
 
     public void LogTetrominoStatus(TetrominoData next, TetrominoData held)
     {
         string nextType = next != null ? next.tetromino.ToString() : "None";
         string heldType = held != null ? held.tetromino.ToString() : "None";
-        Debug.Log($"[GameDisplay] Next Tetromino: {nextType}, Held Tetromino: {heldType}");
         // Clear previous blocks
         foreach (var block in NextBlock)
         {
