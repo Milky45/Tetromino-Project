@@ -49,7 +49,7 @@ public class NullSkill : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
         if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;
@@ -61,7 +61,6 @@ public class NullSkill : MonoBehaviour
                 isOnCooldown = false;
                 Debug.Log("Skill cooldown ended. Skill is ready to use.");
             }
-            Debug.Log($"Remaining Time for skill: {cooldownTimer}");
         }
     }
 

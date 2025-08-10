@@ -118,10 +118,13 @@ public class Piece : MonoBehaviour
         Vector2Int horizontalMove = Vector2Int.zero;
 
         if (moveLeftAction != null && moveLeftAction.ReadValue<float>() > 0)
+        {
             horizontalMove = Vector2Int.left;
+        }
+
 
         if (moveRightAction != null && moveRightAction.ReadValue<float>() > 0)
-            horizontalMove = Vector2Int.right;
+        { horizontalMove = Vector2Int.right; }
 
         // Apply inverted control if active
         if (horizontalMove != Vector2Int.zero && repeatTimerLR >= gameManager.GetMovementSensitivity())
@@ -139,6 +142,7 @@ public class Piece : MonoBehaviour
             if (repeatTimerDown >= (gameManager.GetMovementSensitivity() * 0.1f)) // Soft drop is 10x faster than horizontal movement
             {
                 TryMove(Vector2Int.down);
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.moveClip);
                 repeatTimerDown = 0f;
             }
         }
@@ -185,6 +189,10 @@ public class Piece : MonoBehaviour
 
     public bool TryMove(Vector2Int direction)
     {
+        if (direction != Vector2Int.down)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.moveClip);
+        }
         
         Clear();
 
@@ -195,6 +203,7 @@ public class Piece : MonoBehaviour
             Clear();
             position = newPos;
             Set();
+            
             return true;
         }
 
@@ -206,7 +215,8 @@ public class Piece : MonoBehaviour
     {
         if (gameManager.isPaused) return;
         if (gameManager.isTimeStopped == true) return;
-
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.rotateClip);
         Clear();
         Vector2Int[] rotatedCells = new Vector2Int[cells.Length];
 
@@ -293,7 +303,7 @@ public class Piece : MonoBehaviour
                 }
             }
         }
-
+        
         // Restore the old state if all failed
         Set();
     }
@@ -313,6 +323,7 @@ public class Piece : MonoBehaviour
         gameManager.TriggerHardDropLockout();
         gameManager.ResetHold();
         LockPiece();
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.dropClip);
     }
 
     public void Set()

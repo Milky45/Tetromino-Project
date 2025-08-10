@@ -11,7 +11,6 @@ public class MenuAwake : MonoBehaviour
 
     void Awake()
     {
-        AudioManagerGlobal.LoadStates();
     }
 
     public void OnOptionsClicked()

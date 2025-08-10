@@ -82,7 +82,6 @@ public class TetroSkill : MonoBehaviour
 
     void Update()
     {
-        cost += 100 * gameManager.inflationCtr;
         if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;
@@ -100,7 +99,7 @@ public class TetroSkill : MonoBehaviour
 
     public void SFX()
     {
-        //AudioManager.Instance.sfxSource.PlayOneShot(AudioManager.Instance.Blind);
+        AudioManager.Instance.sfxSource.PlayOneShot(AudioManager.Instance.Blind);
     }
 
     public void BallAnim()

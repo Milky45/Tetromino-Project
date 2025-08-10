@@ -63,7 +63,6 @@ public class PackHatSkill : MonoBehaviour
                 isOnCooldown = false;
                 Debug.Log("Skill cooldown ended. Skill is ready to use.");
             }
-            Debug.Log($"Remaining Time for skill: {cooldownTimer}");
         }
     }
 

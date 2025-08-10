@@ -68,6 +68,8 @@ public class CharacterManager : MonoBehaviour
                 Debug.Log("DodokeSkill script assigned for character index 3");
                 break;
             case 4:
+                gameObject.AddComponent<YunJinSkill>();
+                Debug.Log("YunJInSkill script assigned for character index 3");
                 break;
             case 5:
                 gameObject.AddComponent<NullSkill>();

@@ -3,7 +3,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Game_Manager gameManager;
-
     public bool isPlayer1 = true;
     public int lives = 3;
     public int gold = 0;
@@ -24,8 +23,7 @@ public class Player : MonoBehaviour
     public int lastComboMilestone = 0;
     public int pendingDeadLines = 0;
 
-    public void Awake()
-    {
-    }
+
+
 
 }

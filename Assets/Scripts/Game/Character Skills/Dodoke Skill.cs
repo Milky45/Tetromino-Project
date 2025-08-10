@@ -57,7 +57,6 @@ public class DodokeSkill : MonoBehaviour
 
     private void Update()
     {
-        cost += 100 * gameManager.inflationCtr;
         if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;
@@ -75,6 +74,7 @@ public class DodokeSkill : MonoBehaviour
     
     public void ActivateSkill()
     {
+        cost += 100 * gameManager.inflationCtr;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");

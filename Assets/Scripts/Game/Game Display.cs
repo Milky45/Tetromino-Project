@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 
 public class GameDisplay : MonoBehaviour
@@ -20,7 +21,19 @@ public class GameDisplay : MonoBehaviour
     public GameObject[] NextBlock = new GameObject[7];
     public GameObject[] HeldBlock = new GameObject[8];
 
+    public SpriteRenderer backBase;
 
+    public SpriteRenderer EMP_Icon;
+
+    public SpriteRenderer PowerBar;
+    public Sprite PowerBar_0;
+    public Sprite PowerBar_1;
+    public Sprite PowerBar_2;
+    public Sprite PowerBar_3;
+    public SpriteRenderer Rock1;
+    public SpriteRenderer Rock2;
+    public SpriteRenderer Rock3;
+    public TextMeshProUGUI RockDurUI;
 
     public void UpdateChips(int chips)
     {
@@ -152,5 +165,63 @@ public class GameDisplay : MonoBehaviour
 
     }
 
+    public IEnumerator BackPulse(float duration)
+    {
+        // Set to target color (#CE9A4D), wait, then fade back to original color
+        float fadeDuration = duration;
+        float elapsed = 0f;
 
+        // Cache original color
+        Color originalColor = backBase != null ? backBase.color : Color.white;
+
+        // Parse target color from hex and preserve original alpha
+        Color targetColor;
+        if (!ColorUtility.TryParseHtmlString("#763700", out targetColor))
+        {
+            targetColor = new Color(118f / 255f, 55f / 255f, 0f / 255f, 1f);
+        }
+        targetColor.a = originalColor.a;
+
+        if (backBase != null)
+        {
+            backBase.color = targetColor;
+        }
+
+        // Hold the target color for the specified duration
+        yield return new WaitForSeconds(0f);
+
+        // Fade back to the original color
+        elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            float t = Mathf.Clamp01(elapsed / fadeDuration);
+            if (backBase != null)
+            {
+                backBase.color = Color.Lerp(targetColor, originalColor, t);
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (backBase != null)
+        {
+            backBase.color = originalColor;
+        }
+    }
+
+    public void UpdateEMPStateIcon()
+    {
+        if (gameManager.player.hasEmpGrenade && !gameManager.player.empOnCooldown)
+        {
+            EMP_Icon.color = new Color(EMP_Icon.color.r, EMP_Icon.color.g, EMP_Icon.color.b, 1f);
+        }
+        else if (gameManager.player.hasEmpGrenade && gameManager.player.empOnCooldown)
+        {
+            EMP_Icon.color = new Color(EMP_Icon.color.r, EMP_Icon.color.g, EMP_Icon.color.b, 0.5f);
+        }
+        else
+        {
+            EMP_Icon.color = new Color(EMP_Icon.color.r, EMP_Icon.color.g, EMP_Icon.color.b, 0f);
+        }
+    }
 }

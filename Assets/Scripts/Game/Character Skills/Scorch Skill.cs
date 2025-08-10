@@ -61,7 +61,6 @@ public class ScorchSkill : MonoBehaviour
                 isOnCooldown = false;
                 Debug.Log("Skill cooldown ended. Skill is ready to use.");
             }
-            Debug.Log($"Remaining Time for skill: {cooldownTimer}");
         }
     }
     public void ActivateSkill()

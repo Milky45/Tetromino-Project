@@ -6,10 +6,16 @@ public class PvP : MonoBehaviour
 {
     public Game_Manager gameManager;
 
+    public GameDisplay gameDisplay;
+
+    public YunJinEvents yunJinEvents;
+
     public Game_Manager opponentGameManager;
 
     public Player player;
     public Player opponent;
+
+    public bool isInvertImmune = false;
 
     PlayerInput playerInput;
     InputAction empGrenadeAction;
@@ -24,11 +30,13 @@ public class PvP : MonoBehaviour
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("P1");
             playerInput = playerObj.GetComponent<PlayerInput>();
+            yunJinEvents = GameObject.Find("Character Manager P1").GetComponent<YunJinEvents>();
         }
         else
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("P2");
             playerInput = playerObj.GetComponent<PlayerInput>();
+            yunJinEvents = GameObject.Find("Character Manager P2").GetComponent<YunJinEvents>();
         }
 
         empGrenadeAction = playerInput.actions["EMP"];
@@ -49,7 +57,7 @@ public class PvP : MonoBehaviour
             opponent.gameManager.pvp.ApplyInvertControlDebuff(10f);
 
             gameManager.StartEmpCooldown();
-
+            gameDisplay.UpdateEMPStateIcon();
         }
         else
         {
@@ -59,17 +67,24 @@ public class PvP : MonoBehaviour
 
     public void ApplyInvertControlDebuff(float duration)
     {
-        if (!player.isInverted)
+        if (isInvertImmune)
         {
-            player.isInverted = true;
-            gameManager.invertTimer = duration;
-            var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
-            if (activePiece != null)
-                activePiece.Clear();
-            // comboText.color = Color.red;
-            // comboText.text = "Inverted Controls";
-            Debug.Log("Controls inverted!");
+            isInvertImmune = !isInvertImmune;
+            return;
         }
+        if (!player.isInverted)
+            {
+                player.isInverted = true;
+                gameManager.invertTimer = duration;
+                var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
+                if (activePiece != null)
+                    activePiece.Clear();
+                // comboText.color = Color.red;
+                // comboText.text = "Inverted Controls";
+                Debug.Log("Controls inverted!");
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.EMP_clip);
+                StartCoroutine(gameDisplay.BackPulse(10f));
+            }
 
     }
 
@@ -97,6 +112,7 @@ public class PvP : MonoBehaviour
             }
 
             opponent.gameManager.ReceiveDeadLine();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
 
             if (opponentPiece != null)
             {

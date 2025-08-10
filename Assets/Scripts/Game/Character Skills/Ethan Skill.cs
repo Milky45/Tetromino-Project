@@ -65,7 +65,6 @@ public class EthanSkill : MonoBehaviour
                 isOnCooldown = false;
                 Debug.Log("Skill cooldown ended. Skill is ready to use.");
             }
-            Debug.Log($"Remaining Time for skill: {cooldownTimer}");
         }
     }
 
@@ -92,9 +91,16 @@ public class EthanSkill : MonoBehaviour
 
     public IEnumerator TimeStopOpponent(float durationSeconds)
     {
+        float tempGravity = gameManager.currentGravityDelay;
+
+        gameManager.currentGravityDelay = 0f;
         opponent.isTimeStopped = true;
+
         yield return new WaitForSeconds(durationSeconds);
+
+        gameManager.currentGravityDelay = tempGravity;
         opponent.isTimeStopped = false;
+
 
         Debug.Log("Time unfroze.");
     }

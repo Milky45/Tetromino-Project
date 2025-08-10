@@ -64,6 +64,8 @@ public class Game_Manager : MonoBehaviour
         gameDisplay.UpdateChips(player.score); // Initialize chips display
         gameDisplay.UpdateHeartIcons(player.lives);
         gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log initial tetromino status
+
+        gameDisplay.UpdateEMPStateIcon();
         SpawnNextPiece();
     }
 
@@ -279,7 +281,7 @@ public class Game_Manager : MonoBehaviour
             {
                 player.hasEmpGrenade = true;
                 Debug.Log("EMP Grenade acquired!");
-                //AmmoBox.GrenadeUpdateP1();
+                gameDisplay.UpdateEMPStateIcon();
             }
 
             if (player.comboCount > 1)
@@ -288,12 +290,12 @@ public class Game_Manager : MonoBehaviour
                 //playercomboText.color = Color.yellow;
                 //comboText.text = $"Combo x{comboCount}";
 
-                //nt soundIndex = Mathf.Clamp(comboCount, 2, 13);
-                //PlayComboSFX(soundIndex);
+                int soundIndex = Mathf.Clamp(player.comboCount, 2, 13);
+                PlayComboSFX(soundIndex);
             }
             else
             {
-                //AudioManager.Instance.PlaySFX(AudioManager.Instance.clear1);
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.clear1);
             }
         }
         else
@@ -306,16 +308,29 @@ public class Game_Manager : MonoBehaviour
         gameDisplay.UpdateChips(player.score);
     }
 
+    private void PlayComboSFX(int combo)
+    {
+        switch (combo)
+        {
+            case 2: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear2); break;
+            case 3: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear3); break;
+            case 4: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear4); break;
+            case 5: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear5); break;
+            case 6: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear6); break;
+            case 7: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear7); break;
+            case 8: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear8); break;
+            case 9: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear9); break;
+            case 10: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear10); break;
+            case 11: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear11); break;
+            case 12: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear12); break;
+            case 13: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear13); break;
+            default: break;
+        }
+    }
+
+
     public void ReceiveDeadLine()
     {
-        // if (chosenCharacter == 4 && yunJinSkill.rockCount > 0)
-        // {
-        //     yunJinSkill.Camera.SetTrigger("Shake");
-        //     yunJinSkill.InvisRock(yunJinSkill.rockCount);
-        //     yunJinSkill.rockCount--;
-        //     return;
-        // }
-
         if (HD_Timer > 0f)
         {
             // Delay deadline, queue it
@@ -332,6 +347,7 @@ public class Game_Manager : MonoBehaviour
         player.empOnCooldown = true;
         empCooldownTimer = player.empCooldownDuration;
         Debug.Log($"EMP cooldown started for {player.empCooldownDuration} seconds!");
+        gameDisplay.UpdateEMPStateIcon();
     }
 
     public void ResetEmpCooldown()
@@ -344,6 +360,7 @@ public class Game_Manager : MonoBehaviour
         {
             gameDisplay.EMP_CD_Update(0f);
         }
+        gameDisplay.UpdateEMPStateIcon();
         
         Debug.Log("EMP cooldown reset!");
     }

@@ -4,16 +4,17 @@ using UnityEngine.SceneManagement;
 public class LobbyManager : MonoBehaviour
 {
     public Animator cameraAnimator; // Reference to the camera animation
-    private void Start()
+    private void Awake()
     {
-        // Initialize lobby settings or UI here
-        Debug.Log("Lobby Manager initialized.");
+        AudioManager.Instance.LobbyPlayMusic();
     }
 
     public void cameraAnimation()
     {
         if (cameraAnimator != null)
         {
+            AudioManager.Instance.LobbyStopMusic();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.GameStart);
             cameraAnimator.SetTrigger("Ready"); // Trigger the camera animation
             Debug.Log("Camera animation triggered.");
         }
