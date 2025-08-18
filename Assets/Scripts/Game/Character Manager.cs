@@ -7,6 +7,9 @@ public class CharacterManager : MonoBehaviour
     private Animator animator;
     private CharacterSelect playerSelect;
     public AnimatorController[] charControllers = new AnimatorController[8];
+    public GameObject blindBall;
+    public GameObject blindOverlay;
+    public Animator animBall;
 
     private void Awake()
     {

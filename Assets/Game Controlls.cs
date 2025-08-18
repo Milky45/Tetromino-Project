@@ -347,7 +347,7 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d96ae53a-e781-4295-ac10-4a103a6d582a"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

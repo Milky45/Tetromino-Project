@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -5,7 +6,8 @@ using UnityEngine.UI;
 public class CharacterSelect : MonoBehaviour
 {
     public bool isPlayer1 = true;
-    public static bool ready = false;
+    public bool ready = false;
+    public static bool currentlyPlaying;
 
     public CharacterDisplay characterDisplay;
 
@@ -15,12 +17,16 @@ public class CharacterSelect : MonoBehaviour
     private int currentRow = 0;
     private int currentCol = 0;
     public int selectedCharacterIndex;
+    public TextMeshProUGUI P1state;
+    public TextMeshProUGUI P2state;
+
+    public LobbyManager lobbyManager;
+    
 
     [Header("Tags")]
     [SerializeField] private SpriteRenderer[] playerTag = new SpriteRenderer[8];
     public Transform[,] slotTransforms = new Transform[2, 4];
 
-    //private int selectedCharacterIndex = 0;
     private Vector2Int[,] characterArr = new Vector2Int[2, 4];
 
     [Header("Input")]
@@ -42,6 +48,9 @@ public class CharacterSelect : MonoBehaviour
         // make this game obgject persist across scenes
         DontDestroyOnLoad(gameObject);
         ready = false;
+        SetReadyUI(false);
+
+        lobbyManager = GameObject.Find("Camera").GetComponent<LobbyManager>();
 
         // Detect number of CharacterSelect instances in the scene
         var allSelectors = FindObjectsByType<CharacterSelect>(FindObjectsSortMode.None);
@@ -61,6 +70,8 @@ public class CharacterSelect : MonoBehaviour
             gameObject.name = "Player 2";
             characterDisplay = GameObject.Find("Character Holder P2").GetComponent<CharacterDisplay>();
         }
+        PlayerLobby.playerCount++;
+        PlayerLobby.UpdateLobbyPanels();
         // Auto-assign SpriteRenderers with tags in the format 'P1 (character name) Tag' or 'P2 (character name) Tag'
         string[] characterNames = { "Tetro", "Packhat", "Scorch", "Dodoke", "Yun Jin", "Null", "Ethan", "Random" };
         string playerTagPrefix = isPlayer1 ? "P1" : "P2";
@@ -104,14 +115,10 @@ public class CharacterSelect : MonoBehaviour
         previousSkinAction.performed += ctx => PreviousSkin();
     }
 
-    private void Update()
-    {
-
-    }
-
     private void Start()
     {
-
+        P1state = GameObject.Find("P1 state text").GetComponent<TextMeshProUGUI>();
+        P2state = GameObject.Find("P2 state text").GetComponent<TextMeshProUGUI>();
     }
 
     private void OnEnable()
@@ -172,10 +179,22 @@ public class CharacterSelect : MonoBehaviour
 
     private void CancelSelection()
     {
+        if (currentlyPlaying) return;
         ready = false;
         Debug.Log("Selection cancelled. Player can reselect a character.");
         // Optionally, update UI or reset highlights here
         HighlightCurrentSlot();
+        SetReadyUI(false);
+        if (isPlayer1)
+        {
+            LobbyManager.p1Ready = false;
+        }
+        else
+        {
+            LobbyManager.p2Ready = false;
+        }
+
+        lobbyManager.ReadyBtn();
     }
 
     private void TogglePause()
@@ -224,9 +243,30 @@ public class CharacterSelect : MonoBehaviour
 
     private void ConfirmSelection()
     {
+        if (currentlyPlaying) return;
         if (ready == true) return;
         selectedCharacterIndex = currentRow * cols + currentCol;
         ready = true; // Lock in the selection
         Debug.Log($"Confirmed Selection: Character Index={selectedCharacterIndex}");
+        SetReadyUI(true);
+        if (isPlayer1)
+        {
+            LobbyManager.p1Ready = true;
+        }
+        else
+        {
+            LobbyManager.p2Ready = true;
+        }
+
+        lobbyManager.ReadyBtn();
+    }
+
+    private void SetReadyUI(bool isReady)
+    {
+        var targetLabel = isPlayer1 ? P1state : P2state;
+        if (targetLabel == null) return;
+
+        targetLabel.text = isReady ? "READY" : "NOT READY";
+        targetLabel.color = isReady ? Color.green : Color.red;
     }
 }

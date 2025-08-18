@@ -90,7 +90,7 @@ public class Piece : MonoBehaviour
     private void Update()
     {
         if (!isActiveAndEnabled) return;
-        if (gameManager.isPaused) return;
+        if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped == true) return;
 
         moveTimer += Time.deltaTime;
@@ -213,7 +213,7 @@ public class Piece : MonoBehaviour
 
     private void TryRotate(int direction)
     {
-        if (gameManager.isPaused) return;
+        if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped == true) return;
         
         AudioManager.Instance.PlaySFX(AudioManager.Instance.rotateClip);
@@ -310,7 +310,7 @@ public class Piece : MonoBehaviour
 
     private void HardDrop()
     {
-        if (gameManager.isPaused) return;
+        if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped == true) return;
 
         while (TryMove(Vector2Int.down))

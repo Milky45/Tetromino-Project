@@ -47,7 +47,7 @@ public class PvP : MonoBehaviour
     }
     public void TryUseEmpGrenade()
     {
-        if (gameManager.isPaused) return;
+        if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped) return;
 
         if (player.hasEmpGrenade && !player.empOnCooldown)
@@ -90,7 +90,7 @@ public class PvP : MonoBehaviour
 
     public void TryAttack()
     {
-        if (gameManager.isPaused) return;
+        if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped) return;
 
         if (player.atkOnCooldown)

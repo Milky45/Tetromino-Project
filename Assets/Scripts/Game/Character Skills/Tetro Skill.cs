@@ -37,11 +37,11 @@ public class TetroSkill : MonoBehaviour
         characterManager = GetComponent<CharacterManager>();
         if (characterManager.isPlayer1)
         {
-            blindBall = GameObject.Find("Blind Ball P1");
-            animBall = blindBall.GetComponent<Animator>();
-            ballRenderer = blindBall.GetComponent<SpriteRenderer>();
-            blindOverlay = GameObject.Find("Blind Overlay P1");
-            BO_Renderer = blindOverlay.GetComponent<SpriteRenderer>();
+            blindBall = characterManager.blindBall;
+            animBall = characterManager.blindBall.GetComponent<Animator>();
+            ballRenderer = characterManager.blindBall.GetComponent<SpriteRenderer>();
+            blindOverlay = characterManager.blindOverlay;
+            BO_Renderer = characterManager.blindOverlay.GetComponent<SpriteRenderer>();
 
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
             gameDisplay = gameManager.gameDisplay;

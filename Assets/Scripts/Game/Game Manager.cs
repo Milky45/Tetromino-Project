@@ -29,7 +29,7 @@ public class Game_Manager : MonoBehaviour
     private float initialGravityDelay = 0.8f; // initial gravity delay
     private float minGravityDelay = 0.25f; // minimum gravity delay
     private float moveSens = 0.1f;
-    public bool isPaused;
+    public static bool isPaused;
     public bool isTimeStopped = false;
     public bool isGameOver;
 

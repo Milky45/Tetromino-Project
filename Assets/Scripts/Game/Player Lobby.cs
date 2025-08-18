@@ -4,53 +4,29 @@ using System.Linq;
 
 public class PlayerLobby : MonoBehaviour
 {
-    public GameObject player1Prefab;
-    public GameObject player2Prefab;
-    private int playerCount = 0;
+    public static PlayerLobby instance;
+    public static int playerCount = 0;
 
     private void Start()
     {
-        PlayerInputManager.instance.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
-        PlayerInputManager.instance.onPlayerJoined += OnPlayerJoined;
+        UpdateLobbyPanels();
     }
 
-    private void Update()
+    public static void UpdateLobbyPanels()
     {
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (LobbyManager.Instance == null) return;
+
+        if (playerCount <= 0)
         {
-            TryJoin(Keyboard.current);
+            LobbyManager.Instance.P1Panel();
         }
-
-        foreach (var pad in Gamepad.all)
+        else if (playerCount == 1)
         {
-            if (pad.startButton.wasPressedThisFrame)
-            {
-                TryJoin(pad);
-            }
+            LobbyManager.Instance.P2Panel();
         }
-    }
-
-    private void TryJoin(InputDevice device)
-    {
-        if (PlayerInput.all.Any(p => p.devices.Contains(device))) return;
-
-        PlayerInput.Instantiate(player1Prefab, playerCount, controlScheme: null, pairWithDevice: device);
-    }
-
-    public void OnPlayerJoined(PlayerInput input)
-    {
-        // Destroy auto placeholder
-        Destroy(input.gameObject);
-
-        GameObject selectedPrefab = (playerCount == 0) ? player1Prefab : player2Prefab;
-
-        PlayerInput newInput = PlayerInput.Instantiate(
-            selectedPrefab,
-            playerIndex: playerCount,
-            controlScheme: null,
-            pairWithDevice: input.devices[0]
-        );
-
-        playerCount++;
+        else
+        {
+            LobbyManager.Instance.HideAllPlayerPanel();
+        }
     }
 }
