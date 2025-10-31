@@ -142,7 +142,7 @@ public class Piece : MonoBehaviour
             if (repeatTimerDown >= (gameManager.GetMovementSensitivity() * 0.1f)) // Soft drop is 10x faster than horizontal movement
             {
                 TryMove(Vector2Int.down);
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.moveClip);
+                gameManager.audioManager.PlaySFX(gameManager.audioManager.moveClip);
                 repeatTimerDown = 0f;
             }
         }
@@ -162,7 +162,8 @@ public class Piece : MonoBehaviour
 
     public void LockPiece()
     {
-        // Prevent locking and spawning a new piece if game is already over
+        // Prevent locking and spawning a new piece if this specific game manager's game is over
+        // But allow it if only the opponent is in game over state (catch-up phase)
         if (gameManager.isGameOver)
         {
             Debug.Log("Destroyed");
@@ -191,7 +192,7 @@ public class Piece : MonoBehaviour
     {
         if (direction != Vector2Int.down)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.moveClip);
+            gameManager.audioManager.PlaySFX(gameManager.audioManager.moveClip);
         }
         
         Clear();
@@ -216,7 +217,7 @@ public class Piece : MonoBehaviour
         if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped == true) return;
         
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.rotateClip);
+        gameManager.audioManager.PlaySFX(gameManager.audioManager.rotateClip);
         Clear();
         Vector2Int[] rotatedCells = new Vector2Int[cells.Length];
 
@@ -323,7 +324,7 @@ public class Piece : MonoBehaviour
         gameManager.TriggerHardDropLockout();
         gameManager.ResetHold();
         LockPiece();
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.dropClip);
+        gameManager.audioManager.PlaySFX(gameManager.audioManager.dropClip);
     }
 
     public void Set()

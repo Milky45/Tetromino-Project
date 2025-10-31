@@ -4,8 +4,7 @@ using UnityEngine;
 public class BorderVisuals : MonoBehaviour
 {
     public SpriteRenderer[] borders;
-    public TimerDisplay global_time;
-    public Color pulseColor = Color.red;
+    public Color pulseColor;
     public Color snarePulseColor;
     public float pulseDuration = 0.3f; // total time for pulse (fade in + fade out)
     public float hardPulseDuration = 1.62f;

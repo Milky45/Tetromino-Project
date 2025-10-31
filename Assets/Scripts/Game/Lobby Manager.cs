@@ -10,17 +10,20 @@ public class LobbyManager : MonoBehaviour
     public GameObject p1_startPnl;
     public GameObject p2_startPnl;
     public GameObject playBtn;
+    public AudioManager audioManager;
 
     public static bool p1Ready = false;
     public static bool p2Ready = false;
 
-    private void Awake()
+    private void Start()
     {
         Instance = this;
-        AudioManager.Instance.LobbyPlayMusic();
+        audioManager.LobbyPlayMusic();
         p1_startPnl.SetActive(true);
         p2_startPnl.SetActive(false);
         playBtn.SetActive(false);
+        p1Ready = false;
+        p2Ready = false;
     }
 
     public void P1Panel()
@@ -46,7 +49,7 @@ public class LobbyManager : MonoBehaviour
         {
             playBtn.SetActive(true);
         }
-        else
+        else if(p1Ready && p2Ready)
         {
             playBtn.SetActive(false);
         }
@@ -57,8 +60,8 @@ public class LobbyManager : MonoBehaviour
     {
         if (cameraAnimator != null)
         {
-            AudioManager.Instance.LobbyStopMusic();
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.GameStart);
+            audioManager.LobbyStopMusic();
+            audioManager.PlaySFX(audioManager.GameStart);
             cameraAnimator.SetTrigger("Ready"); // Trigger the camera animation
             Debug.Log("Camera animation triggered.");
         }

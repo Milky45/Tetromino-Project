@@ -14,14 +14,13 @@ public class CharacterSelect : MonoBehaviour
     [Header("Grid Settings")]
     public int rows = 2;
     public int cols = 4;
-    private int currentRow = 0;
-    private int currentCol = 0;
+    public int currentRow = 0;
+    public int currentCol = 0;
     public int selectedCharacterIndex;
     public TextMeshProUGUI P1state;
     public TextMeshProUGUI P2state;
-
     public LobbyManager lobbyManager;
-    
+    public bool isSkin = false;
 
     [Header("Tags")]
     [SerializeField] private SpriteRenderer[] playerTag = new SpriteRenderer[8];
@@ -132,10 +131,18 @@ public class CharacterSelect : MonoBehaviour
         playerInput.actions.Disable();
     }
 
+    private void HideSkin()
+    {
+        if (characterDisplay.characterDisplay[8] == true)
+        {
+            characterDisplay.characterDisplay[8].SetActive(false);
+        }
+    }
 
 
     private void HighlightCurrentSlot()
     {
+        HideSkin();
         for (int r = 0; r < rows; r++)
         {
             for (int c = 0; c < cols; c++)
@@ -143,7 +150,7 @@ public class CharacterSelect : MonoBehaviour
                 int idx = r * cols + c;
                 if (playerTag != null && idx < playerTag.Length && playerTag[idx] != null)
                 {
-                    playerTag[idx].enabled = (r == currentRow && c == currentCol);
+                    playerTag[idx].enabled = r == currentRow && c == currentCol;
                 }
                 // Activate the corresponding character display GameObject
                 if (characterDisplay != null && characterDisplay.characterDisplay != null && idx < characterDisplay.characterDisplay.Length && characterDisplay.characterDisplay[idx] != null)
@@ -158,13 +165,23 @@ public class CharacterSelect : MonoBehaviour
     private void NextSkin()
     {
         if (ready == true) return;
-        Debug.Log("Next skin for selected character");
+        if(currentCol == 2 && currentRow == 0) // prime scorch
+        {
+            isSkin = true;
+            characterDisplay.characterDisplay[2].SetActive(false);
+            characterDisplay.characterDisplay[8].SetActive(true);
+        }
     }
 
     private void PreviousSkin()
     {
         if (ready == true) return;
-        Debug.Log("Previous skin for selected character");
+        if(currentCol == 2 && currentRow == 0) // normal scorch
+        {
+            isSkin = false;
+            characterDisplay.characterDisplay[2].SetActive(true);
+            characterDisplay.characterDisplay[8].SetActive(false);
+        }
     }
 
     private void GoBack()
@@ -245,7 +262,15 @@ public class CharacterSelect : MonoBehaviour
     {
         if (currentlyPlaying) return;
         if (ready == true) return;
-        selectedCharacterIndex = currentRow * cols + currentCol;
+        if (isSkin == true && currentCol == 2 && currentRow == 0)
+        {
+            selectedCharacterIndex = 8;
+        }
+        else
+        {
+            selectedCharacterIndex = currentRow * cols + currentCol;
+        }
+
         ready = true; // Lock in the selection
         Debug.Log($"Confirmed Selection: Character Index={selectedCharacterIndex}");
         SetReadyUI(true);

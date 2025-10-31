@@ -580,9 +580,9 @@ RectTransform:
   - {fileID: 6705800955255476845}
   m_Father: {fileID: 1916582456575447544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -15.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7, y: 5}
   m_Pivot: {x: 0.5, y: 0.56}
 --- !u!222 &1030560252703266788
@@ -764,9 +764,9 @@ RectTransform:
   - {fileID: 4213082334486822557}
   m_Father: {fileID: 1916582456575447544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -3.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7, y: 5}
   m_Pivot: {x: 0.5, y: 0.56}
 --- !u!222 &8012215881421231367
@@ -910,9 +910,9 @@ RectTransform:
   - {fileID: 4118085155421642531}
   m_Father: {fileID: 1916582456575447544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -21.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7, y: 5}
   m_Pivot: {x: 0.5, y: 0.56}
 --- !u!222 &3449446248232656793
@@ -1403,9 +1403,9 @@ RectTransform:
   - {fileID: 880901040795516406}
   m_Father: {fileID: 1916582456575447544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -9.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7, y: 5}
   m_Pivot: {x: 0.5, y: 0.56}
 --- !u!222 &3949029009916531053
@@ -1588,6 +1588,7 @@ GameObject:
   - component: {fileID: 4022200717758251185}
   - component: {fileID: 8331602547017480307}
   - component: {fileID: 760303571381695801}
+  - component: {fileID: 2014858404115823159}
   m_Layer: 0
   m_Name: Header
   m_TagString: Untagged
@@ -1753,3 +1754,15 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8331602547017480307}
   m_maskType: 0
+--- !u!210 &2014858404115823159
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7540099928126075294}
+  m_Enabled: 1
+  m_SortingLayerID: 595491997
+  m_SortingLayer: 6
+  m_SortingOrder: 1
+  m_SortAtRoot: 0

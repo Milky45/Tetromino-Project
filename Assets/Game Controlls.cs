@@ -198,6 +198,42 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cursor Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""5318cac4-4538-4fe6-8dc0-444ddd2d7419"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cursor Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8183a66-544c-43f7-a3c8-ee72e2f7afa3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cursor Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""0600703b-6085-4f60-bcd5-b00a0cd43d94"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cursor Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a942269-e0be-4b67-8219-3ac5377be188"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,6 +252,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""9cf85688-ff7d-4ac1-8437-ec224d34c091"",
                     ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f344c2fc-ba33-4ee6-8577-0e9b08f34c58"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button7"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -247,6 +294,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c62e8377-d32b-4532-8139-097d53af8a0a"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""df176e9f-2a05-4935-96f0-e0c08f3fcb61"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
@@ -260,6 +318,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""28a23ee3-dd31-4ed0-8030-38467b28f49c"",
                     ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5a2a747-9228-4e2c-b5be-fa98cd08b239"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button10"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -291,6 +360,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""21c16fa5-4c85-4454-a805-30e3a7aa59ed"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EMP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""bde4a926-f757-49b4-85bd-ce97090f1c01"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -304,6 +384,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""e3e02213-925c-4be1-890f-99cf7fde79c8"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hard Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e1a9dfb-751e-46c0-8896-2011bb67e7ba"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -335,6 +426,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""0cd539ef-8284-4407-9dc4-b7e359608fdf"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""43b5085f-0f20-4ecb-8fcd-542a9e2ccc0b"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
@@ -357,8 +459,30 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""23dfbafb-66e9-41bf-b173-7434bc878dc3"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c02fc622-afe4-4693-b67f-ea86f07c52e4"",
                     ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swap Team"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7e9be10-7ed4-405a-a3cd-4fcf88760f2d"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -412,6 +536,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""801d0217-4fb0-449f-bd3a-f371b718ad31"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83c7c8f8-6410-4310-b8a8-85e1756cb15d"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2b247b0b-3434-4640-8d50-97c55259b9b9"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
@@ -447,6 +593,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""8b706c95-0565-4d0c-a1ee-748c3bbb92e2"",
                     ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bede4691-f063-4eb2-95e2-093069bbff6a"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6684b7b0-7ea8-4ead-b14b-ef691446975f"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -500,6 +668,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ff9a4f88-66cb-4f57-859b-0030714de055"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a0e3e46-a76d-4f01-a594-2ce1243ed38a"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""fe72662e-e063-47bc-a1db-517a01d9f3af"",
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
@@ -539,6 +729,116 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6abefb47-3cc0-49ac-9c9f-2db7e6aed0cc"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""520c7e85-964c-4140-a566-56ffa1f20e8d"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8fe2721-1070-4a0b-a287-5e06dc74a60b"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79e408b0-8ee2-4ea2-9b85-6f2ba2932596"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c03ec5d-3508-4bb1-94a2-d86c8d234556"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0862b8f6-a1ce-4966-a661-1b2a799c02e8"",
+                    ""path"": ""<Keyboard>/numpad5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79c2956c-2581-4e6d-9d75-feee2d28f33e"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88a84bcc-ee53-4b72-9860-f348c5f58b1e"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""541698d0-0f8f-42cc-b860-93965f4b4750"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c5a7b84-3f3e-439f-b6a1-29e71b3bec2b"",
+                    ""path"": ""<Keyboard>/numpad6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -682,6 +982,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f83f1c85-8767-44fd-8a9e-ee4658b472df"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1cd22333-bc8c-4eaa-bff7-3b9524a93abc"",
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
@@ -695,6 +1006,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""0b9dffe3-2135-49cc-b76a-7478745ddb46"",
                     ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Room Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a2e1445-62b6-4950-8383-a00db3fe88d5"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button11"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -726,6 +1048,17 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9918e1b2-103c-45b8-8c19-da0240ab9c45"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7bfef61b-3463-482c-a0c1-722205bf8f87"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
@@ -748,8 +1081,41 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""13b4c928-c9e4-47af-9958-439eb5646fb5"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c90672c4-eac6-4d7c-a6ae-3ab7d9c323d8"",
                     ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next Skin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef03d07c-232a-42a6-8dbd-6c87e8a13fa1"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next Skin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e2df899-b2ff-4104-9465-58b11844c831"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -770,6 +1136,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b5735ae8-f485-4f11-be24-4e412c9876d4"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous Skin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10bc0075-e26b-4f31-b470-97965d1eef1b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous Skin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""91d66554-b9f0-4b4b-bcb7-9be479c1a0c8"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -781,8 +1169,30 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ef6bda62-cf29-4339-8ec7-bbee325cd1e6"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d2ffe5ae-fd22-4032-aca7-a98af2de7fae"",
                     ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Random"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d08249d-cf5d-4965-86f3-53075db591af"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/button4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -836,6 +1246,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c43a1806-da5b-44ad-8637-d5b20c0e4d98"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf6e036f-bd63-45f7-bd75-8dee418d8f3b"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f1ddae45-e9c7-481c-b43c-63fe64ac84ec"",
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
@@ -871,6 +1303,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""4f75aacf-8e31-49b5-8f80-5a815449f532"",
                     ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c830677-767c-4c17-a8fc-781452cb5ab8"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""665f23eb-203d-4ebe-9467-4aaf571b8a35"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -924,6 +1378,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""4388a1b2-d0f3-42b4-a042-582a34c47a70"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97e1486d-11da-4435-b4f0-2b2f5431c691"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f9c46866-c4f7-4f05-ab60-290052f10f2b"",
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
@@ -965,6 +1441,28 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1c8aefc-30f7-4ae9-8d07-db25d38a4d1f"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/hat/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""654fc2f6-ffcc-41d6-9fe3-e4016087f4ba"",
+                    ""path"": ""<HID::ShanWan  Corp.   Bluetooth Gamepad   >/stick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -985,6 +1483,10 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         m_PlayerMovement_MoveRight = m_PlayerMovement.FindAction("Move Right", throwIfNotFound: true);
         m_PlayerMovement_MoveDown = m_PlayerMovement.FindAction("Move Down", throwIfNotFound: true);
         m_PlayerMovement_MoveUp = m_PlayerMovement.FindAction("Move Up", throwIfNotFound: true);
+        m_PlayerMovement_CursorLeft = m_PlayerMovement.FindAction("Cursor Left", throwIfNotFound: true);
+        m_PlayerMovement_CursorRight = m_PlayerMovement.FindAction("Cursor Right", throwIfNotFound: true);
+        m_PlayerMovement_CursorDown = m_PlayerMovement.FindAction("Cursor Down", throwIfNotFound: true);
+        m_PlayerMovement_CursorUp = m_PlayerMovement.FindAction("Cursor Up", throwIfNotFound: true);
         // Lobby Controls
         m_LobbyControls = asset.FindActionMap("Lobby Controls", throwIfNotFound: true);
         m_LobbyControls_Pause = m_LobbyControls.FindAction("Pause", throwIfNotFound: true);
@@ -1092,6 +1594,10 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_MoveRight;
     private readonly InputAction m_PlayerMovement_MoveDown;
     private readonly InputAction m_PlayerMovement_MoveUp;
+    private readonly InputAction m_PlayerMovement_CursorLeft;
+    private readonly InputAction m_PlayerMovement_CursorRight;
+    private readonly InputAction m_PlayerMovement_CursorDown;
+    private readonly InputAction m_PlayerMovement_CursorUp;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player Movement".
     /// </summary>
@@ -1151,6 +1657,22 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerMovement/MoveUp".
         /// </summary>
         public InputAction @MoveUp => m_Wrapper.m_PlayerMovement_MoveUp;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMovement/CursorLeft".
+        /// </summary>
+        public InputAction @CursorLeft => m_Wrapper.m_PlayerMovement_CursorLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMovement/CursorRight".
+        /// </summary>
+        public InputAction @CursorRight => m_Wrapper.m_PlayerMovement_CursorRight;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMovement/CursorDown".
+        /// </summary>
+        public InputAction @CursorDown => m_Wrapper.m_PlayerMovement_CursorDown;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMovement/CursorUp".
+        /// </summary>
+        public InputAction @CursorUp => m_Wrapper.m_PlayerMovement_CursorUp;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1213,6 +1735,18 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
             @MoveUp.started += instance.OnMoveUp;
             @MoveUp.performed += instance.OnMoveUp;
             @MoveUp.canceled += instance.OnMoveUp;
+            @CursorLeft.started += instance.OnCursorLeft;
+            @CursorLeft.performed += instance.OnCursorLeft;
+            @CursorLeft.canceled += instance.OnCursorLeft;
+            @CursorRight.started += instance.OnCursorRight;
+            @CursorRight.performed += instance.OnCursorRight;
+            @CursorRight.canceled += instance.OnCursorRight;
+            @CursorDown.started += instance.OnCursorDown;
+            @CursorDown.performed += instance.OnCursorDown;
+            @CursorDown.canceled += instance.OnCursorDown;
+            @CursorUp.started += instance.OnCursorUp;
+            @CursorUp.performed += instance.OnCursorUp;
+            @CursorUp.canceled += instance.OnCursorUp;
         }
 
         /// <summary>
@@ -1260,6 +1794,18 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
             @MoveUp.started -= instance.OnMoveUp;
             @MoveUp.performed -= instance.OnMoveUp;
             @MoveUp.canceled -= instance.OnMoveUp;
+            @CursorLeft.started -= instance.OnCursorLeft;
+            @CursorLeft.performed -= instance.OnCursorLeft;
+            @CursorLeft.canceled -= instance.OnCursorLeft;
+            @CursorRight.started -= instance.OnCursorRight;
+            @CursorRight.performed -= instance.OnCursorRight;
+            @CursorRight.canceled -= instance.OnCursorRight;
+            @CursorDown.started -= instance.OnCursorDown;
+            @CursorDown.performed -= instance.OnCursorDown;
+            @CursorDown.canceled -= instance.OnCursorDown;
+            @CursorUp.started -= instance.OnCursorUp;
+            @CursorUp.performed -= instance.OnCursorUp;
+            @CursorUp.canceled -= instance.OnCursorUp;
         }
 
         /// <summary>
@@ -1601,6 +2147,34 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cursor Left" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCursorLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cursor Right" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCursorRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cursor Down" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCursorDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cursor Up" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCursorUp(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Lobby Controls" which allows adding and removing callbacks.

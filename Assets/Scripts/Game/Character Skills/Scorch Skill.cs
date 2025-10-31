@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,8 +39,6 @@ public class ScorchSkill : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
 
-        gameManager.player.maxAmmo = 15;
-
         skillAction = playerInput.actions.FindAction("Skill");
         skillAction.performed += ctx => ActivateSkill();
 
@@ -65,6 +62,7 @@ public class ScorchSkill : MonoBehaviour
     }
     public void ActivateSkill()
     {
+        if (gameManager.pvp.opponentGameManager.isGameOver) return;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");
@@ -81,6 +79,8 @@ public class ScorchSkill : MonoBehaviour
         gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
+        gameManager.shaker.ChipsDeductShake();
+        gameManager.shaker.CostShake();
 
         ClearBottomLines();
     }

@@ -21,7 +21,7 @@ public class TetroSkill : MonoBehaviour
     public SpriteRenderer ballRenderer;
         
     [Header("Cooldown Settings")]
-    public float cooldownTime = 25f;
+    public float cooldownTime = 35f;
     private float cooldownTimer = 0f;
     public bool isOnCooldown = true;
 
@@ -30,6 +30,8 @@ public class TetroSkill : MonoBehaviour
     private Coroutine pulseRoutine;
 
     public int cost = 300;
+
+    public AudioManager audioManager;
 
 
     private void Awake()
@@ -69,7 +71,7 @@ public class TetroSkill : MonoBehaviour
         {
             Debug.LogError("One or more required components are missing. Please check the GameObject setup.");
         }
-
+        gameManager.audioManager = audioManager;
         skillAction = playerInput.actions.FindAction("Skill");
         skillAction.performed += ctx => BallAnim();
 
@@ -99,15 +101,16 @@ public class TetroSkill : MonoBehaviour
 
     public void SFX()
     {
-        AudioManager.Instance.sfxSource.PlayOneShot(AudioManager.Instance.Blind);
+        audioManager.sfxSource.PlayOneShot(audioManager.Blind);
     }
 
     public void BallAnim()
     {
+        if (gameManager.isGameOver) return;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");
-            //AudioManager.Instance.sfxSource.PlayOneShot(AudioManager.Instance.invalid);
+            //audioManager.sfxSource.PlayOneShot(audioManager.invalid);
             return;
         }
         if (gameManager.player.score < cost)
@@ -122,6 +125,9 @@ public class TetroSkill : MonoBehaviour
         gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
+
+        gameManager.shaker.ChipsDeductShake();
+        gameManager.shaker.CostShake();
 
         animBall.SetTrigger("Activate");
 
@@ -141,16 +147,17 @@ public class TetroSkill : MonoBehaviour
         BO_Renderer.enabled = true;
         ballRenderer.enabled = false;
         Color baseColor = BO_Renderer.color;
+        gameManager.pvp.opponentGameManager.shaker.boardShake();
         
         // Step 1: Set to full opacity
         BO_Renderer.color = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);
         // Hold full opacity for 3 seconds
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2.5f);
         animBall.SetTrigger("Return");
         
 
         // Step 2: Fade out over 3 seconds
-        float fadeDuration = 2f;
+        float fadeDuration = 2.5f;
         float elapsed = 0f;
 
         while (elapsed < fadeDuration)

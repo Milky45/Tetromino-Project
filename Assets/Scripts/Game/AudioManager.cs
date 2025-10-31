@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     public bool SFX_mute = false;
     public bool music_mute = false;
 
+    public bool isMenu = false;
+
     [Header("Music")]
     public AudioSource VsMusicSource;
     public AudioSource LobbyMusicSource;
@@ -38,23 +40,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip attack;
     public AudioClip EMP_clip;
     public AudioClip Blind;
+    public AudioClip ScorchSfx;
 
-    
-
-    public void Awake()
+    private void Start()
     {
-        DontDestroyOnLoad(Holder);
+        if (isMenu)
+        {
+            MenuPlayMusic();
+        }
 
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            Debug.Log("Destroy");
-            return;
-        }
     }
 
     public void ToggleMuteMusic()
@@ -82,26 +76,53 @@ public class AudioManager : MonoBehaviour
 
     public void VSPlayMusic()
     {
-        if (!VsMusicSource.isPlaying || LobbyMusicSource.isPlaying)
+        if (!VsMusicSource.isPlaying)
         {
             LobbyMusicSource.Stop();
             MenuSource.Stop();
             VsMusicSource.Play();
         }
     }
+
+    public void VSStopMusic()
+    {
+        if (VsMusicSource.isPlaying)
+        {
+            LobbyMusicSource.Stop();
+            MenuSource.Stop();
+            VsMusicSource.Stop();
+        }
+    }
+    
     public void LobbyPlayMusic()
     {
-        if (!LobbyMusicSource.isPlaying || VsMusicSource.isPlaying)
+        if (!LobbyMusicSource.isPlaying)
         {
             VsMusicSource.Stop();
             MenuSource.Stop();
             LobbyMusicSource.Play();
+        }
+    }
+
+    public void MenuPlayMusic()
+    {
+        if (MenuSource.isPlaying)
+        {
+            VsMusicSource.Stop();
+            LobbyMusicSource.Stop();
+            MenuSource.Play();
         } 
     }
 
-    public void VSStopMusic()
+
+    public void VS_PauseMusic()
     {
-        VsMusicSource.Stop();
+        VsMusicSource.Pause();
+    }
+
+    public void VS_UnPauseMusic()
+    {
+        VsMusicSource.UnPause();
     }
 
     public void LobbyStopMusic()

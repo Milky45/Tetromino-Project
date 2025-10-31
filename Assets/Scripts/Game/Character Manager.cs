@@ -1,4 +1,3 @@
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
@@ -6,7 +5,7 @@ public class CharacterManager : MonoBehaviour
     public bool isPlayer1 = true;
     private Animator animator;
     private CharacterSelect playerSelect;
-    public AnimatorController[] charControllers = new AnimatorController[8];
+    public RuntimeAnimatorController[] charControllers = new RuntimeAnimatorController[9];
     public GameObject blindBall;
     public GameObject blindOverlay;
     public Animator animBall;
@@ -72,7 +71,7 @@ public class CharacterManager : MonoBehaviour
                 break;
             case 4:
                 gameObject.AddComponent<YunJinSkill>();
-                Debug.Log("YunJInSkill script assigned for character index 3");
+                Debug.Log("YunJInSkill script assigned for character index 4");
                 break;
             case 5:
                 gameObject.AddComponent<NullSkill>();
@@ -80,7 +79,11 @@ public class CharacterManager : MonoBehaviour
                 break;
             case 6:
                 gameObject.AddComponent<EthanSkill>();
-                Debug.Log("EthanSkill script assigned for character index 5");
+                Debug.Log("EthanSkill script assigned for character index 6");
+                break;
+            case 8:
+                gameObject.AddComponent<D_ScorchSkill>();
+                Debug.Log("ScorchSkill script assigned for character index 8");
                 break;
             default:
                 Debug.LogWarning($"No skill script assigned for character index: {characterIndex}");

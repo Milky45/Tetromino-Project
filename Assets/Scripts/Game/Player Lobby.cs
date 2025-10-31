@@ -7,7 +7,7 @@ public class PlayerLobby : MonoBehaviour
     public static PlayerLobby instance;
     public static int playerCount = 0;
 
-    private void Start()
+    private void Awake()
     {
         UpdateLobbyPanels();
     }

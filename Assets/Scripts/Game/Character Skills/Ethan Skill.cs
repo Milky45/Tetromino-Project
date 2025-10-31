@@ -30,8 +30,6 @@ public class EthanSkill : MonoBehaviour
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
             opponent = gameManager.pvp.opponentGameManager;
-
-
         }
         else
         {
@@ -44,7 +42,7 @@ public class EthanSkill : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
 
-        gameManager.player.maxAmmo = 7;
+        gameManager.player.maxAmmo = 5;
 
         skillAction = playerInput.actions.FindAction("Skill");
         skillAction.performed += ctx => ActivateSkill();
@@ -70,6 +68,7 @@ public class EthanSkill : MonoBehaviour
 
     public void ActivateSkill()
     {
+        if (gameManager.isGameOver) return;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");
@@ -86,6 +85,9 @@ public class EthanSkill : MonoBehaviour
         gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
+        gameManager.shaker.ChipsDeductShake();
+        gameManager.shaker.CostShake();
+        
         StartCoroutine(TimeStopOpponent(12f));
     }
 
@@ -93,7 +95,7 @@ public class EthanSkill : MonoBehaviour
     {
         float tempGravity = gameManager.currentGravityDelay;
 
-        gameManager.currentGravityDelay = 0f;
+        gameManager.currentGravityDelay = 99f;
         opponent.isTimeStopped = true;
 
         yield return new WaitForSeconds(durationSeconds);

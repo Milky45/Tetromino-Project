@@ -9,6 +9,9 @@ public class Game_Manager : MonoBehaviour
     public PvP pvp;
     public PlayerInput playerInput;
     public GameDisplay gameDisplay; // Reference to GameDisplay for UI updates
+    public GameOverManager gameOverManager;
+    public ScorchCursor scorchCursor;
+    public Shaker shaker;
 
     // Tetromino Data
     private TetrominoData heldTetromino;
@@ -34,9 +37,12 @@ public class Game_Manager : MonoBehaviour
     public bool isGameOver;
 
     public int inflationCtr = 0;
+    public bool disableSpawn = false;
 
     // EMP Cooldown Timer
     private float empCooldownTimer = 0f;
+
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -51,7 +57,7 @@ public class Game_Manager : MonoBehaviour
             GameObject playerObj = GameObject.FindGameObjectWithTag("P2");
             playerInput = playerObj.GetComponent<PlayerInput>();
         }
-
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
 
     public void Start()
@@ -64,7 +70,7 @@ public class Game_Manager : MonoBehaviour
         gameDisplay.UpdateChips(player.score); // Initialize chips display
         gameDisplay.UpdateHeartIcons(player.lives);
         gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log initial tetromino status
-
+        gameDisplay.UpdateComboText();
         gameDisplay.UpdateEMPStateIcon();
         SpawnNextPiece();
     }
@@ -129,6 +135,11 @@ public class Game_Manager : MonoBehaviour
 
     public void SpawnNextPiece()
     {
+        if (disableSpawn == true)
+        {
+            return;
+        }
+        // Note: Don't check isGameOver here - the catching up player needs to spawn pieces
         // Clear any existing active piece before spawning a new one
         var existingPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
         if (existingPiece != null)
@@ -167,6 +178,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (isPaused) return;
         if (isTimeStopped) return;
+        if (isGameOver) return;
         
         var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
 
@@ -204,6 +216,8 @@ public class Game_Manager : MonoBehaviour
 
     public void SpawnHeldPiece(TetrominoData data)
     {
+        if (isGameOver) return;
+
         // Clear any existing active piece before spawning a new one
         var existingPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
         if (existingPiece != null)
@@ -259,6 +273,7 @@ public class Game_Manager : MonoBehaviour
         int linesCleared = boardManager.ClearLines();
         player.score += 100 * linesCleared;
 
+
         if (linesCleared > 0)
         {
             player.comboCount += linesCleared;
@@ -282,27 +297,29 @@ public class Game_Manager : MonoBehaviour
                 player.hasEmpGrenade = true;
                 Debug.Log("EMP Grenade acquired!");
                 gameDisplay.UpdateEMPStateIcon();
+                shaker.EMPShake();
             }
 
             if (player.comboCount > 1)
             {
                 player.score += 100;
-                //playercomboText.color = Color.yellow;
-                //comboText.text = $"Combo x{comboCount}";
+                gameDisplay.UpdateComboText();
+                shaker.ComboShake();
 
                 int soundIndex = Mathf.Clamp(player.comboCount, 2, 13);
                 PlayComboSFX(soundIndex);
             }
             else
             {
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.clear1);
+                audioManager.PlaySFX(audioManager.clear1);
             }
+            shaker.ChipsShake();
         }
         else
         {
             player.comboCount = 0;
             player.lastComboMilestone = 0;
-            //comboText.text = "";
+            shaker.ComboInvalidShake(); 
         }
 
         gameDisplay.UpdateChips(player.score);
@@ -312,18 +329,18 @@ public class Game_Manager : MonoBehaviour
     {
         switch (combo)
         {
-            case 2: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear2); break;
-            case 3: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear3); break;
-            case 4: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear4); break;
-            case 5: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear5); break;
-            case 6: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear6); break;
-            case 7: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear7); break;
-            case 8: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear8); break;
-            case 9: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear9); break;
-            case 10: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear10); break;
-            case 11: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear11); break;
-            case 12: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear12); break;
-            case 13: AudioManager.Instance.PlaySFX(AudioManager.Instance.clear13); break;
+            case 2: audioManager.PlaySFX(audioManager.clear2); break;
+            case 3: audioManager.PlaySFX(audioManager.clear3); break;
+            case 4: audioManager.PlaySFX(audioManager.clear4); break;
+            case 5: audioManager.PlaySFX(audioManager.clear5); break;
+            case 6: audioManager.PlaySFX(audioManager.clear6); break;
+            case 7: audioManager.PlaySFX(audioManager.clear7); break;
+            case 8: audioManager.PlaySFX(audioManager.clear8); break;
+            case 9: audioManager.PlaySFX(audioManager.clear9); break;
+            case 10: audioManager.PlaySFX(audioManager.clear10); break;
+            case 11: audioManager.PlaySFX(audioManager.clear11); break;
+            case 12: audioManager.PlaySFX(audioManager.clear12); break;
+            case 13: audioManager.PlaySFX(audioManager.clear13); break;
             default: break;
         }
     }
@@ -339,7 +356,58 @@ public class Game_Manager : MonoBehaviour
             return;
         }
 
+        // Check if player has Yun Jin rocks to block the attack
+        if (TryBlockWithYunJinRocks())
+        {
+            Debug.Log("Attack blocked by Yun Jin rocks!");
+            return;
+        }
+
+        shaker.boardShake();
         ApplyDeadLine();
+    }
+
+    private bool TryBlockWithYunJinRocks()
+    {
+        // Find the character manager for this player
+        GameObject characterManagerObj = GameObject.Find($"Character Manager {(player.isPlayer1 ? "P1" : "P2")}");
+        if (characterManagerObj == null)
+        {
+            return false;
+        }
+
+        // Check if this player has Yun Jin skill
+        YunJinSkill yunJinSkill = characterManagerObj.GetComponent<YunJinSkill>();
+        if (yunJinSkill == null)
+        {
+            return false;
+        }
+
+        // Check if any rocks are active and can block
+        if (yunJinSkill.Rock1Active || yunJinSkill.Rock2Active || yunJinSkill.Rock3Active)
+        {
+            // Use the first available rock to block the attack
+            if (yunJinSkill.Rock1Active)
+            {
+                yunJinSkill.InvisRock(1);
+                Debug.Log("Rock1 blocked the incoming attack!");
+                return true;
+            }
+            else if (yunJinSkill.Rock2Active)
+            {
+                yunJinSkill.InvisRock(2);
+                Debug.Log("Rock2 blocked the incoming attack!");
+                return true;
+            }
+            else if (yunJinSkill.Rock3Active)
+            {
+                yunJinSkill.InvisRock(3);
+                Debug.Log("Rock3 blocked the incoming attack!");
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void StartEmpCooldown()
@@ -364,6 +432,7 @@ public class Game_Manager : MonoBehaviour
         
         Debug.Log("EMP cooldown reset!");
     }
+
     public void TriggerHardDropLockout()
     {
         HD_Timer = lockoutDuration;
@@ -387,24 +456,116 @@ public class Game_Manager : MonoBehaviour
 
     public void LoseLife()
     {
+        shaker.boardShake();
         player.lives--;
         Debug.Log($"Player lost a life! Lives remaining: {player.lives}");
-        
+
         // Update UI to show remaining lives
         if (gameDisplay != null)
         {
             gameDisplay.UpdateHeartIcons(player.lives);
+            gameDisplay.Ammo_Update(player.attackAmmo);
+            gameDisplay.UpdateEMPStateIcon();
         }
-        
+
         if (player.lives <= 0)
         {
-            // No more lives, game is truly over
-            GameOver();
+            // Check if opponent is already out of lives
+            if (pvp.opponent.lives <= 0)
+            {
+                // Both players are out of lives - game ends based on score
+                GameOver();
+            }
+            else
+            {
+                // Only this player is out of lives - check if catch-up is needed
+                CheckCatchUpCondition();
+            }
         }
         else
         {
             // Reset the board and continue the game
             ResetBoardAfterLifeLoss();
+            gameDisplay.UpdateComboText();
+            boardManager.ClearAll();
+            boardManager.ghost_tilemap.ClearAllTiles();
+        }
+    }
+
+    private void CheckCatchUpCondition()
+    {
+        // If this player has higher or equal score, opponent can still catch up
+        if (player.score >= pvp.opponent.score)
+        {
+            isGameOver = true;
+            boardManager.ClearAll();
+            boardManager.ghost_tilemap.ClearAllTiles();
+            
+            // Clear pieces
+            GameObject Piece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
+            Destroy(Piece);
+            
+            heldTetromino = null;
+            player.holdUsed = false;
+            player.lastComboMilestone = 0;
+            
+            // Opponent gets to continue (they're still active)
+            // Set opponent's isGameOver to false so they can keep playing
+            pvp.opponentGameManager.isGameOver = false;
+            
+            string playerId = player.isPlayer1 ? "P1" : "P2";
+            string opponentId = player.isPlayer1 ? "P2" : "P1";
+            Debug.Log($"{playerId} ran out of lives with score {player.score}. {opponentId} can still catch up!");
+            
+            // Let the PvP system handle the catch-up phase
+            StartCoroutine(WaitForCatchUpCompletion());
+        }
+        else
+        {
+            // This player has lower score and is out of lives - they lost
+            player.isWinner = false;
+            pvp.opponent.isWinner = true;
+            GameOver();
+        }
+    }
+
+    private System.Collections.IEnumerator WaitForCatchUpCompletion()
+    {
+        Player catchingUpPlayer = pvp.opponent;
+        Player fallenPlayer = player;
+        int targetScore = fallenPlayer.score;
+        
+        string catchingPlayerId = catchingUpPlayer.isPlayer1 ? "P1" : "P2";
+        Debug.Log($"Catch-up phase started! {catchingPlayerId} needs to reach {targetScore} points.");
+        
+        // Wait while opponent is playing catch-up
+        while (catchingUpPlayer.lives > 0 && catchingUpPlayer.score < targetScore)
+        {
+            yield return null;
+        }
+
+        // Catch-up phase ended
+        if (catchingUpPlayer.score >= targetScore)
+        {
+            Debug.Log($"{catchingPlayerId} successfully caught up! Score: {catchingUpPlayer.score}");
+            // Continue the game - both players can still compete
+            isGameOver = false;
+            if (!catchingUpPlayer.gameManager.isGameOver)
+            {
+                catchingUpPlayer.gameManager.isGameOver = false;
+            }
+        }
+        if (catchingUpPlayer.score > targetScore)
+        {
+            player.isWinner = false;
+            catchingUpPlayer.isWinner = true;
+            GameOver();
+        }
+        else
+        {
+            player.isWinner = true;
+            catchingUpPlayer.isWinner = false;
+            GameOver();
         }
     }
     
@@ -435,10 +596,21 @@ public class Game_Manager : MonoBehaviour
         int randomIndex = Random.Range(0, tetrominoSet.Length);
         nextTetromino = tetrominoSet[randomIndex];
         gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after board reset
+        boardManager.ClearAll();
+        boardManager.ghost_tilemap.ClearAllTiles();
         
-        Invoke(nameof(SpawnNextPiece), 3f);
+        Invoke(nameof(LossRespawn), 3f);
         
         Debug.Log("Board reset after life loss. Game continues!");
+    }
+
+    public void LossRespawn()
+    {
+        GameObject existingPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
+        if (existingPiece) Destroy(existingPiece);
+        boardManager.ClearAll();
+        boardManager.ghost_tilemap.ClearAllTiles();
+        SpawnNextPiece();
     }
 
     public void GameOver()
@@ -446,15 +618,21 @@ public class Game_Manager : MonoBehaviour
         isGameOver = true;
         boardManager.ClearAll();
         boardManager.ghost_tilemap.ClearAllTiles();
+        boardManager.receivedDeadLineCount = 0;
         // nextDisplayUI.HideAll();
         // holdDisplayUI.HideAll();
         heldTetromino = null;
         player.holdUsed = false;
-        GameObject existingPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
-        if (existingPiece) Destroy(existingPiece);
+        player.lastComboMilestone = 0;
+        GameObject P1Piece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
+        if (P1Piece) Destroy(P1Piece);
+        GameObject P2Piece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P2" : "P1")}");
+        if (P2Piece) Destroy(P2Piece);
         int randomIndex = Random.Range(0, tetrominoSet.Length);
         nextTetromino = tetrominoSet[randomIndex];
-        
-        Debug.Log("Game Over! No more lives remaining.");
+        gameOverManager.TriggerGameOver();
+        gameDisplay.UpdateComboText();
+
+        Debug.Log("Game Over!");
     }
 }

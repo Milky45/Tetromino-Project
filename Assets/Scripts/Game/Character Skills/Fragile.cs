@@ -14,10 +14,12 @@ public class Fragile : MonoBehaviour
     public SpriteRenderer Rock1;
     public SpriteRenderer Rock2;
     public SpriteRenderer Rock3;
+    public AudioManager audioManager;
 
     private void Awake()
     {
         yunJinSkill = GetComponent<YunJinSkill>();
+        audioManager = gameManager.audioManager;
     }
 
     public void RocksPush()
@@ -35,7 +37,7 @@ public class Fragile : MonoBehaviour
     {
         if (yunJinSkill.Rock1Active == true)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
+            audioManager.PlaySFX(audioManager.attack);
             Debug.Log("Rock1 disappears");
             if (Rock1 != null)
             {
@@ -49,17 +51,16 @@ public class Fragile : MonoBehaviour
                 if (activePiece != null) activePiece.Clear();
                 opponent.ReceiveDeadLine();
                 if (activePiece != null) activePiece.Set();
-                opponent.player.attackAmmo--;
-                if (opponent.player.attackAmmo < 0)
+                gameManager.player.attackAmmo--;
+                if (gameManager.player.attackAmmo < 0)
                 {
-                    opponent.player.attackAmmo = 0; // Ensure attackAmmo does not go below 0
+                    gameManager.player.attackAmmo = 0; // Ensure attackAmmo does not go below 0
                 }
             }
-            if (opponent != null && opponent.gameDisplay != null)
+            if (gameManager != null && gameManager.gameDisplay != null)
             {
-                opponent.gameDisplay.Ammo_Update(opponent.player.attackAmmo);
+                gameManager.gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
             }
-
             yunJinSkill.Rock1Active = false; // Reset Rock1Active after checking
             yunJinSkill.Fragile = false; // Reset Fragile state after checking
         }
@@ -69,7 +70,7 @@ public class Fragile : MonoBehaviour
     {
         if (yunJinSkill.Rock2Active == true)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
+            audioManager.PlaySFX(audioManager.attack);
             Debug.Log("Rock2 disappears");
             if (Rock2 != null)
             {
@@ -84,15 +85,15 @@ public class Fragile : MonoBehaviour
                 if (activePiece != null) activePiece.Clear();
                 opponent.ReceiveDeadLine();
                 if (activePiece != null) activePiece.Set();
-                opponent.player.attackAmmo--;
-                if (opponent.player.attackAmmo < 0)
+                gameManager.player.attackAmmo--;
+                if (gameManager.player.attackAmmo < 0)
                 {
-                    opponent.player.attackAmmo = 0; // Ensure attackAmmo does not go below 0
+                    gameManager.player.attackAmmo = 0; // Ensure attackAmmo does not go below 0
                 }
             }
-            if (opponent != null && opponent.gameDisplay != null)
+            if (gameManager != null && gameManager.gameDisplay != null)
             {
-                opponent.gameDisplay.Ammo_Update(opponent.player.attackAmmo);
+                gameManager.gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
             }
 
             yunJinSkill.Rock2Active = false; // Reset Rock1Active after checking
@@ -104,7 +105,7 @@ public class Fragile : MonoBehaviour
     {
         if (yunJinSkill.Rock3Active == true)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
+            audioManager.PlaySFX(audioManager.attack);
             Debug.Log("Rock3 disappears");
             if (Rock3 != null)
             {
@@ -119,15 +120,15 @@ public class Fragile : MonoBehaviour
                 if (activePiece != null) activePiece.Clear();
                 opponent.ReceiveDeadLine();
                 if (activePiece != null) activePiece.Set();
-                opponent.player.attackAmmo--;
-                if (opponent.player.attackAmmo < 0)
+                gameManager.player.attackAmmo--;
+                if (gameManager.player.attackAmmo < 0)
                 {
-                    opponent.player.attackAmmo = 0; // Ensure attackAmmo does not go below 0
+                    gameManager.player.attackAmmo = 0; // Ensure attackAmmo does not go below 0
                 }
             }
-            if (opponent != null && opponent.gameDisplay != null)
+            if (gameManager != null && gameManager.gameDisplay != null)
             {
-                opponent.gameDisplay.Ammo_Update(opponent.player.attackAmmo);
+                gameManager.gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
             }
 
             yunJinSkill.Rock3Active = false; // Reset Rock1Active after checking

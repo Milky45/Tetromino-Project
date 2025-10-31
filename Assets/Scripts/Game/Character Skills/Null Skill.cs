@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
@@ -66,6 +65,7 @@ public class NullSkill : MonoBehaviour
 
     public void ActivateSkill()
     {
+        if (gameManager.isGameOver) return;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");
@@ -82,6 +82,8 @@ public class NullSkill : MonoBehaviour
         gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
+        gameManager.shaker.ChipsDeductShake();
+        gameManager.shaker.CostShake();
 
         Buff();
     }

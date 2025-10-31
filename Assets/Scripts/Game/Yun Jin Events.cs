@@ -6,19 +6,12 @@ public class YunJinEvents : MonoBehaviour
     public Game_Manager gameManager;
     public YunJinSkill yunJinSkill;
     public Fragile fragile;
+    public GameObject targetObj;
 
     private void Start()
     {
-        if (gameManager.player.isPlayer1)
-        {
-            yunJinSkill = GameObject.Find("Character Manager P1").GetComponent<YunJinSkill>();
-            fragile = GameObject.Find("Character Manager P1").GetComponent<Fragile>();
-        }
-        else
-        {
-            yunJinSkill = GameObject.Find("Character Manager P2").GetComponent<YunJinSkill>();
-            fragile = GameObject.Find("Character Manager P2").GetComponent<Fragile>();
-        }
+        yunJinSkill = targetObj.GetComponent<YunJinSkill>();
+        fragile = targetObj.GetComponent<Fragile>();
 
         if (yunJinSkill == null)
         {
@@ -45,8 +38,12 @@ public class YunJinEvents : MonoBehaviour
         fragile.Rock3Check();
     }
 
-    public void ExecuteSkill()
-    {
+    public int eventCtr = 0;
+    public void Execute_Skill()
+    {   
+        Debug.Log("Yun Jin Events executed");
+        // eventCtr++;
+        // Debug.Log($"Event count: {eventCtr}");
         yunJinSkill.ExecuteSkill();
     }
 

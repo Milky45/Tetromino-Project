@@ -3,8 +3,10 @@ using TMPro;
 
 public class TimerDisplay : MonoBehaviour
 {
-    public TMP_Text minutes;
-    public TMP_Text seconds;
+    public TMP_Text timerText;
+    private string minutesText;
+    private string secondsText;
+
     public float timeElapsed;
 
     private bool isRunning = false;
@@ -23,8 +25,10 @@ public class TimerDisplay : MonoBehaviour
         int mins = totalSeconds / 60;
         int secs = totalSeconds % 60;
 
-        minutes.text = mins.ToString("0");
-        seconds.text = secs.ToString("00");
+        minutesText = mins.ToString("0");
+        secondsText = secs.ToString("00");
+
+        timerText.text = minutesText + ":" + secondsText;
     }
 
     public void StartTimer()
@@ -40,8 +44,9 @@ public class TimerDisplay : MonoBehaviour
     public void ResetTimer()
     {
         timeElapsed = 0f;
-        minutes.text = "0";
-        seconds.text = "00";
+        minutesText = "0";
+        secondsText = "00";
+        timerText.text = minutesText + ":" + secondsText;
     }
 
     public float GetElapsedTime()

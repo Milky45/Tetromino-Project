@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
@@ -68,6 +67,7 @@ public class PackHatSkill : MonoBehaviour
 
     public void ActivateSkill()
     {
+        if (gameManager.isGameOver) return;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");
@@ -87,6 +87,8 @@ public class PackHatSkill : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         packhatAnim.SetTrigger("Activate");
+        gameManager.shaker.ChipsDeductShake();
+        gameManager.shaker.CostShake();
 
         // Turn attack cooldown to 0 for 10 seconds when skill is activated
         EnableZeroAttackCooldownForTenSeconds();

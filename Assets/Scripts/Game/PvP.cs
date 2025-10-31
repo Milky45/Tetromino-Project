@@ -8,6 +8,7 @@ public class PvP : MonoBehaviour
 
     public GameDisplay gameDisplay;
 
+    public EmpEvents emp_events;
     public YunJinEvents yunJinEvents;
 
     public Game_Manager opponentGameManager;
@@ -49,15 +50,11 @@ public class PvP : MonoBehaviour
     {
         if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped) return;
+        if (opponentGameManager.isGameOver) return;
 
         if (player.hasEmpGrenade && !player.empOnCooldown)
         {
-            player.hasEmpGrenade = false;
-            Debug.Log("EMP Grenade used!");
-            opponent.gameManager.pvp.ApplyInvertControlDebuff(10f);
-
-            gameManager.StartEmpCooldown();
-            gameDisplay.UpdateEMPStateIcon();
+            emp_events.EmpAnim.SetTrigger("Throw");
         }
         else
         {
@@ -65,8 +62,19 @@ public class PvP : MonoBehaviour
         }
     }
 
+    public void DetonateEmp()
+    {
+        player.hasEmpGrenade = false;
+        Debug.Log("EMP Grenade used!");
+        opponent.gameManager.pvp.ApplyInvertControlDebuff(10f);
+
+        gameManager.StartEmpCooldown();
+        gameDisplay.UpdateEMPStateIcon();
+    }
+
     public void ApplyInvertControlDebuff(float duration)
     {
+        gameManager.shaker.boardShake();
         if (isInvertImmune)
         {
             isInvertImmune = !isInvertImmune;
@@ -82,7 +90,7 @@ public class PvP : MonoBehaviour
                 // comboText.color = Color.red;
                 // comboText.text = "Inverted Controls";
                 Debug.Log("Controls inverted!");
-                AudioManager.Instance.PlaySFX(AudioManager.Instance.EMP_clip);
+                gameManager.audioManager.PlaySFX(gameManager.audioManager.EMP_clip);
                 StartCoroutine(gameDisplay.BackPulse(10f));
             }
 
@@ -92,6 +100,7 @@ public class PvP : MonoBehaviour
     {
         if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped) return;
+        if (opponentGameManager.isGameOver) return;
 
         if (player.atkOnCooldown)
         {
@@ -112,7 +121,7 @@ public class PvP : MonoBehaviour
             }
 
             opponent.gameManager.ReceiveDeadLine();
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.attack);
+            gameManager.audioManager.PlaySFX(gameManager.audioManager.attack);
 
             if (opponentPiece != null)
             {

@@ -7,29 +7,26 @@ using System.Collections;
 public class GameDisplay : MonoBehaviour
 {
     public Game_Manager gameManager;
+    public Shaker shaker;
 
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI empCDText;
     public TextMeshProUGUI skillCDText;
     public TextMeshProUGUI chipsText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI comboTextMain;
+    public TextMeshProUGUI comboTextHighlight;
 
     public Transform mainTileMap;
     public Transform ghostTileMap;
 
+    public SpriteRenderer[] burnStack = new SpriteRenderer[3];
     public SpriteRenderer[] heartIcons = new SpriteRenderer[3];
     public GameObject[] NextBlock = new GameObject[7];
     public GameObject[] HeldBlock = new GameObject[8];
 
     public SpriteRenderer backBase;
-
     public SpriteRenderer EMP_Icon;
-
-    public SpriteRenderer PowerBar;
-    public Sprite PowerBar_0;
-    public Sprite PowerBar_1;
-    public Sprite PowerBar_2;
-    public Sprite PowerBar_3;
     public SpriteRenderer Rock1;
     public SpriteRenderer Rock2;
     public SpriteRenderer Rock3;
@@ -55,6 +52,18 @@ public class GameDisplay : MonoBehaviour
         }
     }
 
+    public void UpdateBurnStack(int stack) // 1
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            burnStack[i].enabled = false;
+        }
+        for (int i = 0; i < stack; i++)
+        {
+            burnStack[i].enabled = true;
+        }
+    }
+
     public void EMP_CD_Update(float timeLeft)
     {
         timeLeft = Mathf.Max(timeLeft, 0f);
@@ -67,6 +76,7 @@ public class GameDisplay : MonoBehaviour
         {
             empCDText.text = $"{timeLeft:F0}";
         }
+        shaker.EMPShake();
     }
 
     public void SkillCooldownUpdate(float cooldownTime)
@@ -86,6 +96,7 @@ public class GameDisplay : MonoBehaviour
     public void Ammo_Update(int ammoCount)
     {
         ammoText.text = $"{ammoCount}/{gameManager.player.maxAmmo}";
+        shaker.bulletShake();
     }
 
     public void LogTetrominoStatus(TetrominoData next, TetrominoData held)
@@ -223,5 +234,21 @@ public class GameDisplay : MonoBehaviour
         {
             EMP_Icon.color = new Color(EMP_Icon.color.r, EMP_Icon.color.g, EMP_Icon.color.b, 0f);
         }
+    }
+
+    public void UpdateComboText()
+    {
+        if (gameManager.player.comboCount <= 1)
+        {
+            comboTextMain.text = "";
+            comboTextHighlight.text = "";
+        }
+        else
+        {
+            comboTextMain.text = $"COMBO {gameManager.player.comboCount}x";
+            comboTextHighlight.text = $"COMBO {gameManager.player.comboCount}x";
+            
+        }
+        
     }
 }

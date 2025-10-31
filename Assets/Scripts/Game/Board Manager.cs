@@ -5,6 +5,7 @@ public class Board_Manager : MonoBehaviour
 {
     public Tilemap main_tilemap;
     public Tilemap ghost_tilemap;
+    public Tilemap scorch_tilemap;
     public TileBase[] tile_types;
     public Vector2Int boardSize = new Vector2Int(10, 24);
     public int LinesCleared { get; private set; } = 0;
@@ -12,27 +13,6 @@ public class Board_Manager : MonoBehaviour
     public RectInt Bounds => new RectInt(-boardSize.x / 2, -boardSize.y / 2, boardSize.x, boardSize.y);
 
     [SerializeField] private Player player; // Assign this in the inspector
-
-    private void Awake()
-    {
-    }
-    /// <summary>
-    /// Check if the Board Manager is ready to use
-    /// </summary>
-
-    /// <summary>
-    /// Wait for the Board Manager to be initialized (for coroutines)
-    /// </summary>
-
-    // public void SetTile(Vector3Int position, TileBase tile)
-    // {
-    //     main_tilemap.SetTile(position, tile);
-    // }
-
-    // public void ClearTile(Vector3Int position)
-    // {
-    //     main_tilemap.SetTile(position, null);
-    // }
 
     public bool IsInsideBoard(Vector3Int pos)
     {

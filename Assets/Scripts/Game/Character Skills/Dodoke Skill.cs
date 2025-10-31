@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.InputSystem;
 
@@ -74,6 +72,7 @@ public class DodokeSkill : MonoBehaviour
     
     public void ActivateSkill()
     {
+        if (gameManager.isGameOver) return;
         cost += 100 * gameManager.inflationCtr;
         if (isOnCooldown)
         {
@@ -91,6 +90,8 @@ public class DodokeSkill : MonoBehaviour
         gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
+        gameManager.shaker.ChipsDeductShake();
+        gameManager.shaker.CostShake();
 
         StartCoroutine(BoardFlip());
     }
