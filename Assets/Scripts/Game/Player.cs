@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public int attackAmmo = 0;
     public int  maxAmmo = 5;
     public bool isInverted = false;
+    public int level = 1;
 
     public bool hasEmpGrenade = false;
     public bool empOnCooldown = false;

@@ -35,6 +35,9 @@ public class Game_Manager : MonoBehaviour
     public static bool isPaused;
     public bool isTimeStopped = false;
     public bool isGameOver;
+    public bool isSolo = false;
+
+    private int goalScore = 5000;
 
     public int inflationCtr = 0;
     public bool disableSpawn = false;
@@ -65,13 +68,20 @@ public class Game_Manager : MonoBehaviour
         currentGravityDelay = initialGravityDelay;
         int randomIndex = Random.Range(0, tetrominoSet.Length);
         nextTetromino = tetrominoSet[randomIndex];
-        gameDisplay.EMP_CD_Update(0f); // Initialize EMP cooldown display
-        gameDisplay.Ammo_Update(player.attackAmmo); // Initialize ammo display
+        if (isSolo)
+        {
+            gameDisplay.LevelUpdate(player.level-1);
+        }
+        else if (!isSolo)
+        {
+            gameDisplay.EMP_CD_Update(0f);
+            gameDisplay.Ammo_Update(player.attackAmmo);
+            gameDisplay.UpdateEMPStateIcon();
+            gameDisplay.UpdateHeartIcons(player.lives);
+        }
         gameDisplay.UpdateChips(player.score); // Initialize chips display
-        gameDisplay.UpdateHeartIcons(player.lives);
         gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log initial tetromino status
         gameDisplay.UpdateComboText();
-        gameDisplay.UpdateEMPStateIcon();
         SpawnNextPiece();
     }
 
@@ -110,13 +120,13 @@ public class Game_Manager : MonoBehaviour
         {
             empCooldownTimer -= delta;
             empCooldownTimer = Mathf.Max(empCooldownTimer, 0f);
-            
+
             // Update the UI display
             if (gameDisplay != null)
             {
                 gameDisplay.EMP_CD_Update(empCooldownTimer);
             }
-            
+
             // Check if cooldown is finished
             if (empCooldownTimer <= 0f)
             {
@@ -124,12 +134,23 @@ public class Game_Manager : MonoBehaviour
             }
         }
 
-        if (gravityTime >= g_IncreaseInt)
+        if (player.score > goalScore && isSolo)
+        {
+            currentGravityDelay -= 0.02f;
+            gameDisplay.LevelUpdate(player.level);
+            player.level++;
+            if (currentGravityDelay <= 0)
+            {
+                currentGravityDelay = 0.02f;
+            }
+            goalScore += 5000;
+        }
+        
+        if (gravityTime >= g_IncreaseInt && !isSolo)
         {
             gravityTime = 0f;
             currentGravityDelay -= 0.2f;
             currentGravityDelay = Mathf.Max(currentGravityDelay, minGravityDelay);
-            inflationCtr++;
         }
     }
 
@@ -290,9 +311,12 @@ public class Game_Manager : MonoBehaviour
                     }
                 }
                 player.lastComboMilestone = milestone;
-                gameDisplay.Ammo_Update(player.attackAmmo);
+                if (!isSolo)
+                {
+                    gameDisplay.Ammo_Update(player.attackAmmo);
+                }
             }
-            if (player.comboCount >= 4 && !player.hasEmpGrenade && !player.empOnCooldown)
+            if (player.comboCount >= 4 && !player.hasEmpGrenade && !player.empOnCooldown && !isSolo)
             {
                 player.hasEmpGrenade = true;
                 Debug.Log("EMP Grenade acquired!");
@@ -390,6 +414,7 @@ public class Game_Manager : MonoBehaviour
             if (yunJinSkill.Rock1Active)
             {
                 yunJinSkill.InvisRock(1);
+                yunJinSkill.StoneDestroyed();
                 Debug.Log("Rock1 blocked the incoming attack!");
                 return true;
             }
@@ -461,14 +486,18 @@ public class Game_Manager : MonoBehaviour
         Debug.Log($"Player lost a life! Lives remaining: {player.lives}");
 
         // Update UI to show remaining lives
-        if (gameDisplay != null)
+        if (gameDisplay != null && !isSolo)
         {
             gameDisplay.UpdateHeartIcons(player.lives);
             gameDisplay.Ammo_Update(player.attackAmmo);
             gameDisplay.UpdateEMPStateIcon();
         }
 
-        if (player.lives <= 0)
+        if (pvp.isSolo && player.lives <= 0)
+        {
+            GameOver();
+        }
+        else if (player.lives <= 0 && !pvp.isSolo)
         {
             // Check if opponent is already out of lives
             if (pvp.opponent.lives <= 0)

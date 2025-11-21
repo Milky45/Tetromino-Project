@@ -155,7 +155,7 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Swap Team"",
+                    ""name"": ""Secondary Skill"",
                     ""type"": ""Button"",
                     ""id"": ""1abc9125-89ee-4d3b-8263-ecd4f79cb409"",
                     ""expectedControlType"": """",
@@ -475,7 +475,7 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Swap Team"",
+                    ""action"": ""Secondary Skill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -486,7 +486,18 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Swap Team"",
+                    ""action"": ""Secondary Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""028e1e3d-c19d-40eb-91f9-cc6047b988ae"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Secondary Skill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1478,7 +1489,7 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         m_PlayerMovement_HardDrop = m_PlayerMovement.FindAction("Hard Drop", throwIfNotFound: true);
         m_PlayerMovement_Hold = m_PlayerMovement.FindAction("Hold", throwIfNotFound: true);
         m_PlayerMovement_Skill = m_PlayerMovement.FindAction("Skill", throwIfNotFound: true);
-        m_PlayerMovement_SwapTeam = m_PlayerMovement.FindAction("Swap Team", throwIfNotFound: true);
+        m_PlayerMovement_SecondarySkill = m_PlayerMovement.FindAction("Secondary Skill", throwIfNotFound: true);
         m_PlayerMovement_MoveLeft = m_PlayerMovement.FindAction("Move Left", throwIfNotFound: true);
         m_PlayerMovement_MoveRight = m_PlayerMovement.FindAction("Move Right", throwIfNotFound: true);
         m_PlayerMovement_MoveDown = m_PlayerMovement.FindAction("Move Down", throwIfNotFound: true);
@@ -1589,7 +1600,7 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_HardDrop;
     private readonly InputAction m_PlayerMovement_Hold;
     private readonly InputAction m_PlayerMovement_Skill;
-    private readonly InputAction m_PlayerMovement_SwapTeam;
+    private readonly InputAction m_PlayerMovement_SecondarySkill;
     private readonly InputAction m_PlayerMovement_MoveLeft;
     private readonly InputAction m_PlayerMovement_MoveRight;
     private readonly InputAction m_PlayerMovement_MoveDown;
@@ -1638,9 +1649,9 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Skill => m_Wrapper.m_PlayerMovement_Skill;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerMovement/SwapTeam".
+        /// Provides access to the underlying input action "PlayerMovement/SecondarySkill".
         /// </summary>
-        public InputAction @SwapTeam => m_Wrapper.m_PlayerMovement_SwapTeam;
+        public InputAction @SecondarySkill => m_Wrapper.m_PlayerMovement_SecondarySkill;
         /// <summary>
         /// Provides access to the underlying input action "PlayerMovement/MoveLeft".
         /// </summary>
@@ -1720,9 +1731,9 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
             @Skill.started += instance.OnSkill;
             @Skill.performed += instance.OnSkill;
             @Skill.canceled += instance.OnSkill;
-            @SwapTeam.started += instance.OnSwapTeam;
-            @SwapTeam.performed += instance.OnSwapTeam;
-            @SwapTeam.canceled += instance.OnSwapTeam;
+            @SecondarySkill.started += instance.OnSecondarySkill;
+            @SecondarySkill.performed += instance.OnSecondarySkill;
+            @SecondarySkill.canceled += instance.OnSecondarySkill;
             @MoveLeft.started += instance.OnMoveLeft;
             @MoveLeft.performed += instance.OnMoveLeft;
             @MoveLeft.canceled += instance.OnMoveLeft;
@@ -1779,9 +1790,9 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
             @Skill.started -= instance.OnSkill;
             @Skill.performed -= instance.OnSkill;
             @Skill.canceled -= instance.OnSkill;
-            @SwapTeam.started -= instance.OnSwapTeam;
-            @SwapTeam.performed -= instance.OnSwapTeam;
-            @SwapTeam.canceled -= instance.OnSwapTeam;
+            @SecondarySkill.started -= instance.OnSecondarySkill;
+            @SecondarySkill.performed -= instance.OnSecondarySkill;
+            @SecondarySkill.canceled -= instance.OnSecondarySkill;
             @MoveLeft.started -= instance.OnMoveLeft;
             @MoveLeft.performed -= instance.OnMoveLeft;
             @MoveLeft.canceled -= instance.OnMoveLeft;
@@ -2113,12 +2124,12 @@ public partial class @GameControlls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSkill(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Swap Team" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Secondary Skill" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSwapTeam(InputAction.CallbackContext context);
+        void OnSecondarySkill(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Move Left" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

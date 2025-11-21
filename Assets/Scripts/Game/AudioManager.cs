@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip EMP_clip;
     public AudioClip Blind;
     public AudioClip ScorchSfx;
+    public AudioClip EthanSfx;
 
     private void Start()
     {

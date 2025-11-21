@@ -4,26 +4,29 @@ using System.Collections;
 
 public class PackHatSkill : MonoBehaviour
 {
-    public CharacterManager characterManager;
+    [Header("References")]
     public Game_Manager gameManager;
     public GameDisplay gameDisplay;
+    public CharacterManager characterManager;
     public Animator packhatAnim;
 
     [Header("Input")]
     public PlayerInput playerInput;
     private InputAction skillAction;
 
-
     [Header("Cooldown Settings")]
     public float cooldownTime = 35f;
     private float cooldownTimer = 0f;
     public bool isOnCooldown = true;
 
+    [Header("Misc")]
+    public bool isSec = false;
+    public bool isSkillActive = false;
     public int cost = 500;
     
     // Tracks the temporary zero-attack-cooldown effect
     private Coroutine zeroAtkCooldownRoutine;
-    private void Awake()
+    private void Start()
     {
         characterManager = GetComponent<CharacterManager>();
         if (characterManager.isPlayer1)
@@ -38,15 +41,28 @@ public class PackHatSkill : MonoBehaviour
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
         }
-        packhatAnim = GetComponent<Animator>();
+        
+        gameManager.player.maxAmmo = 5;
         cooldownTimer = cooldownTime + 10;
         isOnCooldown = true;
 
-        skillAction = playerInput.actions.FindAction("Skill");
-        skillAction.performed += ctx => ActivateSkill();
+        if (isSec == true)
+        {
+            Debug.Log("PackHat Skill Assigned as Secondary Skill");
+            packhatAnim = characterManager.charSecDisplay.GetComponent<Animator>();
+            skillAction = playerInput.actions.FindAction("Secondary Skill");
+            gameDisplay.cost2Text.text = cost.ToString();
+        }
+        else if(isSec == false)
+        {
+            Debug.Log("PackHat Skill Assigned as Primary Skill");
+            packhatAnim = GetComponent<Animator>();
+            skillAction = playerInput.actions.FindAction("Skill");
+            gameDisplay.cost1Text.text = cost.ToString();
+        }
+        if (skillAction != null)
+           skillAction.performed += ctx => ActivateSkill();
 
-        gameManager.player.maxAmmo = 5;
-        gameDisplay.costText.text = cost.ToString();
     }
 
     private void Update()
@@ -55,7 +71,14 @@ public class PackHatSkill : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
-            gameDisplay.SkillCooldownUpdate(cooldownTimer);
+            if(isSec)
+            {
+                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+            }
+            else
+            {
+                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+            }
 
             if (cooldownTimer <= 0f)
             {
@@ -92,6 +115,7 @@ public class PackHatSkill : MonoBehaviour
 
         // Turn attack cooldown to 0 for 10 seconds when skill is activated
         EnableZeroAttackCooldownForTenSeconds();
+        StartCoroutine(gameDisplay.BackPulse(10f, "#bb6400ff"));
     }
 
     // Public method to set attack cooldown to 0 for 10 seconds
@@ -116,6 +140,7 @@ public class PackHatSkill : MonoBehaviour
         float originalCooldown = playerRef.atkCD_Time;
 
         // Clear any currently active attack cooldown and set to zero
+        isSkillActive = true;
         playerRef.atkOnCooldown = false;
         playerRef.atkTempCD = originalCooldown;
         playerRef.atkCD_Time = 0f;
@@ -124,6 +149,7 @@ public class PackHatSkill : MonoBehaviour
         yield return new WaitForSeconds(durationSeconds);
 
         // Restore original attack cooldown
+        isSkillActive = false;
         playerRef.atkCD_Time = playerRef.atkTempCD > 0f ? playerRef.atkTempCD : originalCooldown;
         Debug.Log("Attack cooldown restored.");
         packhatAnim.SetTrigger("Return");
@@ -131,4 +157,8 @@ public class PackHatSkill : MonoBehaviour
         zeroAtkCooldownRoutine = null;
     }
 
+    private void OnDisable()
+    {
+        skillAction.performed -= ctx => ActivateSkill();
+    }
 }

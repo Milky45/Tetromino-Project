@@ -16,8 +16,6 @@ public class ScorchCursor : MonoBehaviour
 
     private float repeatTimerLR = 0f;
     private float repeatTimerUD = 0f;
-    private float cursorInitialDelay = 0.15f; // Initial delay before repeat
-    private float cursorRepeatRate = 0.05f;  // Delay between repeated moves
 
     private int holdLR = 0; // -1 for left, +1 for right, 0 for none
     private int holdUD = 0; // -1 for down, +1 for up, 0 for none

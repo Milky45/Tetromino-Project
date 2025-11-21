@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Swap Team",
+                    "name": "Secondary Skill",
                     "type": "Button",
                     "id": "1abc9125-89ee-4d3b-8263-ecd4f79cb409",
                     "expectedControlType": "",
@@ -389,7 +389,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Swap Team",
+                    "action": "Secondary Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -400,7 +400,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Swap Team",
+                    "action": "Secondary Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "028e1e3d-c19d-40eb-91f9-cc6047b988ae",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Secondary Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

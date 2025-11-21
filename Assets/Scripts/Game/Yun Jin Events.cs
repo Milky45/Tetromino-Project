@@ -3,7 +3,6 @@ using UnityEngine;
 public class YunJinEvents : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Game_Manager gameManager;
     public YunJinSkill yunJinSkill;
     public Fragile fragile;
     public GameObject targetObj;
@@ -37,8 +36,6 @@ public class YunJinEvents : MonoBehaviour
     {
         fragile.Rock3Check();
     }
-
-    public int eventCtr = 0;
     public void Execute_Skill()
     {   
         Debug.Log("Yun Jin Events executed");

@@ -40,8 +40,36 @@ public class PauseManager : MonoBehaviour
         Destroy(Player2);
         SceneManager.LoadScene("MainMenu");
     }
-    
+
     public void VsLobby()
+    {
+        if (!isMenu)
+        {
+            Time.timeScale = 1f;
+        }
+        CharacterSelect.currentlyPlaying = false;
+        GameObject Player1 = GameObject.Find("Player 1");
+        GameObject Player2 = GameObject.Find("Player 2");
+        Destroy(Player1);
+        Destroy(Player2);
+        SceneManager.LoadScene("VS Lobby");
+    }
+
+    public void VsTeamsLobby()
+    {
+        if (!isMenu)
+        {
+            Time.timeScale = 1f;
+        }
+        CharacterSelect.currentlyPlaying = false;
+        GameObject Player1 = GameObject.Find("Player 1");
+        GameObject Player2 = GameObject.Find("Player 2");
+        Destroy(Player1);
+        Destroy(Player2);
+        SceneManager.LoadScene("VS Teams Lobby");
+    }
+    
+    public void SoloLobby()
     {
         if (!isMenu)
         {
@@ -49,10 +77,8 @@ public class PauseManager : MonoBehaviour
         }    
         CharacterSelect.currentlyPlaying = false;
         GameObject Player1 = GameObject.Find("Player 1");
-        GameObject Player2 = GameObject.Find("Player 2");
         Destroy(Player1);
-        Destroy(Player2);
-        SceneManager.LoadScene("VS Lobby");
+        SceneManager.LoadScene("Solo Lobby");
     }
 
     public void RestartScene()

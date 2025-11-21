@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: 3291288bd3b7a0c4a83c1eeabfc10a2f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6544485853052719187
+    second: Packhat Skill_0
+  - first:
+      213: 7367730714053609961
+    second: Packhat Skill_1
+  - first:
+      213: -6142333067733057715
+    second: Packhat Skill_2
+  - first:
+      213: -2252284274028484915
+    second: Packhat Skill_3
+  - first:
+      213: -5621234276013509954
+    second: Packhat Skill_4
+  - first:
+      213: 6013478720485645114
+    second: Packhat Skill_5
+  - first:
+      213: -7059663863240569593
+    second: Packhat Skill_6
+  - first:
+      213: -8668019636942790289
+    second: Packhat Skill_7
+  - first:
+      213: -4317546740218731846
+    second: Packhat Skill_8
+  - first:
+      213: -4348574679681017819
+    second: Packhat Skill_9
+  - first:
+      213: -5404731518412788682
+    second: Packhat Skill_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 2.7
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Packhat Skill_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 34
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 350d6cc853fa2da50800000000000000
+      internalID: 6544485853052719187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 49
+        height: 48
+      alignment: 9
+      pivot: {x: 0.3469388, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e986eb6c007f3660800000000000000
+      internalID: 7367730714053609961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 49
+        height: 49
+      alignment: 9
+      pivot: {x: 0.3469388, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4fb2ad4e9c02caa0800000000000000
+      internalID: -6142333067733057715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 49
+        height: 48
+      alignment: 9
+      pivot: {x: 0.3469388, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc66559c2674eb0e0800000000000000
+      internalID: -2252284274028484915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_4
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 0
+        width: 51
+        height: 48
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb2f6f2653d5df1b0800000000000000
+      internalID: -5621234276013509954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_5
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 0
+        width: 85
+        height: 49
+      alignment: 9
+      pivot: {x: 0.2, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3bdae6190b247350800000000000000
+      internalID: 6013478720485645114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_6
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 76
+        height: 49
+      alignment: 9
+      pivot: {x: 0.2236842, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d42edbe19070e90800000000000000
+      internalID: -7059663863240569593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_7
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 0
+        width: 54
+        height: 48
+      alignment: 9
+      pivot: {x: 0.3148148, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f612ae9b01205b780800000000000000
+      internalID: -8668019636942790289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_8
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 55
+        height: 48
+      alignment: 9
+      pivot: {x: 0.3090909, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab2ed187d1ef414c0800000000000000
+      internalID: -4317546740218731846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_9
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 55
+        height: 48
+      alignment: 9
+      pivot: {x: 0.3090909, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 528da5a5e52c6a3c0800000000000000
+      internalID: -4348574679681017819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Packhat Skill_10
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 53
+        height: 48
+      alignment: 9
+      pivot: {x: 0.3207547, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63ce5aac1598ef4b0800000000000000
+      internalID: -5404731518412788682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f2f2cd6543ba0e94b9e061b5d39ec9f9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Packhat Skill_0: 6544485853052719187
+      Packhat Skill_1: 7367730714053609961
+      Packhat Skill_10: -5404731518412788682
+      Packhat Skill_2: -6142333067733057715
+      Packhat Skill_3: -2252284274028484915
+      Packhat Skill_4: -5621234276013509954
+      Packhat Skill_5: 6013478720485645114
+      Packhat Skill_6: -7059663863240569593
+      Packhat Skill_7: -8668019636942790289
+      Packhat Skill_8: -4317546740218731846
+      Packhat Skill_9: -4348574679681017819
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

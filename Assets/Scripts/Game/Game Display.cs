@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class GameDisplay : MonoBehaviour
@@ -11,11 +11,15 @@ public class GameDisplay : MonoBehaviour
 
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI empCDText;
-    public TextMeshProUGUI skillCDText;
+    public TextMeshProUGUI skill1CDText;
+    public TextMeshProUGUI skill2CDText;
     public TextMeshProUGUI chipsText;
-    public TextMeshProUGUI costText;
+    public TextMeshProUGUI cost1Text;
+    public TextMeshProUGUI cost2Text;
     public TextMeshProUGUI comboTextMain;
     public TextMeshProUGUI comboTextHighlight;
+    public TextMeshProUGUI lvlText;
+    public GameObject mashBarDisplay;
 
     public Transform mainTileMap;
     public Transform ghostTileMap;
@@ -79,17 +83,30 @@ public class GameDisplay : MonoBehaviour
         shaker.EMPShake();
     }
 
-    public void SkillCooldownUpdate(float cooldownTime)
+    public void Skill1CooldownUpdate(float cooldownTime)
     {
         cooldownTime = Mathf.Max(cooldownTime, 0f);
 
         if (cooldownTime <= 0f)
         {
-            skillCDText.text = "";
+            skill1CDText.text = "";
         }
         else
         {
-            skillCDText.text = $"{cooldownTime:F0}"; // Display with one decimal place
+            skill1CDText.text = $"{cooldownTime:F0}"; // Display with one decimal place
+        }
+    }
+    public void Skill2CooldownUpdate(float cooldownTime)
+    {
+        cooldownTime = Mathf.Max(cooldownTime, 0f);
+
+        if (cooldownTime <= 0f)
+        {
+            skill2CDText.text = "";
+        }
+        else
+        {
+            skill2CDText.text = $"{cooldownTime:F0}"; // Display with one decimal place
         }
     }
 
@@ -97,6 +114,12 @@ public class GameDisplay : MonoBehaviour
     {
         ammoText.text = $"{ammoCount}/{gameManager.player.maxAmmo}";
         shaker.bulletShake();
+    }
+
+    public void LevelUpdate(int lvl)
+    {
+        lvl++;
+        lvlText.text = $"Level {lvl.ToString()}";
     }
 
     public void LogTetrominoStatus(TetrominoData next, TetrominoData held)
@@ -176,7 +199,7 @@ public class GameDisplay : MonoBehaviour
 
     }
 
-    public IEnumerator BackPulse(float duration)
+    public IEnumerator BackPulse(float duration, string color)
     {
         // Set to target color (#CE9A4D), wait, then fade back to original color
         float fadeDuration = duration;
@@ -187,7 +210,7 @@ public class GameDisplay : MonoBehaviour
 
         // Parse target color from hex and preserve original alpha
         Color targetColor;
-        if (!ColorUtility.TryParseHtmlString("#763700", out targetColor))
+        if (!ColorUtility.TryParseHtmlString(color, out targetColor))
         {
             targetColor = new Color(118f / 255f, 55f / 255f, 0f / 255f, 1f);
         }

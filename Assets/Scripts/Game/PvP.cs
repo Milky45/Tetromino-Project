@@ -5,11 +5,13 @@ using System.Linq;
 public class PvP : MonoBehaviour
 {
     public Game_Manager gameManager;
-
     public GameDisplay gameDisplay;
-
     public EmpEvents emp_events;
     public YunJinEvents yunJinEvents;
+    public YunJinSkill yunJinSkill;
+    public PackHatSkill packHatSkill;
+    public GameObject charManagerObj;
+
 
     public Game_Manager opponentGameManager;
 
@@ -17,6 +19,7 @@ public class PvP : MonoBehaviour
     public Player opponent;
 
     public bool isInvertImmune = false;
+    public bool isSolo;
 
     PlayerInput playerInput;
     InputAction empGrenadeAction;
@@ -24,6 +27,7 @@ public class PvP : MonoBehaviour
 
     private void Awake()
     {
+        isSolo = gameManager.isSolo;
         // assign oponent based on the opposite isPlayer1 value
         opponent = FindObjectsByType<Player>(FindObjectsSortMode.None).FirstOrDefault(p => p != player);
 
@@ -40,12 +44,23 @@ public class PvP : MonoBehaviour
             yunJinEvents = GameObject.Find("Character Manager P2").GetComponent<YunJinEvents>();
         }
 
-        empGrenadeAction = playerInput.actions["EMP"];
-        attackAction = playerInput.actions["Attack"];
+        if (!isSolo)
+        {
+            empGrenadeAction = playerInput.actions["EMP"];
+            attackAction = playerInput.actions["Attack"];
 
-        empGrenadeAction.performed += ctx => TryUseEmpGrenade();
-        attackAction.performed += ctx => TryAttack();
+            empGrenadeAction.performed += ctx => TryUseEmpGrenade();
+            attackAction.performed += ctx => TryAttack();
+        }
     }
+
+    private void Start()
+    {
+        if (isSolo) { return; }
+        yunJinSkill = yunJinEvents.yunJinSkill;
+        packHatSkill = charManagerObj.GetComponent<PackHatSkill>();
+    }
+
     public void TryUseEmpGrenade()
     {
         if (Game_Manager.isPaused) return;
@@ -74,6 +89,11 @@ public class PvP : MonoBehaviour
 
     public void ApplyInvertControlDebuff(float duration)
     {
+        if (TryBlockEmp() == true)
+        {
+            Debug.Log("EMP Blocked by Yun Jin's Rocks");
+            return;
+        }
         gameManager.shaker.boardShake();
         if (isInvertImmune)
         {
@@ -81,19 +101,37 @@ public class PvP : MonoBehaviour
             return;
         }
         if (!player.isInverted)
+        {
+            player.isInverted = true;
+            gameManager.invertTimer = duration;
+            var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
+            if (activePiece != null)
+                activePiece.Clear();
+            // comboText.color = Color.red;
+            // comboText.text = "Inverted Controls";
+            Debug.Log("Controls inverted!");
+            gameManager.audioManager.PlaySFX(gameManager.audioManager.EMP_clip);
+            StartCoroutine(gameDisplay.BackPulse(10f, "#763700")); // "#763700"
+        }
+    }
+    
+    public bool TryBlockEmp()
+    {
+        if(yunJinSkill != null)
+        {
+            int rockCtr = yunJinSkill.rockCount;
+            if (rockCtr > 0)
             {
-                player.isInverted = true;
-                gameManager.invertTimer = duration;
-                var activePiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
-                if (activePiece != null)
-                    activePiece.Clear();
-                // comboText.color = Color.red;
-                // comboText.text = "Inverted Controls";
-                Debug.Log("Controls inverted!");
-                gameManager.audioManager.PlaySFX(gameManager.audioManager.EMP_clip);
-                StartCoroutine(gameDisplay.BackPulse(10f));
+                for (int i = rockCtr; i > 0; i--)
+                {
+                    yunJinSkill.InvisRock(i);
+                }
+                yunJinSkill.StoneDestroyed();
+                return true;
             }
-
+            
+        }
+        return false;
     }
 
     public void TryAttack()
@@ -112,6 +150,15 @@ public class PvP : MonoBehaviour
 
         if (player.attackAmmo > 0)
         {
+            
+            if (packHatSkill != null)
+            {
+                if (packHatSkill.isSkillActive)
+                {
+                    packHatSkill.packhatAnim.Play("Firing", 0, 0f);
+                }
+            }
+
             player.attackAmmo--;
             //Camera.SetTrigger("Shake");
             var opponentPiece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P2" : "P1")}")?.GetComponent<Piece>();

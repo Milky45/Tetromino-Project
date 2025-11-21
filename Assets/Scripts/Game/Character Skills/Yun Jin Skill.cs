@@ -1,13 +1,16 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class YunJinSkill : MonoBehaviour
 {
+    [Header("References")]
     public Game_Manager gameManager;
     public GameDisplay gameDisplay;
     public CharacterManager characterManager;
-    public PlayerInput playerInput;
 
+    [Header("Input")]
+    public PlayerInput playerInput;
     private InputAction skillAction;
 
     [Header("Cooldown Settings")]
@@ -27,12 +30,13 @@ public class YunJinSkill : MonoBehaviour
     public Animator YunJinAnim;
     private bool ActiveRock = false;
     public bool Fragile = false;
+
+    [Header("Misc")]
     public int rockCount; // Number of rocks to animate
-
+    public bool isSec = false;
     public int cost = 500;
-    public int triggerCtr = 0;
 
-    private void Awake()
+    private void Start()
     {
         characterManager = GetComponent<CharacterManager>();
         if (characterManager.isPlayer1)
@@ -49,16 +53,26 @@ public class YunJinSkill : MonoBehaviour
         }
 
         fragile = GetComponent<Fragile>();
-        YunJinAnim = GetComponent<Animator>();
+        
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         gameManager.player.maxAmmo = 5;
 
-        skillAction = playerInput.actions.FindAction("Skill");
-        // Start charge on press; if rocks are active, perform rock push instead (even during cooldown)
+        if (isSec == true)
+        {
+            YunJinAnim = characterManager.charSecDisplay.GetComponent<Animator>();
+            Debug.Log("Yun Jin Skill Assigned as Secondary Skill");
+            skillAction = playerInput.actions.FindAction("Secondary Skill");
+            gameDisplay.cost2Text.text = cost.ToString();
+        }
+        else if(isSec == false)
+        {
+            YunJinAnim = GetComponent<Animator>();
+            Debug.Log("Yun Jin Skill Assigned as Primary Skill");
+            skillAction = playerInput.actions.FindAction("Skill");
+            gameDisplay.cost1Text.text = cost.ToString();
+        }        
         skillAction.performed += ctx => ActivateSkill();
-
-        gameDisplay.costText.text = cost.ToString();
     }
 
     void Update()
@@ -67,9 +81,13 @@ public class YunJinSkill : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
-            if (gameDisplay != null)
+            if(isSec)
             {
-                gameDisplay.SkillCooldownUpdate(cooldownTimer);
+                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+            }
+            else
+            {
+                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
             }
 
             if (cooldownTimer <= 0f)
@@ -83,7 +101,6 @@ public class YunJinSkill : MonoBehaviour
         if (ActiveRock && !Rock1Active && !Rock2Active && !Rock3Active)
         {
             ActiveRock = false;
-            gameDisplay.RockDurUI.text = "";
             Fragile = false;
             ReturnRockIdle();
         }
@@ -116,6 +133,12 @@ public class YunJinSkill : MonoBehaviour
         }
     }
 
+    public void StoneDestroyed()
+    {
+        isOnCooldown = true;
+        ReturnRockIdle();
+    }
+
     public void ActivateSkill()
     {
         if (isOnCooldown) return;
@@ -143,14 +166,10 @@ public class YunJinSkill : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         Fragile = false;
-        triggerCtr = 0;
     }
     
     public void ExecuteSkill()
     {
-        triggerCtr++;
-        Debug.Log($"Trigger count: {triggerCtr}");
-
         if (Fragile == true)
         {
             ActivateFragile();

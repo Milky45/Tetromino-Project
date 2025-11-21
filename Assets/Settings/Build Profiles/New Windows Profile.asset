@@ -23,7 +23,7 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/MainMenu.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/TetrominoGame.unity
+    m_path: Assets/Scenes/VsTeamsTetrominoGame.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []

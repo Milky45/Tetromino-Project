@@ -23,9 +23,11 @@ public class DodokeSkill : MonoBehaviour
     private float cooldownTimer = 0f;
     public bool isOnCooldown = true;
 
+    [Header("Misc")]
+    public bool isSec = false;
     public int cost = 300;
     
-     private void Awake()
+    private void Start()
     {
         characterManager = GetComponent<CharacterManager>();
         if (characterManager.isPlayer1)
@@ -47,10 +49,19 @@ public class DodokeSkill : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
 
-        skillAction = playerInput.actions.FindAction("Skill");
-        skillAction.performed += ctx => ActivateSkill();
-
-        gameDisplay.costText.text = cost.ToString();
+        if (isSec == true)
+        {
+            Debug.Log("Dodoke Skill Assigned as Secondary Skill");
+            skillAction = playerInput.actions.FindAction("Secondary Skill");
+            gameDisplay.cost2Text.text = cost.ToString();
+        }
+        else if(isSec == false)
+        {
+            Debug.Log("Dodoke Skill Assigned as Primary Skill");
+            skillAction = playerInput.actions.FindAction("Skill");
+            gameDisplay.cost1Text.text = cost.ToString();
+        }        
+           skillAction.performed += ctx => ActivateSkill();
     }
 
     private void Update()
@@ -59,7 +70,14 @@ public class DodokeSkill : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
-            gameDisplay.SkillCooldownUpdate(cooldownTimer);
+            if(isSec)
+            {
+                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+            }
+            else
+            {
+                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+            }
 
             if (cooldownTimer <= 0f)
             {
@@ -94,6 +112,8 @@ public class DodokeSkill : MonoBehaviour
         gameManager.shaker.CostShake();
 
         StartCoroutine(BoardFlip());
+        gameManager.pvp.opponentGameManager.shaker.boardShake();
+        StartCoroutine(gameManager.pvp.opponentGameManager.gameDisplay.BackPulse(10f, "#720076ff"));
     }
 
     public IEnumerator BoardFlip()
@@ -130,4 +150,8 @@ public class DodokeSkill : MonoBehaviour
         Debug.Log("Board flip ended!");
     }
 
+    private void OnDisable()
+    {
+        skillAction.performed -= ctx => ActivateSkill();
+    }
 }

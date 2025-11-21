@@ -10,11 +10,13 @@ public class GameOverManager : MonoBehaviour
     public GameObject winDisplay;
     public GameObject gameOverDisplay;
     public string playerName;
+    public string playerScore;
     public TextMeshProUGUI winStringMain;
     public TextMeshProUGUI winStringHigh;
 
     public AudioManager audioManager;
     public bool gameEnd = false;
+    public bool isSolo = false;
 
     private void Awake()
     {
@@ -23,7 +25,7 @@ public class GameOverManager : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(TimedGameOver), 400f);
+        if (!isSolo) { Invoke(nameof(TimedGameOver), 400f); }
     }
 
     public void TimedGameOver()
@@ -48,6 +50,14 @@ public class GameOverManager : MonoBehaviour
     public void TriggerGameOver()
     {
         audioManager.VSStopMusic();
+        if (isSolo)
+        {
+            playerScore = P1gameManager.player.score.ToString();
+            gameEnd = true;
+            gameOverAnimator.Play("GameOver");
+            Invoke(nameof(DisplayScore), 2.5f);
+            return;
+        }
         if (P1gameManager.player.isWinner && !P2gameManager.player.isWinner)
         {
             playerName = "Player 1";
@@ -56,9 +66,17 @@ public class GameOverManager : MonoBehaviour
         {
             playerName = "Player 2";
         }
-        gameEnd = true;     
+        gameEnd = true;
         gameOverAnimator.Play("GameOver");
         Invoke(nameof(DisplayWinner), 2.5f);
+    }
+    
+    public void DisplayScore()
+    {
+        winStringMain.text = $"Final Score: {playerScore}";
+        winStringHigh.text = $"Final Score: {playerScore}";
+        gameOverDisplay.SetActive(false);
+        winDisplay.SetActive(true);
     }
 
     public void DisplayWinner()

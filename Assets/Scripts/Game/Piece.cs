@@ -12,8 +12,8 @@ public class Piece : MonoBehaviour
 
     public Vector2Int position;
     public Vector2Int[] cells;
-
-    private float moveTimer = 0f;
+    public bool isMoving = false;
+    public float movingTimer = 1f;
     private float gravityDelay = 1.0f;
     private float gravityTimer = 0f;
     private Vector2Int[] ghostCells;
@@ -93,10 +93,19 @@ public class Piece : MonoBehaviour
         if (Game_Manager.isPaused) return;
         if (gameManager.isTimeStopped == true) return;
 
-        moveTimer += Time.deltaTime;
         gravityTimer += Time.deltaTime;
         repeatTimerLR += Time.deltaTime;
         repeatTimerDown += Time.deltaTime;
+
+        if (isMoving)
+        {
+            movingTimer -= Time.deltaTime;
+            if (movingTimer <= 0f)
+            {
+                isMoving = false;
+                movingTimer = 0f;
+            }
+        }
 
         ClearGhost();
         Clear();
@@ -107,11 +116,16 @@ public class Piece : MonoBehaviour
         {
             if (!TryMove(Vector2Int.down))
             {
-                gameManager.ResetHold();
-                LockPiece();
-                return;
+                if (!isMoving)
+                {
+                    gameManager.ResetHold();
+                    LockPiece();
+                    return;
+                }
+
             }
             gravityTimer = 0f;
+            
         }
 
         // Handle horizontal movement with invert logic
@@ -176,7 +190,7 @@ public class Piece : MonoBehaviour
         foreach (Vector2Int cell in cells)
         {
             int yPos = position.y + cell.y;
-            if (yPos > 7)
+            if (yPos > 6)
             {
                 gameManager.LoseLife();
                 Destroy(this.gameObject); // Just in case
@@ -195,12 +209,18 @@ public class Piece : MonoBehaviour
             gameManager.audioManager.PlaySFX(gameManager.audioManager.moveClip);
         }
         
+        
         Clear();
 
         Vector2Int newPos = position + direction;
 
         if (IsValidPosition(newPos))
-        {
+        {   
+            if (direction != Vector2Int.down)
+            {
+                isMoving = true;
+                movingTimer = 1f;
+            }
             Clear();
             position = newPos;
             Set();
@@ -247,11 +267,14 @@ public class Piece : MonoBehaviour
                 // Normal rotation (standard SRS)
                 rotatedCells[i] = new Vector2Int(-direction * y, direction * x);
             }
+            
         }
 
         // Try rotating in place first
         if (IsValidPosition(position, rotatedCells))
         {
+            isMoving = true;
+            movingTimer = 1f;
             cells = rotatedCells;
             Set();
             return;
@@ -262,10 +285,10 @@ public class Piece : MonoBehaviour
         {
             Vector2Int[] iKicks = new Vector2Int[]
             {
-        new Vector2Int(2, 0),
-        new Vector2Int(-2, 0),
-        new Vector2Int(1, 0),
-        new Vector2Int(-1, 0),
+                new Vector2Int(2, 0),
+                new Vector2Int(-2, 0),
+                new Vector2Int(1, 0),
+                new Vector2Int(-1, 0),
             };
 
             foreach (var offset in iKicks)
@@ -273,6 +296,8 @@ public class Piece : MonoBehaviour
                 Vector2Int testPos = position + offset;
                 if (IsValidPosition(testPos, rotatedCells))
                 {
+                    isMoving = true;
+                    movingTimer = 1f;
                     position = testPos;
                     cells = rotatedCells;
                     Set();
@@ -285,11 +310,11 @@ public class Piece : MonoBehaviour
         {
             Vector2Int[] genericKicks = new Vector2Int[]
             {
-        new Vector2Int(1, 0),
-        new Vector2Int(-1, 0),
-        new Vector2Int(0, 1),
-        new Vector2Int(1, 1),
-        new Vector2Int(-1, 1)
+                new Vector2Int(1, 0),
+                new Vector2Int(-1, 0),
+                new Vector2Int(0, 1),
+                new Vector2Int(1, 1),
+                new Vector2Int(-1, 1)
             };
 
             foreach (var offset in genericKicks)
@@ -297,6 +322,8 @@ public class Piece : MonoBehaviour
                 Vector2Int testPos = position + offset;
                 if (IsValidPosition(testPos, rotatedCells))
                 {
+                    isMoving = true;
+                    movingTimer = 1f;
                     position = testPos;
                     cells = rotatedCells;
                     Set();

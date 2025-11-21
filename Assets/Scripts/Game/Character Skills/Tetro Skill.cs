@@ -7,13 +7,13 @@ public class TetroSkill : MonoBehaviour
     [Header("References")]
     public CharacterManager characterManager;
     public Game_Manager gameManager;
+    public AudioManager audioManager;
 
     [Header("Input")]
     public PlayerInput playerInput;
     private InputAction skillAction;
 
     [Header("Blinding Overlay")]
-    
     public GameObject blindOverlay;
     public GameObject blindBall;
     public Animator animBall;
@@ -29,12 +29,11 @@ public class TetroSkill : MonoBehaviour
     public GameDisplay gameDisplay;
     private Coroutine pulseRoutine;
 
+    [Header("Misc")]
+    public bool isSec = false;
     public int cost = 300;
 
-    public AudioManager audioManager;
-
-
-    private void Awake()
+    private void Start()
     {
         characterManager = GetComponent<CharacterManager>();
         if (characterManager.isPlayer1)
@@ -71,15 +70,25 @@ public class TetroSkill : MonoBehaviour
         {
             Debug.LogError("One or more required components are missing. Please check the GameObject setup.");
         }
-        gameManager.audioManager = audioManager;
-        skillAction = playerInput.actions.FindAction("Skill");
+        if (isSec == true)
+        {
+            Debug.Log("Tetro Skill Assigned as Secondary Skill");
+            skillAction = playerInput.actions.FindAction("Secondary Skill");
+            gameDisplay.cost2Text.text = cost.ToString();
+        }
+        else if(isSec == false)
+        {
+            Debug.Log("Tetro Skill Assigned as Primary Skill");
+            skillAction = playerInput.actions.FindAction("Skill");
+            gameDisplay.cost1Text.text = cost.ToString();
+        }      
+        if (skillAction != null)
         skillAction.performed += ctx => BallAnim();
 
         // Start cooldown at the beginning
+        cooldownTimer = cooldownTime;
         isOnCooldown = true;
-        cooldownTimer = cooldownTime + 35;
-
-        gameDisplay.costText.text = cost.ToString();
+        audioManager = gameManager.audioManager;
     }
 
     void Update()
@@ -88,7 +97,14 @@ public class TetroSkill : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
-            gameDisplay.SkillCooldownUpdate(cooldownTimer);
+            if(isSec)
+            {
+                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+            }
+            else
+            {
+                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+            }
 
             // Turn off cooldown when timer ends
             if (cooldownTimer <= 0f)
@@ -148,13 +164,13 @@ public class TetroSkill : MonoBehaviour
         ballRenderer.enabled = false;
         Color baseColor = BO_Renderer.color;
         gameManager.pvp.opponentGameManager.shaker.boardShake();
-        
+
         // Step 1: Set to full opacity
         BO_Renderer.color = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);
         // Hold full opacity for 3 seconds
         yield return new WaitForSeconds(2.5f);
         animBall.SetTrigger("Return");
-        
+
 
         // Step 2: Fade out over 3 seconds
         float fadeDuration = 2.5f;
@@ -170,7 +186,12 @@ public class TetroSkill : MonoBehaviour
         Debug.Log("FadeOut");
         BO_Renderer.color = new Color(baseColor.r, baseColor.g, baseColor.b, 0f);
         BO_Renderer.enabled = false;
-        
-        
+
+
+    }
+    
+    private void OnDisable()
+    {
+        skillAction.performed -= ctx => ActivateSkill();
     }
 }

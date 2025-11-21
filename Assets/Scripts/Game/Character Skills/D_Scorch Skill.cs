@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using NUnit.Framework;
 
 public class D_ScorchSkill : MonoBehaviour
 {
@@ -21,12 +22,13 @@ public class D_ScorchSkill : MonoBehaviour
     private float cooldownTimer = 0f;
     public bool isOnCooldown = true;
 
+    [Header("Misc")]
+    public bool isSec = false;
     public int cost = 400;
-
     public int maxStacks = 3;
     public int burnCtr = 0;
 
-    private void Awake()
+    private void Start()
     {
         characterManager = GetComponent<CharacterManager>();
         if (characterManager.isPlayer1)
@@ -50,13 +52,24 @@ public class D_ScorchSkill : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         gameManager.player.maxAmmo = 5;
-        gameDisplay.costText.text = cost.ToString();
+        
         gameDisplay.UpdateBurnStack(burnCtr);
 
         // Setup input
-        skillAction = playerInput.actions.FindAction("Skill");
+        if (isSec == true)
+        {
+            Debug.Log("Scorch Skill Assigned as Secondary Skill");
+            skillAction = playerInput.actions.FindAction("Secondary Skill");
+            gameDisplay.cost2Text.text = cost.ToString();
+        }
+        else if(isSec == false)
+        {
+            Debug.Log("Scorch Skill Assigned as Primary Skill");
+            skillAction = playerInput.actions.FindAction("Skill");
+            gameDisplay.cost1Text.text = cost.ToString();
+        }        
         if (skillAction != null)
-            skillAction.performed += ctx => ActivateSkill();
+           skillAction.performed += ctx => ActivateSkill();
     }
 
     private void Update()
@@ -66,7 +79,14 @@ public class D_ScorchSkill : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
-            gameDisplay.SkillCooldownUpdate(cooldownTimer);
+            if(isSec)
+            {
+                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+            }
+            else
+            {
+                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+            }
             if (cooldownTimer <= 0f)
             {
 
@@ -104,6 +124,8 @@ public class D_ScorchSkill : MonoBehaviour
         Vector2Int pos = gameManager.scorchCursor.position;
         Vector3Int tilePos = new Vector3Int(pos.x, pos.y, 0);
         gameManager.pvp.opponentGameManager.boardManager.main_tilemap.SetTile(tilePos, null);
+        opponent.shaker.boardShake();
+        StartCoroutine(opponent.gameDisplay.BackPulse(5f, "#760e00ff"));
         audioManager.sfxSource.PlayOneShot(audioManager.ScorchSfx);
         // Deduct stack & update
         burnCtr = Mathf.Max(0, burnCtr-1);
@@ -118,5 +140,8 @@ public class D_ScorchSkill : MonoBehaviour
         Debug.Log($"D_Scorch Skill: Burn used. Destroyed tile at {tilePos}.");
     }
 
-
+    private void OnDisable()
+    {
+        skillAction.performed -= ctx => ActivateSkill();
+    }
 }

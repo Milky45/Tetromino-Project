@@ -3,17 +3,19 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     public bool isPlayer1 = true;
-    private Animator animator;
+    public bool isSolo = false;
+    private Animator primAnimator;
+    private Animator secAnimator;
     private CharacterSelect playerSelect;
     public RuntimeAnimatorController[] charControllers = new RuntimeAnimatorController[9];
     public GameObject blindBall;
     public GameObject blindOverlay;
-    public Animator animBall;
+    public GameObject charSecDisplay;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        if (animator == null)
+        primAnimator = GetComponent<Animator>();
+        if (primAnimator == null)
         {
             Debug.LogError("Animator component not found on the GameObject.");
             return;
@@ -23,66 +25,91 @@ public class CharacterManager : MonoBehaviour
             playerSelect = GameObject.Find("Player 1").GetComponent<CharacterSelect>();
             Debug.Log("CharacterManager assigned to Player 1");
         }
-        else
+        else if (!isPlayer1 && !isSolo)
         {
             playerSelect = GameObject.Find("Player 2").GetComponent<CharacterSelect>();
             Debug.Log("CharacterManager assigned to Player 2");
         }
-
-        SetCharacter(playerSelect.selectedCharacterIndex);
+        SetCharacter(playerSelect.primCharIndex, false);
+        if (playerSelect.isTeamBattle && !isSolo)
+        {
+            secAnimator = charSecDisplay.GetComponent<Animator>();
+            SetCharacter(playerSelect.secCharIndex, true);
+        }
     }
-
-    public void SetCharacter(int characterIndex)
+    public void SetCharacter(int characterIndex, bool isSec)
     {
         if (characterIndex == 7)
         {
             //randomly select a character controller to assign in animator
-            characterIndex = Random.Range(0, charControllers.Length);
+            while (characterIndex == 7)
+            {
+                characterIndex = Random.Range(0, charControllers.Length);
+            }
+            
             Debug.Log($"Randomly selected character index: {characterIndex}");
         }
 
         // assign tha animator controller to the animator
-
-        animator.runtimeAnimatorController = charControllers[characterIndex];
+        if(isSec)
+        {
+            secAnimator.runtimeAnimatorController = charControllers[characterIndex];
+        }
+        else
+        {
+            primAnimator.runtimeAnimatorController = charControllers[characterIndex];
+        }
         Debug.Log($"Character set to index: {characterIndex}");
         // Update the character display in the CharacterSelect script
-        SetCharacterSkillScript(characterIndex);
+        if (!isSolo)
+        {
+            SetCharacterSkillScript(characterIndex, isSec); // primary char
+        }
+        
     }
 
-    public void SetCharacterSkillScript(int characterIndex)
+    public void SetCharacterSkillScript(int characterIndex, bool isSec)
     {
         switch (characterIndex)
         {
             case 0:
-                gameObject.AddComponent<TetroSkill>();
+                var tetroSkill = gameObject.AddComponent<TetroSkill>();
+                if (isSec) tetroSkill.isSec = true;
                 Debug.Log("TetroSkill script assigned for character index 0");
                 break;
             case 1:
-                gameObject.AddComponent<PackHatSkill>();
+                var packHatSkill = gameObject.AddComponent<PackHatSkill>();
+                if (isSec) packHatSkill.isSec = true;
                 Debug.Log("PackhatSkill script assigned for character index 1");
                 break;
             case 2:
-                gameObject.AddComponent<ScorchSkill>();
+                var scorchSkill = gameObject.AddComponent<ScorchSkill>();
+                if (isSec) scorchSkill.isSec = true;
                 Debug.Log("ScorchSkill script assigned for character index 2");
                 break;
             case 3:
-                gameObject.AddComponent<DodokeSkill>();
+                var dodokeSkill = gameObject.AddComponent<DodokeSkill>();
+                if (isSec) dodokeSkill.isSec = true;
                 Debug.Log("DodokeSkill script assigned for character index 3");
                 break;
             case 4:
-                gameObject.AddComponent<YunJinSkill>();
+                var yunJinSkill = gameObject.AddComponent<YunJinSkill>();
+                if (isSec) yunJinSkill.isSec = true;
                 Debug.Log("YunJInSkill script assigned for character index 4");
                 break;
             case 5:
-                gameObject.AddComponent<NullSkill>();
+                var nullSkill = gameObject.AddComponent<NullSkill>();
+                if (isSec) nullSkill.isSec = true;
                 Debug.Log("NullSkill script assigned for character index 5");
                 break;
             case 6:
-                gameObject.AddComponent<EthanSkill>();
+                var ethanSkill = gameObject.AddComponent<EthanSkill>();
+                if (isSec) ethanSkill.isSec = true;
                 Debug.Log("EthanSkill script assigned for character index 6");
                 break;
             case 8:
-                gameObject.AddComponent<D_ScorchSkill>();
+                var dScorchSkill = gameObject.AddComponent<D_ScorchSkill>();
+                if (isSec) dScorchSkill.isSec = true;
                 Debug.Log("ScorchSkill script assigned for character index 8");
                 break;
             default:

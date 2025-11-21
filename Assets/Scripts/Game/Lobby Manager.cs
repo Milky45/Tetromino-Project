@@ -4,17 +4,24 @@ using UnityEngine.InputSystem;
 
 public class LobbyManager : MonoBehaviour
 {
-    public static LobbyManager Instance; 
+    public static LobbyManager Instance;
     public Animator cameraAnimator; // Reference to the camera animation
-    public static int playerCtr = 0;
+    public bool isTeamBattle = false;
     public GameObject p1_startPnl;
     public GameObject p2_startPnl;
     public GameObject playBtn;
     public AudioManager audioManager;
 
+    public CharacterSelect P1select;
+    public CharacterSelect P2select;
+
     public static bool p1Ready = false;
     public static bool p2Ready = false;
 
+    public bool isSolo = false;
+
+    public CharacterDisplay charDisplayP1;
+    public CharacterDisplay charDisplayP2;
     private void Start()
     {
         Instance = this;
@@ -34,6 +41,7 @@ public class LobbyManager : MonoBehaviour
     public void P2Panel()
     {
         p1_startPnl.SetActive(false);
+        if(isSolo) {return;}
         p2_startPnl.SetActive(true);
     }
 
@@ -45,11 +53,21 @@ public class LobbyManager : MonoBehaviour
 
     public void ReadyBtn()
     {
-        if (p1Ready && p2Ready)
+        if (p1Ready && isSolo)
+        {
+            playBtn.SetActive(true);
+            return;
+        }
+        else if (!p1Ready && isSolo)
+        {
+            playBtn.SetActive(false);
+            return;
+        }
+        if (p1Ready && p2Ready && !isSolo)
         {
             playBtn.SetActive(true);
         }
-        else if(p1Ready && p2Ready)
+        else if((!p1Ready && !p2Ready || !p1Ready && p2Ready || p1Ready && !p2Ready) && !isSolo)
         {
             playBtn.SetActive(false);
         }
@@ -70,10 +88,23 @@ public class LobbyManager : MonoBehaviour
     public void StartGame()
     {
         CharacterSelect.currentlyPlaying = true;
-        // Logic to start the game, e.g., loading the game scene
         Debug.Log("Starting game...");
-        // Load the game scene or transition to the game state // Ensure the character select is ready before starting
-        SceneManager.LoadScene("VsTetrominoGame"); // Replace with your actual game scene name
+        if (isTeamBattle)
+        {
+            SceneManager.LoadScene("VsTeamsTetrominoGame");
+        }
+        else
+        {
+            SceneManager.LoadScene("VsTetrominoGame"); // Replace with your actual game scene name
+        }
+
+    }
+    
+    public void StartSoloGame()
+    {
+        CharacterSelect.currentlyPlaying = true;
+        SceneManager.LoadScene("SoloTetrominoGame"); // Replace with your actual game scene name
+        
     }
 
     public void ExitLobby()

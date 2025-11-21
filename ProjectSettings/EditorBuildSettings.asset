@@ -14,6 +14,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VsTetrominoGame.unity
     guid: 29456487fed36c54dabacde04f0a046b
+  - enabled: 1
+    path: Assets/Scenes/VS Teams Lobby.unity
+    guid: 7871021215b04e541abf21c5f7e13fa3
+  - enabled: 1
+    path: Assets/Scenes/VsTeamsTetrominoGame.unity
+    guid: 58cac79b7bb98cf4395a1ef65180c0b0
+  - enabled: 1
+    path: Assets/Scenes/Solo Lobby.unity
+    guid: a2d2fbe31bb9b984bb30b3c657002307
+  - enabled: 1
+    path: Assets/Scenes/SoloTetrominoGame.unity
+    guid: 3fff79b5014e4f44399afa029d3bcd2f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c11421f89e565184faeae4ab1c077932, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 9f090bd24cda43749964d3047804078c, type: 3}

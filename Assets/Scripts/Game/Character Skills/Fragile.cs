@@ -16,7 +16,7 @@ public class Fragile : MonoBehaviour
     public SpriteRenderer Rock3;
     public AudioManager audioManager;
 
-    private void Awake()
+    private void Start()
     {
         yunJinSkill = GetComponent<YunJinSkill>();
         audioManager = gameManager.audioManager;
