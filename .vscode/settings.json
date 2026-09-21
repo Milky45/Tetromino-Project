@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Tetro.sln"
+    "dotnet.defaultSolution": "Tetromino-Project.sln"
 }
