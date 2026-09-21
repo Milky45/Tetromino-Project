@@ -26,14 +26,6 @@ public class CharSkills : ScriptableObject
     public GameObject characterPrefab;
     public Animator animator;
 
-    // for tetro skill
-    [Header("Blinding Overlay")]
-    public GameObject blindOverlay;
-    public GameObject blindBall;
-    public Animator animBall;
-    public SpriteRenderer BO_Renderer;
-    public SpriteRenderer ballRenderer;
-
     // for yun jin skill
     [Header("Rocks Summons Settings")]
     public int maxRockCount = 0;

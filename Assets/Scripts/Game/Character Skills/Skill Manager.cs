@@ -15,6 +15,14 @@ public class SkillManager : MonoBehaviour
     public GameDisplay gameDisplay;
     private Coroutine pulseRoutine;
 
+    // for tetro skill
+    [Header("Blinding Overlay")]
+    public GameObject blindOverlay;
+    public GameObject blindBall;
+    public Animator animBall;
+    public SpriteRenderer BO_Renderer;
+    public SpriteRenderer ballRenderer;
+
     [Header("Input")]
     public PlayerInput playerInput;
     private InputAction skillAction;
