@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
     public Game_Manager gameManager;
     public bool isPlayer1 = true;
     public int lives = 3;
-    public int gold = 0;
+    public int currentChips = 0;
     public int score = 0;
 
     public bool holdUsed = false;
@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     public int  maxAmmo = 5;
     public bool isInverted = false;
     public int level = 1;
-
     public bool hasEmpGrenade = false;
     public bool empOnCooldown = false;
     public float empCooldownDuration = 60f; // Duration for EMP cooldown in seconds
