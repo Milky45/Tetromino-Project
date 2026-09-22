@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameModes", menuName = "Scriptable Objects/GameModes")]
+[CreateAssetMenu(fileName = "GameModes", menuName = "Create Game Mode/New Empty Game Mode")]
 public class GameModes : ScriptableObject
 {
     
