@@ -186,8 +186,6 @@ public class TetroSkill : MonoBehaviour
         Debug.Log("FadeOut");
         BO_Renderer.color = new Color(baseColor.r, baseColor.g, baseColor.b, 0f);
         BO_Renderer.enabled = false;
-
-
     }
     
     private void OnDisable()

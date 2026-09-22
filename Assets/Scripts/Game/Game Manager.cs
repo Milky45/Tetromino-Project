@@ -22,7 +22,6 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] private TetrominoData[] tetrominoSet;
 
     // timers
-    private float timeElapsed;
     private float gravityTime;
     private float HD_Timer; //hard drop lockout
     private float lockoutDuration = 0.1f;
@@ -36,10 +35,7 @@ public class Game_Manager : MonoBehaviour
     public bool isTimeStopped = false;
     public bool isGameOver;
     public bool isSolo = false;
-
     private int goalScore = 5000;
-
-    public int inflationCtr = 0;
     public bool disableSpawn = false;
 
     // EMP Cooldown Timer
@@ -91,7 +87,6 @@ public class Game_Manager : MonoBehaviour
         if (isTimeStopped) return;
 
         float delta = Time.deltaTime;
-        timeElapsed += delta;
         gravityTime += delta;
 
         if (HD_Timer > 0f)

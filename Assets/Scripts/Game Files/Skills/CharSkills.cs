@@ -11,27 +11,27 @@ public class CharSkills : ScriptableObject
 
     [Header("Misc")]
     public int skillCost = 300;
+    public bool startGameOnCooldown = true;
     
     [Header("Skill UI Settings")]
     public Color skillColor;
 
     [Header("SFX Settings")]
     public AudioClip skillSFX;
-
+    
     [Header("Character Prefab")]
     public string characterName;
     public int characterID;
     public string characterDescription;
     public string characterRole;
     public GameObject characterPrefab;
-    public Animator animator;
+    public Animator skillanimator;
 
     // for yun jin skill
     [Header("Rocks Summons Settings")]
     public int maxRockCount = 0;
+    public float rockPushForce = 10f;
 
     [Header("Burn Effect Settings")]
     public int maxBurnStack = 0;
-    
-
 }

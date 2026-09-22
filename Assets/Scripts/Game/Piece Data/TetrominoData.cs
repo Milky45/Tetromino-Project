@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static TetrominoType;
 
 [CreateAssetMenu(menuName = "Tetris/Tetromino")]
 public class TetrominoData : ScriptableObject

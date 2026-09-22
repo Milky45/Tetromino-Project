@@ -91,7 +91,6 @@ public class DodokeSkill : MonoBehaviour
     public void ActivateSkill()
     {
         if (gameManager.isGameOver) return;
-        cost += 100 * gameManager.inflationCtr;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");
