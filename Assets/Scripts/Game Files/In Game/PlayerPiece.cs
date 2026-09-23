@@ -7,14 +7,16 @@ public class PlayerPiece : MonoBehaviour
     public PlayerBoard playerBoard;
     public PlayerManager playerManager;
     public TetrominoData data;
+    public ComboCounter comboCounter;
 
     public Vector2Int position;
     public Vector2Int[] cells;
+    private Vector2Int[] ghostCells;
     public bool isMoving = false;
     public float movingTimer = 1f;
     private float gravityDelay = 1.0f;
     private float gravityTimer = 0f;
-    private Vector2Int[] ghostCells;
+     private float lockoutDuration = 0.1f;
 
     // PlayerInput component for this piece
     private PlayerInput playerInput;
@@ -115,7 +117,7 @@ public class PlayerPiece : MonoBehaviour
             {
                 if (!isMoving)
                 {
-                    playerManager.ResetHold();
+                    playerManager.playerStatus.holdUsed = false;
                     LockPiece();
                     return;
                 }
@@ -175,14 +177,14 @@ public class PlayerPiece : MonoBehaviour
     {
         // Prevent locking and spawning a new piece if this specific game manager's game is over
         // But allow it if only the opponent is in game over state (catch-up phase)
-        if (playerManager.isGameOver)
-        {
-            Debug.Log("Destroyed");
-            Destroy(this.gameObject);
-            return;
-        }
+        // if (playerManager.isGameOver)
+        // {
+        //     Debug.Log("Destroyed");
+        //     Destroy(this.gameObject);
+        //     return;
+        // }
 
-        playerManager.ComboCount();
+        comboCounter.ComboCount();
 
         foreach (Vector2Int cell in cells)
         {
@@ -196,7 +198,7 @@ public class PlayerPiece : MonoBehaviour
         }
 
         Destroy(this.gameObject); // Remove current piece
-        playerManager.SpawnNextPiece(); // Don't do this if game is ending!
+        playerManager.pieceSpawner.SpawnPiece(null); // Don't do this if game is ending!
     }
 
     public bool TryMove(Vector2Int direction)
@@ -338,8 +340,8 @@ public class PlayerPiece : MonoBehaviour
         }
 
         // Lock the piece in place when it can't move further
-        playerManager.TriggerHardDropLockout();
-        playerManager.ResetHold();
+        playerManager.hardDropLockoutTimer = lockoutDuration;
+        playerManager.playerStatus.holdUsed = false;
         LockPiece();
         playerManager.audioManager.PlaySFX(playerManager.audioManager.dropClip);
     }

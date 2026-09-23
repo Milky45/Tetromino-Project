@@ -89,8 +89,8 @@ public class SkillManager : MonoBehaviour
         characterPrefab = charSkills.characterPrefab;
         skillanimator = charSkills.skillanimator;
 
-        opponentMainTileMap = gameManager.pvp.opponentGameManager.gameDisplay.mainTileMap.transform;
-        opponentGhostTileMap = gameManager.pvp.opponentGameManager.gameDisplay.ghostTileMap.transform;
+        opponentMainTileMap = gameManager.pvp.opponentPlayerManager.gameDisplay.mainTileMap.transform;
+        opponentGhostTileMap = gameManager.pvp.opponentPlayerManager.gameDisplay.ghostTileMap.transform;
 
         maxBurnStacks = charSkills.maxBurnStack;
 

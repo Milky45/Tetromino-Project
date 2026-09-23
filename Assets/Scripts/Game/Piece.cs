@@ -192,7 +192,7 @@ public class Piece : MonoBehaviour
             int yPos = position.y + cell.y;
             if (yPos > 6)
             {
-                gameManager.LoseLife();
+                //gameManager.LoseLife();
                 Destroy(this.gameObject); // Just in case
                 return;
             }

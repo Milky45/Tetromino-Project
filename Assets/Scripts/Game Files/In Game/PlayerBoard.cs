@@ -3,19 +3,22 @@ using UnityEngine.Tilemaps;
 
 public class PlayerBoard : MonoBehaviour
 {
+    [Header("References")]
+    public PlayerManager playerManager;
+    public Shaker shaker;
+
     [Header("Tilemaps")]
     public Tilemap main_tilemap;
     public Tilemap ghost_tilemap;
     public Tilemap opponentScorch_tilemap;
     public TileBase[] tile_types;
     public Vector2Int boardSize = new Vector2Int(10, 24);
+
     [Header("Misc")]
     public float currentgravityDelay;
     public int LinesCleared { get; private set; } = 0;
     public int receivedDeadLineCount = 0;
     public RectInt Bounds => new RectInt(-boardSize.x / 2, -boardSize.y / 2, boardSize.x, boardSize.y);
-
-    [SerializeField] private Player player; // Assign this in the inspector
 
     public bool IsInsideBoard(Vector3Int pos)
     {
@@ -180,4 +183,33 @@ public class PlayerBoard : MonoBehaviour
         }
     }
 
+    public void ApplyDeadLine()
+    {
+        var activePiece = playerManager.playerActivePiece;
+
+        if (activePiece != null)
+            activePiece.Clear();
+
+        PushUp();
+        AddDeadLine();
+
+        if (activePiece != null)
+        {
+            if (!activePiece.IsValidPosition(activePiece.position))
+            {
+                activePiece.LockPiece(); // Lock if overlapping right away
+            }
+            else
+            {
+                if (!activePiece.TryMove(Vector2Int.down))
+                {
+                    activePiece.LockPiece(); // Lock if resting
+                }
+                else
+                {
+                    activePiece.Set(); // Update ghost/position
+                }
+            }
+        }
+    }
 }

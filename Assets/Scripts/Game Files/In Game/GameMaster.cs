@@ -18,4 +18,11 @@ public class GameMaster : MonoBehaviour
     public bool disableSpawnForP1 = false;
     public bool disableSpawnForP2 = false;
 
+    private void Awake()
+    {
+        // assign their opps
+        player1Manager.opponentPlayerManager = player2Manager;
+        player2Manager.opponentPlayerManager = player1Manager;
+    }
+
 }

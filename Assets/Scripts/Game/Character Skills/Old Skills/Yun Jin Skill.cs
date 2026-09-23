@@ -157,7 +157,7 @@ public class YunJinSkill : MonoBehaviour
 
     public void ActivateFragile()
     {
-        if (gameManager.pvp.opponentGameManager.isGameOver) return;
+        //if (gameManager.pvp.opponentGameManager.isGameOver) return;
         if (Fragile == false)
         {
             return;

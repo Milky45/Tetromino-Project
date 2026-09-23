@@ -34,16 +34,16 @@ public class EthanSkill : MonoBehaviour
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
-            opponent = gameManager.pvp.opponentGameManager;
+            //opponent = gameManager.pvp.opponentGameManager;
         }
         else
         {
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
-            opponent = gameManager.pvp.opponentGameManager;
+            //opponent = gameManager.pvp.opponentGameManager;
         }
-        opponentMashDisplay = gameManager.pvp.opponentGameManager.gameDisplay.mashBarDisplay;
+        //opponentMashDisplay = gameManager.pvp.opponentGameManager.gameDisplay.mashBarDisplay;
         oppMashBar = opponentMashDisplay.GetComponent<MashBar>();
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
@@ -110,7 +110,7 @@ public class EthanSkill : MonoBehaviour
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         gameManager.shaker.ChipsDeductShake();
-        gameManager.pvp.opponentGameManager.gameDisplay.mashBarDisplay.SetActive(true);
+        //gameManager.pvp.opponentGameManager.gameDisplay.mashBarDisplay.SetActive(true);
         oppMashBar.enabled = true;
         oppMashBar.bar.value = 0f;
         oppMashBar.currentValue = 0f;
@@ -137,7 +137,7 @@ public class EthanSkill : MonoBehaviour
 
         yield return new WaitForSeconds(durationSeconds);
 
-        gameManager.pvp.opponentGameManager.gameDisplay.mashBarDisplay.SetActive(false);
+        //gameManager.pvp.opponentGameManager.gameDisplay.mashBarDisplay.SetActive(false);
         oppMashBar.enabled = false;
         gameManager.currentGravityDelay = tempGravity;
         opponent.isTimeStopped = false;

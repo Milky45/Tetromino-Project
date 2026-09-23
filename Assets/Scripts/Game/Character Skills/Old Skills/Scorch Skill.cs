@@ -82,7 +82,7 @@ public class ScorchSkill : MonoBehaviour
     }
     public void ActivateSkill()
     {
-        if (gameManager.pvp.opponentGameManager.isGameOver) return;
+        //if (gameManager.pvp.opponentGameManager.isGameOver) return;
         if (isOnCooldown)
         {
             Debug.Log("Skill is on cooldown.");

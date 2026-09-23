@@ -36,14 +36,14 @@ public class D_ScorchSkill : MonoBehaviour
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
-            opponent = gameManager.pvp.opponentGameManager;
+            //opponent = gameManager.pvp.opponentGameManager;
         }
         else
         {
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
             gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
-            opponent = gameManager.pvp.opponentGameManager;
+            //opponent = gameManager.pvp.opponentGameManager;
         }
 
         scorchCursor = gameManager.scorchCursor;
@@ -123,7 +123,7 @@ public class D_ScorchSkill : MonoBehaviour
         gameManager.shaker.CostShake();
         Vector2Int pos = gameManager.scorchCursor.position;
         Vector3Int tilePos = new Vector3Int(pos.x, pos.y, 0);
-        gameManager.pvp.opponentGameManager.boardManager.main_tilemap.SetTile(tilePos, null);
+        //gameManager.pvp.opponentGameManager.boardManager.main_tilemap.SetTile(tilePos, null);
         opponent.shaker.boardShake();
         StartCoroutine(opponent.gameDisplay.BackPulse(5f, "#760e00ff"));
         audioManager.sfxSource.PlayOneShot(audioManager.ScorchSfx);

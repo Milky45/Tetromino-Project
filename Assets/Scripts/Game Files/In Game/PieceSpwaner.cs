@@ -11,7 +11,6 @@ public class PieceSpawner : MonoBehaviour
     public TetrominoData heldTetromino;
     public TetrominoData nextTetromino;
     [SerializeField] private TetrominoData currentTetromino;
-    [SerializeField] private TetrominoData previousTetromino;
 
     public void SpawnPiece(TetrominoData data)
     {
@@ -36,7 +35,6 @@ public class PieceSpawner : MonoBehaviour
         while (nextTetromino == current);
 
         currentTetromino = current;
-        previousTetromino = currentTetromino;
 
         GameObject pieceObj = new GameObject($"ActivePiece{(isPlayer1 ? "P1" : "P2")}");
         pieceObj.transform.parent = this.transform; // Make it a child of Game_Manager
@@ -51,6 +49,7 @@ public class PieceSpawner : MonoBehaviour
 
         controller.position = new Vector2Int(0, playerBoard.Bounds.yMax - 4);
         controller.playerManager = playerManager;
+        controller.playerManager.playerActivePiece = controller;
         controller.playerBoard = playerBoard;
         playerManager.gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after next changes
     }

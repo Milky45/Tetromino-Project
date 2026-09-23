@@ -452,7 +452,6 @@ public class Game_Manager : MonoBehaviour
         
         Debug.Log("EMP cooldown reset!");
     }
-
     public void TriggerHardDropLockout()
     {
         HD_Timer = lockoutDuration;
@@ -474,124 +473,124 @@ public class Game_Manager : MonoBehaviour
     }
 
 
-    public void LoseLife()
-    {
-        shaker.boardShake();
-        player.lives--;
-        Debug.Log($"Player lost a life! Lives remaining: {player.lives}");
+    // public void LoseLife()
+    // {
+    //     shaker.boardShake();
+    //     player.lives--;
+    //     Debug.Log($"Player lost a life! Lives remaining: {player.lives}");
 
-        // Update UI to show remaining lives
-        if (gameDisplay != null && !isSolo)
-        {
-            gameDisplay.UpdateHeartIcons(player.lives);
-            gameDisplay.Ammo_Update(player.attackAmmo);
-            gameDisplay.UpdateEMPStateIcon();
-        }
+    //     // Update UI to show remaining lives
+    //     if (gameDisplay != null && !isSolo)
+    //     {
+    //         gameDisplay.UpdateHeartIcons(player.lives);
+    //         gameDisplay.Ammo_Update(player.attackAmmo);
+    //         gameDisplay.UpdateEMPStateIcon();
+    //     }
 
-        if (pvp.isSolo && player.lives <= 0)
-        {
-            GameOver();
-        }
-        else if (player.lives <= 0 && !pvp.isSolo)
-        {
-            // Check if opponent is already out of lives
-            if (pvp.opponent.lives <= 0)
-            {
-                // Both players are out of lives - game ends based on score
-                GameOver();
-            }
-            else
-            {
-                // Only this player is out of lives - check if catch-up is needed
-                CheckCatchUpCondition();
-            }
-        }
-        else
-        {
-            // Reset the board and continue the game
-            ResetBoardAfterLifeLoss();
-            gameDisplay.UpdateComboText();
-            boardManager.ClearAll();
-            boardManager.ghost_tilemap.ClearAllTiles();
-        }
-    }
+    //     if (pvp.isSolo && player.lives <= 0)
+    //     {
+    //         GameOver();
+    //     }
+    //     else if (player.lives <= 0 && !pvp.isSolo)
+    //     {
+    //         // Check if opponent is already out of lives
+    //         if (pvp.opponent.lives <= 0)
+    //         {
+    //             // Both players are out of lives - game ends based on score
+    //             GameOver();
+    //         }
+    //         else
+    //         {
+    //             // Only this player is out of lives - check if catch-up is needed
+    //             CheckCatchUpCondition();
+    //         }
+    //     }
+    //     else
+    //     {
+    //         // Reset the board and continue the game
+    //         ResetBoardAfterLifeLoss();
+    //         gameDisplay.UpdateComboText();
+    //         boardManager.ClearAll();
+    //         boardManager.ghost_tilemap.ClearAllTiles();
+    //     }
+    // }
 
-    private void CheckCatchUpCondition()
-    {
-        // If this player has higher or equal score, opponent can still catch up
-        if (player.score >= pvp.opponent.score)
-        {
-            isGameOver = true;
-            boardManager.ClearAll();
-            boardManager.ghost_tilemap.ClearAllTiles();
+    // private void CheckCatchUpCondition()
+    // {
+    //     // If this player has higher or equal score, opponent can still catch up
+    //     if (player.score >= pvp.opponent.score)
+    //     {
+    //         isGameOver = true;
+    //         boardManager.ClearAll();
+    //         boardManager.ghost_tilemap.ClearAllTiles();
             
-            // Clear pieces
-            GameObject Piece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
-            Destroy(Piece);
+    //         // Clear pieces
+    //         GameObject Piece = GameObject.Find($"ActivePiece{(player.isPlayer1 ? "P1" : "P2")}");
+    //         Destroy(Piece);
             
-            heldTetromino = null;
-            player.holdUsed = false;
-            player.lastComboMilestone = 0;
+    //         heldTetromino = null;
+    //         player.holdUsed = false;
+    //         player.lastComboMilestone = 0;
             
-            // Opponent gets to continue (they're still active)
-            // Set opponent's isGameOver to false so they can keep playing
-            pvp.opponentGameManager.isGameOver = false;
+    //         // Opponent gets to continue (they're still active)
+    //         // Set opponent's isGameOver to false so they can keep playing
+    //         //pvp.opponentGameManager.isGameOver = false;
             
-            string playerId = player.isPlayer1 ? "P1" : "P2";
-            string opponentId = player.isPlayer1 ? "P2" : "P1";
-            Debug.Log($"{playerId} ran out of lives with score {player.score}. {opponentId} can still catch up!");
+    //         string playerId = player.isPlayer1 ? "P1" : "P2";
+    //         string opponentId = player.isPlayer1 ? "P2" : "P1";
+    //         Debug.Log($"{playerId} ran out of lives with score {player.score}. {opponentId} can still catch up!");
             
-            // Let the PvP system handle the catch-up phase
-            StartCoroutine(WaitForCatchUpCompletion());
-        }
-        else
-        {
-            // This player has lower score and is out of lives - they lost
-            player.isWinner = false;
-            pvp.opponent.isWinner = true;
-            GameOver();
-        }
-    }
+    //         // Let the PvP system handle the catch-up phase
+    //         StartCoroutine(WaitForCatchUpCompletion());
+    //     }
+    //     else
+    //     {
+    //         // This player has lower score and is out of lives - they lost
+    //         player.isWinner = false;
+    //         pvp.opponent.isWinner = true;
+    //         GameOver();
+    //     }
+    // }
 
-    private System.Collections.IEnumerator WaitForCatchUpCompletion()
-    {
-        Player catchingUpPlayer = pvp.opponent;
-        Player fallenPlayer = player;
-        int targetScore = fallenPlayer.score;
+    // private System.Collections.IEnumerator WaitForCatchUpCompletion()
+    // {
+    //     Player catchingUpPlayer = pvp.opponent;
+    //     Player fallenPlayer = player;
+    //     int targetScore = fallenPlayer.score;
         
-        string catchingPlayerId = catchingUpPlayer.isPlayer1 ? "P1" : "P2";
-        Debug.Log($"Catch-up phase started! {catchingPlayerId} needs to reach {targetScore} points.");
+    //     string catchingPlayerId = catchingUpPlayer.isPlayer1 ? "P1" : "P2";
+    //     Debug.Log($"Catch-up phase started! {catchingPlayerId} needs to reach {targetScore} points.");
         
-        // Wait while opponent is playing catch-up
-        while (catchingUpPlayer.lives > 0 && catchingUpPlayer.score < targetScore)
-        {
-            yield return null;
-        }
+    //     // Wait while opponent is playing catch-up
+    //     while (catchingUpPlayer.lives > 0 && catchingUpPlayer.score < targetScore)
+    //     {
+    //         yield return null;
+    //     }
 
-        // Catch-up phase ended
-        if (catchingUpPlayer.score >= targetScore)
-        {
-            Debug.Log($"{catchingPlayerId} successfully caught up! Score: {catchingUpPlayer.score}");
-            // Continue the game - both players can still compete
-            isGameOver = false;
-            if (!catchingUpPlayer.gameManager.isGameOver)
-            {
-                catchingUpPlayer.gameManager.isGameOver = false;
-            }
-        }
-        if (catchingUpPlayer.score > targetScore)
-        {
-            player.isWinner = false;
-            catchingUpPlayer.isWinner = true;
-            GameOver();
-        }
-        else
-        {
-            player.isWinner = true;
-            catchingUpPlayer.isWinner = false;
-            GameOver();
-        }
-    }
+    //     // Catch-up phase ended
+    //     if (catchingUpPlayer.score >= targetScore)
+    //     {
+    //         Debug.Log($"{catchingPlayerId} successfully caught up! Score: {catchingUpPlayer.score}");
+    //         // Continue the game - both players can still compete
+    //         isGameOver = false;
+    //         if (!catchingUpPlayer.gameManager.isGameOver)
+    //         {
+    //             catchingUpPlayer.gameManager.isGameOver = false;
+    //         }
+    //     }
+    //     if (catchingUpPlayer.score > targetScore)
+    //     {
+    //         player.isWinner = false;
+    //         catchingUpPlayer.isWinner = true;
+    //         GameOver();
+    //     }
+    //     else
+    //     {
+    //         player.isWinner = true;
+    //         catchingUpPlayer.isWinner = false;
+    //         GameOver();
+    //     }
+    // }
     
     private void ResetBoardAfterLifeLoss()
     {

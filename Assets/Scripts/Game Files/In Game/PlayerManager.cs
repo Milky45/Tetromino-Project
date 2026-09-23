@@ -3,10 +3,19 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [Header("References")]
+    public PlayerManager opponentPlayerManager;
+    public PlayerPiece playerActivePiece;
     public PlayerStatus playerStatus;
     public PieceSpawner pieceSpawner;
     public GameDisplay gameDisplay;
     public AudioManager audioManager;
+    public PvP pvp;
+    public Shaker shaker;
+
+    [Header("Timers")]
+    public float invertTimer;
+    public float hardDropLockoutTimer;
+    
     private void PlayComboSFX(int combo)
     {
         switch (combo)
@@ -61,5 +70,45 @@ public class PlayerManager : MonoBehaviour
         //holdDisplayUI.ShowHold(heldTetromino.tetromino);
 
         Destroy(controller.gameObject);
+    }
+
+
+    public void LoseLife()
+    {
+        shaker.boardShake();
+        playerStatus.lives--;
+        Debug.Log($"Player lost a life! Lives remaining: {playerStatus.lives}");
+
+        // Update UI to show remaining lives
+        //if (gameDisplay != null && !isSolo)
+        if (gameDisplay != null )
+        {
+            gameDisplay.UpdateHeartIcons(playerStatus.lives);
+            gameDisplay.Ammo_Update(playerStatus.attackAmmo);
+            gameDisplay.UpdateEMPStateIcon();
+        }
+
+        // else if (player.lives <= 0 && !pvp.isSolo)
+        // {
+        //     // Check if opponent is already out of lives
+        //     if (pvp.opponent.lives <= 0)
+        //     {
+        //         // Both players are out of lives - game ends based on score
+        //         GameOver();
+        //     }
+        //     else
+        //     {
+        //         // Only this player is out of lives - check if catch-up is needed
+        //         CheckCatchUpCondition();
+        //     }
+        // }
+        // else
+        // {
+        //     // Reset the board and continue the game
+        //     ResetBoardAfterLifeLoss();
+        //     gameDisplay.UpdateComboText();
+        //     boardManager.ClearAll();
+        //     boardManager.ghost_tilemap.ClearAllTiles();
+        // }
     }
 }

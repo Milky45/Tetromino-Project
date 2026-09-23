@@ -3,12 +3,11 @@ using UnityEngine;
 public class TriggerSkills : MonoBehaviour
 {
     [Header("References")]
-    public CharacterManager characterManager;
-    public Game_Manager gameManager;
+    public PlayerManager playerManager;
+    public PlayerBoard playerBoard;
     public AudioManager audioManager;
     public CharSkills charSkills;
     public Collider2D characterCollider;
-    public Board_Manager boardManager;
     public SkillCoroutines skillCoroutines;
     public SkillManager skillManager;
     public RockGroupHandler rockGroupHandler;
@@ -23,8 +22,8 @@ public class TriggerSkills : MonoBehaviour
     public void ScorchSkill() // NOTE: this is not finished yet. will still clean up the board and active piece logic
     {
         //ClearBottomLines();
-        gameManager.shaker.boardShake();
-        StartCoroutine(gameManager.gameDisplay.BackPulse(8f, $"{skillManager.skillColor}"));
+        playerBoard.shaker.boardShake();
+        StartCoroutine(playerManager.gameDisplay.BackPulse(8f, $"{skillManager.skillColor}"));
         //StartCoroutine(gameManager.gameDisplay.BackPulse(8f, "#00763bff"));
     }
 
@@ -32,15 +31,15 @@ public class TriggerSkills : MonoBehaviour
     {
         skillManager.characterSkillAnim.SetTrigger("Activate");
         skillCoroutines.EnableZeroAttackCooldownForTenSeconds();
-        StartCoroutine(gameManager.gameDisplay.BackPulse(10f, $"{skillManager.skillColor}"));
+        StartCoroutine(playerManager.gameDisplay.BackPulse(10f, $"{skillManager.skillColor}"));
         //StartCoroutine(gameManager.gameDisplay.BackPulse(10f, "#bb6400ff"));
     }
 
     public void DodokeSkill()
     {
         StartCoroutine(skillCoroutines.BoardFlip());
-        gameManager.pvp.opponentGameManager.shaker.boardShake();
-        StartCoroutine(gameManager.pvp.opponentGameManager.gameDisplay.BackPulse(10f, $"{skillManager.skillColor}"));
+        playerManager.pvp.opponentPlayerManager.shaker.boardShake();
+        StartCoroutine(playerManager.pvp.opponentPlayerManager.gameDisplay.BackPulse(10f, $"{skillManager.skillColor}"));
         //StartCoroutine(gameManager.pvp.opponentGameManager.gameDisplay.BackPulse(10f, "#720076ff"));
     }
 

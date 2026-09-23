@@ -45,7 +45,7 @@ public class MashBar : MonoBehaviour
     public void EscapeTimeStop() // no Romel Pun intended // Bring back current stats of all players
     {
         oppEthanSkill.gameManager.currentGravityDelay = oppEthanSkill.tempGravity;
-        oppEthanSkill.gameManager.pvp.opponentGameManager.isTimeStopped = false;
+        //oppEthanSkill.gameManager.pvp.opponentGameManager.isTimeStopped = false;
         mashAnim.SetTrigger("Minimize");
         oppEthanSkill.oppMashBar.enabled = false;
         bar.value = 0f;

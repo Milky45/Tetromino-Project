@@ -14,7 +14,7 @@ public class SkillCoroutines : MonoBehaviour
         skillManager.BO_Renderer.enabled = true;
         skillManager.ballRenderer.enabled = false;
         Color baseColor = skillManager.BO_Renderer.color;
-        skillManager.gameManager.pvp.opponentGameManager.shaker.boardShake();
+        skillManager.gameManager.pvp.opponentPlayerManager.shaker.boardShake();
 
         // Step 1: Set to full opacity
         skillManager.   BO_Renderer.color = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);

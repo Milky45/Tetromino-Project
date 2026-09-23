@@ -163,7 +163,7 @@ public class TetroSkill : MonoBehaviour
         BO_Renderer.enabled = true;
         ballRenderer.enabled = false;
         Color baseColor = BO_Renderer.color;
-        gameManager.pvp.opponentGameManager.shaker.boardShake();
+        //gameManager.pvp.opponentGameManager.shaker.boardShake();
 
         // Step 1: Set to full opacity
         BO_Renderer.color = new Color(baseColor.r, baseColor.g, baseColor.b, 1f);

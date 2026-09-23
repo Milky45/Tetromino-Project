@@ -111,8 +111,8 @@ public class DodokeSkill : MonoBehaviour
         gameManager.shaker.CostShake();
 
         StartCoroutine(BoardFlip());
-        gameManager.pvp.opponentGameManager.shaker.boardShake();
-        StartCoroutine(gameManager.pvp.opponentGameManager.gameDisplay.BackPulse(10f, "#720076ff"));
+        // gameManager.pvp.opponentGameManager.shaker.boardShake();
+        // StartCoroutine(gameManager.pvp.opponentGameManager.gameDisplay.BackPulse(10f, "#720076ff"));
     }
 
     public IEnumerator BoardFlip()
