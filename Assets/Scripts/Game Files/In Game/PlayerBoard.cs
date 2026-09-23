@@ -188,7 +188,7 @@ public class PlayerBoard : MonoBehaviour
         var activePiece = playerManager.playerActivePiece;
 
         if (activePiece != null)
-            activePiece.Clear();
+            activePiece.pieceHelpers.ClearActivePiece();
 
         PushUp();
         AddDeadLine();
@@ -197,17 +197,17 @@ public class PlayerBoard : MonoBehaviour
         {
             if (!activePiece.IsValidPosition(activePiece.position))
             {
-                activePiece.LockPiece(); // Lock if overlapping right away
+                activePiece.pieceHelpers.LockPiece(); // Lock if overlapping right away
             }
             else
             {
-                if (!activePiece.TryMove(Vector2Int.down))
+                if (!activePiece.pieceMovement.TryMove(Vector2Int.down))
                 {
-                    activePiece.LockPiece(); // Lock if resting
+                    activePiece.pieceHelpers.LockPiece(); // Lock if resting
                 }
                 else
                 {
-                    activePiece.Set(); // Update ghost/position
+                    activePiece.pieceHelpers.Set(); // Update ghost/position
                 }
             }
         }

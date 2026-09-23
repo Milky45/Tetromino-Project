@@ -1,12 +1,20 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
     [Header("References")]
+    public PlayerBoard playerBoard;
+    public GameMaster gameMaster;
+    public PlayerStatus playerStatus;
+    public PieceMovement pieceMovement;
+    public PieceRotation pieceRotation;
+    public PlayerInput playerInput;
     public PlayerManager opponentPlayerManager;
     public PlayerPiece playerActivePiece;
-    public PlayerStatus playerStatus;
     public PieceSpawner pieceSpawner;
+    public ComboCounter comboCounter;
+
     public GameDisplay gameDisplay;
     public AudioManager audioManager;
     public PvP pvp;
@@ -72,7 +80,6 @@ public class PlayerManager : MonoBehaviour
         Destroy(controller.gameObject);
     }
 
-
     public void LoseLife()
     {
         shaker.boardShake();
@@ -88,27 +95,68 @@ public class PlayerManager : MonoBehaviour
             gameDisplay.UpdateEMPStateIcon();
         }
 
-        // else if (player.lives <= 0 && !pvp.isSolo)
-        // {
-        //     // Check if opponent is already out of lives
-        //     if (pvp.opponent.lives <= 0)
-        //     {
-        //         // Both players are out of lives - game ends based on score
-        //         GameOver();
-        //     }
-        //     else
-        //     {
-        //         // Only this player is out of lives - check if catch-up is needed
-        //         CheckCatchUpCondition();
-        //     }
-        // }
-        // else
-        // {
-        //     // Reset the board and continue the game
-        //     ResetBoardAfterLifeLoss();
-        //     gameDisplay.UpdateComboText();
-        //     boardManager.ClearAll();
-        //     boardManager.ghost_tilemap.ClearAllTiles();
-        // }
+        //else if (player.lives <= 0 && !pvp.isSolo)
+        else if (playerStatus.lives <= 0)
+        {
+            // Check if opponent is already out of lives
+            if (pvp.opponentPlayerManager.playerStatus.lives <= 0)
+            {
+                // Both players are out of lives - game ends based on score
+                gameMaster.ReportPlayerGameLoss(playerStatus.isPlayer1);
+            }
+            else
+            {
+                // Only this player is out of lives - check if catch-up is needed
+                gameMaster.CheckCatchUpCondition(this);
+            }
+        }
+        else
+        {
+            // Reset the board and continue the game
+            ResetPlayerAfterLifeLoss();
+            gameDisplay.UpdateComboText();
+            playerBoard.ClearAll();
+            playerBoard.ghost_tilemap.ClearAllTiles();
+        }
+    }
+
+    private void ResetPlayerAfterLifeLoss()
+    {
+        GameObject existingPiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}");
+        if (existingPiece) Destroy(existingPiece);
+        // Clear the board
+        playerBoard.ClearAll();
+        playerBoard.ghost_tilemap.ClearAllTiles();
+        
+        // Reset game state
+        pieceSpawner.heldTetromino = null;
+        playerStatus.holdUsed = false;
+        playerStatus.comboCount = 0;
+        playerStatus.lastComboMilestone = 0;
+        playerStatus.attackAmmo = 0;
+        playerStatus.hasEmpGrenade = false;
+     
+        // Reset pending deadlines
+        playerStatus.pendingDeadLines = 0;
+        
+        // Spawn a new piece to continue the game
+        int randomIndex = Random.Range(0, pieceSpawner.tetrominoSet.Length);
+        pieceSpawner.nextTetromino = pieceSpawner.tetrominoSet[randomIndex];
+        gameDisplay.LogTetrominoStatus(pieceSpawner.nextTetromino, pieceSpawner.heldTetromino); // Log after board reset
+        playerBoard.ClearAll();
+        playerBoard.ghost_tilemap.ClearAllTiles();
+        
+        Invoke(nameof(LossRespawn), 3f);
+        
+        Debug.Log("Board reset after life loss. Game continues!");
+    }
+
+    public void LossRespawn()
+    {
+        GameObject existingPiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}");
+        if (existingPiece) Destroy(existingPiece);
+        playerBoard.ClearAll();
+        playerBoard.ghost_tilemap.ClearAllTiles();
+        pieceSpawner.SpawnPiece(null);
     }
 }

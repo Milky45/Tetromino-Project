@@ -5,9 +5,10 @@ public class PieceSpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private PlayerBoard playerBoard;
+    public PieceHelpers pieceHelpers;
 
     [Header("Tetromino Data")]
-    [SerializeField] private TetrominoData[] tetrominoSet;
+    public TetrominoData[] tetrominoSet;
     public TetrominoData heldTetromino;
     public TetrominoData nextTetromino;
     [SerializeField] private TetrominoData currentTetromino;
@@ -40,15 +41,19 @@ public class PieceSpawner : MonoBehaviour
         pieceObj.transform.parent = this.transform; // Make it a child of Game_Manager
         PlayerPiece controller = pieceObj.AddComponent<PlayerPiece>();
 
+        playerManager.pieceMovement.activePiece = controller;
+        playerManager.pieceRotation.activePiece = controller;
+        controller.pieceHelpers = pieceHelpers;
+
         // if null, rng the spawned piece
         // else then spawn a specific piece
         if(data != null)
         {controller.data = data;}
         else{controller.data = currentTetromino;}
 
-
         controller.position = new Vector2Int(0, playerBoard.Bounds.yMax - 4);
         controller.playerManager = playerManager;
+        
         controller.playerManager.playerActivePiece = controller;
         controller.playerBoard = playerBoard;
         playerManager.gameDisplay.LogTetrominoStatus(nextTetromino, heldTetromino); // Log after next changes
