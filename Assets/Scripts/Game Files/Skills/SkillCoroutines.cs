@@ -38,11 +38,17 @@ public class SkillCoroutines : MonoBehaviour
         skillManager.BO_Renderer.enabled = false;
     }
 
-    public void EnableZeroAttackCooldownForTenSeconds() // NOTE: there might be some animation issues here such as null reference exception if the skill is activated before the game manager and player are initialized. Make sure to call this method after the game manager and player are properly set up.
+    public void EnableZeroAttackCooldownForTenSeconds()
     {
-        if (skillManager.gameManager == null || skillManager.gameManager.player == null)
+        PlayerStatus status = null;
+        if (skillManager != null && skillManager.gameManager != null && skillManager.gameManager.pvp != null)
         {
-            Debug.LogWarning("Cannot apply zero attack cooldown: missing Game_Manager or Player reference.");
+            status = skillManager.gameManager.pvp.playerStatus;
+        }
+
+        if (status == null)
+        {
+            Debug.LogWarning("Cannot apply zero attack cooldown: missing PlayerStatus reference.");
             return;
         }
 
@@ -50,26 +56,26 @@ public class SkillCoroutines : MonoBehaviour
         {
             StopCoroutine(zeroAtkCooldownRoutine);
         }
-        zeroAtkCooldownRoutine = StartCoroutine(ZeroAttackCooldownCoroutine(10f));
+        zeroAtkCooldownRoutine = StartCoroutine(ZeroAttackCooldownCoroutine(status, 10f));
     }
 
-    private IEnumerator ZeroAttackCooldownCoroutine(float durationSeconds)
+    private IEnumerator ZeroAttackCooldownCoroutine(PlayerStatus status, float durationSeconds)
     {
-        Player playerRef = skillManager.gameManager.player;
-        float originalCooldown = playerRef.atkCD_Time;
+        float originalCooldown = status.atkCD_Time;
 
-        // Clear any currently active attack cooldown and set to zero
-        playerRef.atkOnCooldown = false;
-        playerRef.atkTempCD = originalCooldown;
-        playerRef.atkCD_Time = 0f;
+        status.atkOnCooldown = false;
+        status.atkTempCD = originalCooldown;
+        status.atkCD_Time = 0f;
         Debug.Log($"Attack cooldown set to 0 for {durationSeconds} seconds.");
 
         yield return new WaitForSeconds(durationSeconds);
 
-        // Restore original attack cooldown
-        playerRef.atkCD_Time = playerRef.atkTempCD > 0f ? playerRef.atkTempCD : originalCooldown;
+        status.atkCD_Time = status.atkTempCD > 0f ? status.atkTempCD : originalCooldown;
         Debug.Log("Attack cooldown restored.");
-        skillManager.characterSkillAnim.SetTrigger("Return");
+        if (skillManager != null && skillManager.characterSkillAnim != null)
+        {
+            skillManager.characterSkillAnim.SetTrigger("Return");
+        }
 
         zeroAtkCooldownRoutine = null;
     }

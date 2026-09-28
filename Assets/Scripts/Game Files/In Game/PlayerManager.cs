@@ -46,77 +46,76 @@ public class PlayerManager : MonoBehaviour
 
     public void TryHoldPiece(TetrominoData current, PlayerPiece controller)
     {   
-        var activePiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
-
-        if (activePiece != null)
-            activePiece.Clear();
-
         if (playerStatus.holdUsed)
         {
-            // comboText.color = Color.red;
-            // comboText.text = "SWAP LOCKED";
             Debug.Log("Hold already used this turn!");
             return;
         }
-        controller.pieceHelpers.ClearActivePiece();
+
+        if (controller != null && controller.pieceHelpers != null)
+        {
+            controller.pieceHelpers.ClearActivePiece();
+        }
 
         if (pieceSpawner.heldTetromino == null)
         {
             pieceSpawner.heldTetromino = current;
-            gameDisplay.LogTetrominoStatus(pieceSpawner.nextTetromino, pieceSpawner.heldTetromino); // Log after hold
+            if (gameDisplay != null) gameDisplay.LogTetrominoStatus(pieceSpawner.nextTetromino, pieceSpawner.heldTetromino);
             pieceSpawner.SpawnPiece(null);
         }
         else
         {
             TetrominoData temp = pieceSpawner.heldTetromino;
             pieceSpawner.heldTetromino = current;
-            gameDisplay.LogTetrominoStatus(pieceSpawner.nextTetromino, pieceSpawner.heldTetromino); // Log after swap
+            if (gameDisplay != null) gameDisplay.LogTetrominoStatus(pieceSpawner.nextTetromino, pieceSpawner.heldTetromino);
             pieceSpawner.SpawnPiece(temp);
         }
 
         playerStatus.holdUsed = true;
-        //holdDisplayUI.ShowHold(heldTetromino.tetromino);
 
-        Destroy(controller.gameObject);
+        if (controller != null)
+        {
+            Destroy(controller.gameObject);
+        }
     }
 
     public void LoseLife()
     {
-        shaker.boardShake();
+        if (shaker != null) shaker.boardShake();
         playerStatus.lives--;
         Debug.Log($"Player lost a life! Lives remaining: {playerStatus.lives}");
 
-        // Update UI to show remaining lives
-        //if (gameDisplay != null && !isSolo)
-        if (gameDisplay != null )
+        if (gameDisplay != null)
         {
             gameDisplay.UpdateHeartIcons(playerStatus.lives);
             gameDisplay.Ammo_Update(playerStatus.attackAmmo);
             gameDisplay.UpdateEMPStateIcon();
         }
 
-        //else if (player.lives <= 0 && !pvp.isSolo)
-        else if (playerStatus.lives <= 0)
+        if (playerStatus.lives <= 0)
         {
             // Check if opponent is already out of lives
-            if (pvp.opponentPlayerManager.playerStatus.lives <= 0)
+            if (pvp != null && pvp.opponentPlayerManager != null && pvp.opponentPlayerManager.playerStatus != null && pvp.opponentPlayerManager.playerStatus.lives <= 0)
             {
                 // Both players are out of lives - game ends based on score
-                gameMaster.ReportPlayerGameLoss(playerStatus.isPlayer1);
+                if (gameMaster != null) gameMaster.ReportPlayerGameLoss(playerStatus.isPlayer1);
             }
             else
             {
                 // Only this player is out of lives - check if catch-up is needed
-                gameMaster.CheckCatchUpCondition(this);
+                if (gameMaster != null) gameMaster.CheckCatchUpCondition(this);
             }
         }
         else
         {
             // Reset the board and continue the game
             ResetPlayerAfterLifeLoss();
-            gameDisplay.UpdateComboText();
-            playerBoard.ClearAll();
-            playerBoard.ghost_tilemap.ClearAllTiles();
+            if (gameDisplay != null) gameDisplay.UpdateComboText();
+            if (playerBoard != null)
+            {
+                playerBoard.ClearAll();
+                if (playerBoard.ghost_tilemap != null) playerBoard.ghost_tilemap.ClearAllTiles();
+            }
         }
     }
 

@@ -65,7 +65,7 @@ public class PlayerBoard : MonoBehaviour
 
         if (linesClearedThisTurn > 0)
         {
-            ClearBottomDeadLines(linesClearedThisTurn);
+            receivedDeadLineCount = Mathf.Max(0, receivedDeadLineCount - linesClearedThisTurn);
         }
 
         LinesCleared += linesClearedThisTurn;
@@ -74,9 +74,13 @@ public class PlayerBoard : MonoBehaviour
 
     private bool IsLineFull(int y)
     {
-        for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
+        int minY = -boardSize.y / 2;
+        int minX = -boardSize.x / 2;
+        int maxX = boardSize.x / 2;
+
+        for (int x = minX; x < maxX; x++)
         {
-            Vector3Int pos = new Vector3Int(x, y - boardSize.y / 2, 0);
+            Vector3Int pos = new Vector3Int(x, y + minY, 0);
             if (!main_tilemap.HasTile(pos))
             {
                 return false;
@@ -87,24 +91,36 @@ public class PlayerBoard : MonoBehaviour
 
     private void ClearLine(int y)
     {
-        for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
+        int minY = -boardSize.y / 2;
+        int minX = -boardSize.x / 2;
+        int maxX = boardSize.x / 2;
+
+        for (int x = minX; x < maxX; x++)
         {
-            Vector3Int pos = new Vector3Int(x, y - boardSize.y / 2, 0);
+            Vector3Int pos = new Vector3Int(x, y + minY, 0);
             main_tilemap.SetTile(pos, null);
         }
     }
 
     public void PushUp()
     {
-        for (int y = boardSize.y - 2; y >= 0; y--)
+        int minY = -boardSize.y / 2;
+        int maxY = boardSize.y / 2;
+        int minX = -boardSize.x / 2;
+        int maxX = boardSize.x / 2;
+
+        for (int y = maxY - 2; y >= minY; y--)
         {
-            for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
+            for (int x = minX; x < maxX; x++)
             {
-                Vector3Int from = new Vector3Int(x, y - boardSize.y / 2, 0);
-                Vector3Int to = new Vector3Int(x, y + 1 - boardSize.y / 2, 0);
+                Vector3Int from = new Vector3Int(x, y, 0);
+                Vector3Int to = new Vector3Int(x, y + 1, 0);
 
                 TileBase tile = main_tilemap.GetTile(from);
-                main_tilemap.SetTile(to, tile);
+                if (to.y < maxY)
+                {
+                    main_tilemap.SetTile(to, tile);
+                }
                 main_tilemap.SetTile(from, null);
             }
         }
@@ -112,10 +128,16 @@ public class PlayerBoard : MonoBehaviour
 
     public void AddDeadLine()
     {
-        int holeX = Random.Range(-boardSize.x / 2, boardSize.x / 2);
+        int minX = -boardSize.x / 2;
+        int maxX = boardSize.x / 2;
+        int holeX = Random.Range(minX, maxX);
         int y = -boardSize.y / 2;
 
-        for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
+        TileBase garbageTile = (tile_types != null && tile_types.Length > 0) 
+            ? tile_types[Mathf.Clamp(7, 0, tile_types.Length - 1)] 
+            : null;
+
+        for (int x = minX; x < maxX; x++)
         {
             Vector3Int pos = new Vector3Int(x, y, 0);
             if (x == holeX)
@@ -124,57 +146,25 @@ public class PlayerBoard : MonoBehaviour
             }
             else
             {
-                main_tilemap.SetTile(pos, tile_types[7]);
+                main_tilemap.SetTile(pos, garbageTile);
             }
         }
 
         receivedDeadLineCount++;
     }
-    
-    private void ClearBottomDeadLines(int linesCleared)
-    {
-        int linesToRemove = Mathf.Min(linesCleared, receivedDeadLineCount);
-
-        for (int i = 0; i < linesToRemove; i++)
-        {
-            int y = -boardSize.y / 2;
-
-            ClearLineFromWorldY(y);
-        }
-
-        receivedDeadLineCount -= linesToRemove;
-    }
-
-    public void ClearLineFromWorldY(int worldY)
-    {
-        for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
-        {
-            Vector3Int pos = new Vector3Int(x, worldY, 0);
-            main_tilemap.SetTile(pos, null);
-        }
-
-        for (int y = worldY + 1; y < boardSize.y / 2; y++)
-        {
-            for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
-            {
-                Vector3Int from = new Vector3Int(x, y, 0);
-                Vector3Int to = new Vector3Int(x, y - 1, 0);
-
-                TileBase tile = main_tilemap.GetTile(from);
-                main_tilemap.SetTile(to, tile);
-                main_tilemap.SetTile(from, null);
-            }
-        }
-    }
 
     private void MoveRowsDown(int fromY)
     {
+        int minY = -boardSize.y / 2;
+        int minX = -boardSize.x / 2;
+        int maxX = boardSize.x / 2;
+
         for (int y = fromY; y < boardSize.y - 1; y++)
         {
-            for (int x = -boardSize.x / 2; x < boardSize.x / 2; x++)
+            for (int x = minX; x < maxX; x++)
             {
-                Vector3Int from = new Vector3Int(x, y + 1 - boardSize.y / 2, 0);
-                Vector3Int to = new Vector3Int(x, y - boardSize.y / 2, 0);
+                Vector3Int from = new Vector3Int(x, y + 1 + minY, 0);
+                Vector3Int to = new Vector3Int(x, y + minY, 0);
 
                 TileBase tile = main_tilemap.GetTile(from);
                 main_tilemap.SetTile(to, tile);

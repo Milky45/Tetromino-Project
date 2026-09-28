@@ -17,6 +17,27 @@ public class EmpManager : MonoBehaviour
         playerStatus.empOnCooldown = true;
         empCooldownTimer = playerStatus.empCooldownDuration;
         Debug.Log($"EMP cooldown started for {playerStatus.empCooldownDuration} seconds!");
-        playerManager.gameDisplay.UpdateEMPStateIcon();
+        if (playerManager != null && playerManager.gameDisplay != null)
+        {
+            playerManager.gameDisplay.UpdateEMPStateIcon();
+        }
+    }
+
+    private void Update()
+    {
+        if (playerStatus != null && playerStatus.empOnCooldown)
+        {
+            empCooldownTimer -= Time.deltaTime;
+            if (empCooldownTimer <= 0f)
+            {
+                empCooldownTimer = 0f;
+                playerStatus.empOnCooldown = false;
+                if (playerManager != null && playerManager.gameDisplay != null)
+                {
+                    playerManager.gameDisplay.UpdateEMPStateIcon();
+                }
+                Debug.Log("EMP Cooldown finished!");
+            }
+        }
     }
 }

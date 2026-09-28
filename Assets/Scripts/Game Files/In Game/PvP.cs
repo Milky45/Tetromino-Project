@@ -72,33 +72,17 @@ public class PvP : MonoBehaviour
         {
             playerStatus.isInverted = true;
             playerManager.invertTimer = duration;
-            var activePiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
-            if (activePiece != null)
-                activePiece.Clear();
-            // comboText.color = Color.red;
-            // comboText.text = "Inverted Controls";
+            var activePiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}")?.GetComponent<PlayerPiece>();
+            if (activePiece != null && activePiece.pieceHelpers != null)
+                activePiece.pieceHelpers.ClearActivePiece();
             Debug.Log("Controls inverted!");
             playerManager.audioManager.PlaySFX(playerManager.audioManager.EMP_clip);
-            StartCoroutine(gameDisplay.BackPulse(10f, "#763700")); // "#763700"
+            StartCoroutine(gameDisplay.BackPulse(10f, "#763700"));
         }
     }
-    
+
     public bool TryBlockEmp()
     {
-        // if(yunJinSkill != null)
-        // {
-        //     int rockCtr = yunJinSkill.rockCount;
-        //     if (rockCtr > 0)
-        //     {
-        //         for (int i = rockCtr; i > 0; i--)
-        //         {
-        //             yunJinSkill.InvisRock(i);
-        //         }
-        //         yunJinSkill.StoneDestroyed();
-        //         return true;
-        //     }
-            
-        // }
         return false;
     }
 
@@ -106,37 +90,25 @@ public class PvP : MonoBehaviour
     {
         if (playerStatus.atkOnCooldown)
         {
-            //comboText.color = Color.red;
-            //comboText.text = "Attack on Cooldown";
             Debug.Log("Attack is on cooldown!");
             return;
         }
 
         if (playerStatus.attackAmmo > 0)
         {
-            
-            // if (packHatSkill != null)
-            // {
-            //     if (packHatSkill.isSkillActive)
-            //     {
-            //         packHatSkill.packhatAnim.Play("Firing", 0, 0f);
-            //     }
-            // }
-
             playerStatus.attackAmmo--;
-            //Camera.SetTrigger("Shake");
-            var opponentPiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P2" : "P1")}")?.GetComponent<Piece>();
-            if (opponentPiece != null)
+            var opponentPiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P2" : "P1")}")?.GetComponent<PlayerPiece>();
+            if (opponentPiece != null && opponentPiece.pieceHelpers != null)
             {
-                opponentPiece.Clear(); // Clear its tiles temporarily
+                opponentPiece.pieceHelpers.ClearActivePiece();
             }
 
             opponentPlayerManager.pvp.ReceiveDeadLine();
             playerManager.audioManager.PlaySFX(playerManager.audioManager.attack);
 
-            if (opponentPiece != null)
+            if (opponentPiece != null && opponentPiece.pieceHelpers != null)
             {
-                opponentPiece.Set(); // Re-set the piece tiles after push
+                opponentPiece.pieceHelpers.Set();
             }
 
             playerManager.gameDisplay.Ammo_Update(playerStatus.attackAmmo);

@@ -16,25 +16,30 @@ public class ActiveRock : MonoBehaviour
     // destroy the rock when it collides with the opponent 2d collider
     // but first check if ur player 1 or player 2 and then check if the opponent is player 1 or player 2
     
+    public void Initialize(SkillManager manager, int index)
+    {
+        skillManager = manager;
+        rockIndex = index;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(skillManager.isPlayer1 && collision.CompareTag("Player2"))
+        if (skillManager != null)
         {
-            Debug.Log($"Rock {rockIndex + 1} collided with Player 2");
-            // call function upon collision
-        }
-        else if(!skillManager.isPlayer1 && collision.CompareTag("Player1"))
-        {
-            Debug.Log($"Rock {rockIndex + 1} collided with Player 1");
-            // call function upon collision
-        } 
-        else
-        {
-            Debug.Log($"Rock {rockIndex + 1} collided with something else: {collision.gameObject.name}");
+            if (skillManager.isPlayer1 && collision.CompareTag("Player2"))
+            {
+                Debug.Log($"Rock {rockIndex + 1} collided with Player 2");
+            }
+            else if (!skillManager.isPlayer1 && collision.CompareTag("Player1"))
+            {
+                Debug.Log($"Rock {rockIndex + 1} collided with Player 1");
+            } 
+            else
+            {
+                Debug.Log($"Rock {rockIndex + 1} collided with something else: {collision.gameObject.name}");
+            }
         }
 
-        // disable the script and destroy the rock after collision
-        skillManager.gameManager.player.attackAmmo--;
         this.enabled = false;
         Destroy(gameObject);
     }

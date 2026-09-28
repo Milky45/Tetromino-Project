@@ -55,24 +55,26 @@ public class PieceRotation : MonoBehaviour
 
             if (playerManager.playerActivePiece.data.tetromino == TetrominoType.I)
             {
-                // I piece rotates around its center (0.5 offset)
+                // I piece rotation around center offset
                 float fx = x - 0.5f;
                 float fy = y - 0.5f;
 
-                int rx = Mathf.RoundToInt(-direction * fy + 0.5f);
-                int ry = Mathf.RoundToInt(direction * fx + 0.5f);
+                int rx = Mathf.RoundToInt(direction * fy + 0.5f);
+                int ry = Mathf.RoundToInt(-direction * fx + 0.5f);
 
                 rotatedCells[i] = new Vector2Int(rx, ry);
             }
-            else if (playerManager.playerActivePiece.data.tetromino == TetrominoType.O) // O block shouldn't rotate
+            else if (playerManager.playerActivePiece.data.tetromino == TetrominoType.O)
             {
                 pieceHelpers.Set();
                 return;
             }
             else
             {
-                // Normal rotation (standard SRS)
-                rotatedCells[i] = new Vector2Int(-direction * y, direction * x);
+                // Standard 2D matrix rotation:
+                // Clockwise (direction = 1): (x, y) -> (y, -x)
+                // Counter-clockwise (direction = -1): (x, y) -> (-y, x)
+                rotatedCells[i] = new Vector2Int(direction * y, -direction * x);
             }
         }
 
@@ -86,15 +88,20 @@ public class PieceRotation : MonoBehaviour
             return;
         }
 
-        // Special horizontal kicks for I piece
+        // Special kicks for I piece (includes vertical floor/ceiling kicks)
         if (playerManager.playerActivePiece.data.tetromino == TetrominoType.I)
         {
             Vector2Int[] iKicks = new Vector2Int[]
             {
-                new Vector2Int(2, 0),
-                new Vector2Int(-2, 0),
                 new Vector2Int(1, 0),
                 new Vector2Int(-1, 0),
+                new Vector2Int(2, 0),
+                new Vector2Int(-2, 0),
+                new Vector2Int(0, 1),
+                new Vector2Int(0, -1),
+                new Vector2Int(1, 1),
+                new Vector2Int(-1, 1),
+                new Vector2Int(0, 2)
             };
 
             foreach (var offset in iKicks)
@@ -119,7 +126,10 @@ public class PieceRotation : MonoBehaviour
                 new Vector2Int(-1, 0),
                 new Vector2Int(0, 1),
                 new Vector2Int(1, 1),
-                new Vector2Int(-1, 1)
+                new Vector2Int(-1, 1),
+                new Vector2Int(0, -1),
+                new Vector2Int(1, -1),
+                new Vector2Int(-1, -1)
             };
 
             foreach (var offset in genericKicks)

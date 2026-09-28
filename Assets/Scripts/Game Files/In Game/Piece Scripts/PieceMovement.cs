@@ -59,10 +59,8 @@ public class PieceMovement : MonoBehaviour
 
         HandleInput();
 
-        ClearGhostPiece();
-        ClearActivePiece();
-
-        gravityDelay = playerBoard.currentgravityDelay;
+        gravityDelay = playerBoard != null ? playerBoard.currentgravityDelay : 1.0f;
+        if (gravityDelay <= 0f) gravityDelay = 1.0f;
 
         if (gravityTimer >= gravityDelay)
         {
@@ -70,8 +68,14 @@ public class PieceMovement : MonoBehaviour
             {
                 if (!isMoving)
                 {
-                    playerManager.playerStatus.holdUsed = false;
-                    pieceHelpers.LockPiece();
+                    if (playerManager != null && playerManager.playerStatus != null)
+                    {
+                        playerManager.playerStatus.holdUsed = false;
+                    }
+                    if (pieceHelpers != null)
+                    {
+                        pieceHelpers.LockPiece();
+                    }
                     return;
                 }
             }

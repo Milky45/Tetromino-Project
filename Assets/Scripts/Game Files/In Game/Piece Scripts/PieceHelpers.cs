@@ -16,22 +16,32 @@ public class PieceHelpers : MonoBehaviour
     public void LockPiece()
     {
         if (playerManager.playerActivePiece == null) return;
-        playerManager.comboCounter.ComboCount();
+        
+        int topThreshold = playerBoard != null ? (playerBoard.boardSize.y / 2 - 2) : 10;
+        bool toppedOut = false;
 
         foreach (Vector2Int cell in playerManager.playerActivePiece.cells)
         {
             int yPos = playerManager.playerActivePiece.position.y + cell.y;
-            if (yPos > 6)
+            if (yPos >= topThreshold)
             {
-                playerManager.LoseLife();
-                // REMOVED: Destroy(this.gameObject);
-                return;
+                toppedOut = true;
+                break;
             }
         }
 
-        // Destroy ONLY the dynamically spawned active piece GameObject, NOT the Helper itself:
-        Destroy(playerManager.playerActivePiece.gameObject); 
+        if (toppedOut)
+        {
+            Destroy(playerManager.playerActivePiece.gameObject);
+            playerManager.playerActivePiece = null;
+            playerManager.LoseLife();
+            return;
+        }
 
+        Destroy(playerManager.playerActivePiece.gameObject);
+        playerManager.playerActivePiece = null;
+
+        playerManager.comboCounter.ComboCount();
         playerManager.pieceSpawner.SpawnPiece(null);
     }
 

@@ -7,12 +7,22 @@ public class ComboCounter : MonoBehaviour
     public void ComboCount()
     {
         int linesCleared = playerBoard.ClearLines();
-        playerManager.playerStatus.score += 100 * linesCleared;
+        
+        int lineScore = 0;
+        switch (linesCleared)
+        {
+            case 1: lineScore = 100; break;
+            case 2: lineScore = 300; break;
+            case 3: lineScore = 500; break;
+            case 4: lineScore = 800; break;
+            default: if (linesCleared > 4) lineScore = linesCleared * 200; break;
+        }
 
+        playerManager.playerStatus.score += lineScore;
 
         if (linesCleared > 0)
         {
-            playerManager.playerStatus.comboCount += linesCleared;
+            playerManager.playerStatus.comboCount += 1;
 
             int milestone = playerManager.playerStatus.comboCount / 2;
             if (milestone > playerManager.playerStatus.lastComboMilestone)
@@ -26,44 +36,27 @@ public class ComboCounter : MonoBehaviour
                     }
                 }
                 playerManager.playerStatus.lastComboMilestone = milestone;
-                // if (!isSolo)
-                // {
-                //     gameDisplay.Ammo_Update(playerManager.playerStatus.attackAmmo);
-                // }
             }
-            //if (playerManager.playerStatus.comboCount >= 4 && !playerManager.playerStatus.hasEmpGrenade && !playerManager.playerStatus.empOnCooldown && !isSolo)
-            
+
             if (playerManager.playerStatus.comboCount >= 4 && !playerManager.playerStatus.hasEmpGrenade && !playerManager.playerStatus.empOnCooldown)
             {
                 playerManager.playerStatus.hasEmpGrenade = true;
                 Debug.Log("EMP Grenade acquired!");
-                playerManager.gameDisplay.UpdateEMPStateIcon();
-                //shaker.EMPShake();
+                if (playerManager.gameDisplay != null) playerManager.gameDisplay.UpdateEMPStateIcon();
             }
 
             if (playerManager.playerStatus.comboCount > 1)
             {
-                playerManager.playerStatus.score += 100;
-                playerManager.gameDisplay.UpdateComboText();
-                //shaker.ComboShake();
-
-                // int soundIndex = Mathf.Clamp(playerManager.playerStatus.comboCount, 2, 13);
-                // PlayComboSFX(soundIndex);
+                playerManager.playerStatus.score += 50 * playerManager.playerStatus.comboCount;
+                if (playerManager.gameDisplay != null) playerManager.gameDisplay.UpdateComboText();
             }
-            else
-            {
-                //audioManager.PlaySFX(audioManager.clear1);
-                // play sfx here
-            }
-            //shaker.ChipsShake();
         }
         else
         {
             playerManager.playerStatus.comboCount = 0;
             playerManager.playerStatus.lastComboMilestone = 0;
-            //shaker.ComboInvalidShake(); 
         }
 
-        playerManager.gameDisplay.UpdateChips(playerManager.playerStatus.score);
+        if (playerManager.gameDisplay != null) playerManager.gameDisplay.UpdateChips(playerManager.playerStatus.score);
     }
 }

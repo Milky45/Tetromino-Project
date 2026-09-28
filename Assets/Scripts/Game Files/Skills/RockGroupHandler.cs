@@ -12,18 +12,24 @@ public class RockGroupHandler : MonoBehaviour
     public Transform rockGroupContainer; // Container to hold the spawned rocks
     public ActiveRock[] activeRocks; // Array to hold references to the ActiveRock scripts for each rock
 
+    private bool isPushing = false;
+
     public void SpawnRocks()
     {
+        if (rockSpawnPoints == null) return;
+        activeRocks = new ActiveRock[rockSpawnPoints.Length];
+
         for (int i = 0; i < rockSpawnPoints.Length; i++)
         {
-            if (i < skillManager.rockCtr) // Only spawn rocks up to the rockCount
+            if (skillManager != null && i < skillManager.rockCtr && rockPrefab != null && i < rockPrefab.Length)
             {
                 GameObject rock = Instantiate(rockPrefab[i], rockSpawnPoints[i].position, Quaternion.identity);
+                if (rockGroupContainer != null) rock.transform.parent = rockGroupContainer;
                 ActiveRock activeRockScript = rock.GetComponent<ActiveRock>();
                 if (activeRockScript != null)
                 {
-                    activeRockScript.rockIndex = i; // Assign the index to the ActiveRock script
-                    activeRocks[i] = activeRockScript; // Store the reference in the array
+                    activeRockScript.Initialize(skillManager, i);
+                    activeRocks[i] = activeRockScript;
                 }
             }
         }
@@ -31,10 +37,28 @@ public class RockGroupHandler : MonoBehaviour
     
     public void PushRockGroup() 
     {
-        float pushDirection = skillManager.isPlayer1 ? 1f : -1f; // Determine direction based on player
-        float pushSpeed = skillManager.charSkills.rockPushForce; // Get the push speed from SkillManager
-        // move the rock group container in the x direction based on the push speed and direction
-        rockGroupContainer.Translate(Vector3.right * pushDirection * pushSpeed * Time.deltaTime);
+        if (!isPushing)
+        {
+            StartCoroutine(PushRoutine());
+        }
+    }
+
+    private System.Collections.IEnumerator PushRoutine()
+    {
+        isPushing = true;
+        float pushDirection = (skillManager != null && skillManager.isPlayer1) ? 1f : -1f;
+        float pushSpeed = (skillManager != null && skillManager.charSkills != null) ? skillManager.charSkills.rockPushForce : 5f;
+        float duration = 3.0f;
+        float elapsed = 0f;
+
+        while (elapsed < duration && rockGroupContainer != null)
+        {
+            rockGroupContainer.Translate(Vector3.right * pushDirection * pushSpeed * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        isPushing = false;
     }
 
 }

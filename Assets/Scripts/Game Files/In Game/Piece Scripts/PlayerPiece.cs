@@ -24,42 +24,35 @@ public class PlayerPiece : MonoBehaviour
     
     public void Start()
     {
-        cells = new Vector2Int[data.cells.Length];
-        ghostCells = new Vector2Int[data.cells.Length];
-        for (int i = 0; i < cells.Length; i++)
+        if (data != null && data.cells != null)
         {
-            cells[i] = data.cells[i];
+            cells = new Vector2Int[data.cells.Length];
+            ghostCells = new Vector2Int[data.cells.Length];
+            for (int i = 0; i < cells.Length; i++)
+            {
+                cells[i] = data.cells[i];
+            }
         }
 
-        pieceHelpers.Set();
+        if (pieceHelpers != null)
+        {
+            pieceHelpers.Set();
+        }
     }
 
     private void Update()
     {
-        pieceHelpers.Set();
+        if (pieceHelpers != null)
+        {
+            pieceHelpers.Set();
+        }
         DrawGhost();
     }
-
-    private void HardDrop()
-    {
-        while (playerManager.pieceMovement.TryMove(Vector2Int.down))
-        {
-            // Keep moving down while it's valid
-            continue;
-        }
-
-        // Lock the piece in place when it can't move further
-        playerManager.hardDropLockoutTimer = lockoutDuration;
-        playerManager.playerStatus.holdUsed = false;
-        pieceHelpers.LockPiece();
-        playerManager.audioManager.PlaySFX(playerManager.audioManager.dropClip);
-    }
-
-    
 
     public bool IsValidPosition(Vector2Int pos, Vector2Int[] testCells = null)
     {
         Vector2Int[] checkCells = testCells ?? cells;
+        if (playerBoard == null || checkCells == null) return false;
 
         foreach (Vector2Int cell in checkCells)
         {
@@ -75,8 +68,12 @@ public class PlayerPiece : MonoBehaviour
 
     public void DrawGhost()
     {
+        if (playerBoard == null || playerBoard.ghost_tilemap == null || pieceHelpers == null) return;
+        playerBoard.ghost_tilemap.ClearAllTiles();
+
         Vector2Int ghostPos = position;
         pieceHelpers.ClearActivePiece();
+
         while (IsValidPosition(ghostPos + Vector2Int.down))
         {
             ghostPos += Vector2Int.down;
@@ -84,16 +81,22 @@ public class PlayerPiece : MonoBehaviour
 
         pieceHelpers.Set();
 
-        for (int i = 0; i < cells.Length; i++)
+        if (data != null && data.ghostTile != null && cells != null)
         {
-            Vector3Int tilePos = new Vector3Int(ghostPos.x + cells[i].x, ghostPos.y + cells[i].y, 0);
-            playerBoard.ghost_tilemap.SetTile(tilePos, data.ghostTile);
+            for (int i = 0; i < cells.Length; i++)
+            {
+                Vector3Int tilePos = new Vector3Int(ghostPos.x + cells[i].x, ghostPos.y + cells[i].y, 0);
+                playerBoard.ghost_tilemap.SetTile(tilePos, data.ghostTile);
+            }
         }
     }
 
     public void ClearGhost()
     {
-        playerBoard.ghost_tilemap.ClearAllTiles(); // MUCH cleaner
+        if (playerBoard != null && playerBoard.ghost_tilemap != null)
+        {
+            playerBoard.ghost_tilemap.ClearAllTiles();
+        }
     }
 
 }

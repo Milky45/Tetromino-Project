@@ -40,6 +40,14 @@ public class GameMaster : MonoBehaviour
         player2Manager.pieceSpawner.pieceHelpers = p2PieceHelpers;
     }
 
+    private void Update()
+    {
+
+        player1Manager.pieceSpawner.disableSpawn = disableSpawnForP1;
+        player2Manager.pieceSpawner.disableSpawn = disableSpawnForP2;
+
+    }
+
     public void ReportPlayerGameLoss(bool isPlayer1)
     {
         // if true, then its player 1 who lost
@@ -57,27 +65,26 @@ public class GameMaster : MonoBehaviour
     public void CheckCatchUpCondition(PlayerManager playerManager)
     {
         PlayerStatus playerStatus = playerManager.playerStatus;
-        PlayerBoard playerBoard = player1Manager.playerBoard;
+        PlayerBoard playerBoard = playerManager.playerBoard;
 
 
         // If this player has higher or equal score, opponent can still catch up
-        if (playerStatus.score >= player1Manager.opponentPlayerManager.playerStatus.score)
+        if (playerStatus.score >= playerManager.opponentPlayerManager.playerStatus.score)
         {
             isGameOver = true;
-            playerBoard.ClearAll();
-            playerBoard.ghost_tilemap.ClearAllTiles();
+            if (playerBoard != null)
+            {
+                playerBoard.ClearAll();
+                if (playerBoard.ghost_tilemap != null) playerBoard.ghost_tilemap.ClearAllTiles();
+            }
             
             // Clear pieces
             GameObject Piece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}");
-            Destroy(Piece);
+            if (Piece != null) Destroy(Piece);
             
-            playerManager.pieceSpawner.heldTetromino = null;
+            if (playerManager.pieceSpawner != null) playerManager.pieceSpawner.heldTetromino = null;
             playerStatus.holdUsed = false;
             playerStatus.lastComboMilestone = 0;
-            
-            // Opponent gets to continue (they're still active)
-            // Set opponent's isGameOver to false so they can keep playing
-            //pvp.opponentGameManager.isGameOver = false;
             
             string playerId = playerStatus.isPlayer1 ? "P1" : "P2";
             string opponentId = playerStatus.isPlayer1 ? "P2" : "P1";
@@ -112,18 +119,11 @@ public class GameMaster : MonoBehaviour
         if (catchingUpPlayer.score >= targetScore)
         {
             Debug.Log($"{catchingPlayerId} successfully caught up! Score: {catchingUpPlayer.score}");
-
-        }
-        else
-        {
-            Debug.Log($"{catchingPlayerId} failed to catch up with {fallenPlayer}! Score: {catchingUpPlayer.score}");
-        }
-        if (catchingUpPlayer.score > targetScore)
-        {
             ReportPlayerGameLoss(fallenPlayer.isPlayer1);
         }
         else
         {
+            Debug.Log($"{catchingPlayerId} failed to catch up with {fallenPlayer}! Score: {catchingUpPlayer.score}");
             ReportPlayerGameLoss(catchingUpPlayer.isPlayer1);
         }
     }

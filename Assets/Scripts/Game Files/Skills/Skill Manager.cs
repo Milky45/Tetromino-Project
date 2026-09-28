@@ -108,13 +108,16 @@ public class SkillManager : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
-            if(isChar1)
+            if (gameDisplay != null)
             {
-                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
-            }
-            else
-            {
-                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+                if (isChar1)
+                {
+                    gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+                }
+                else
+                {
+                    gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+                }
             }
 
             if (cooldownTimer <= 0f)

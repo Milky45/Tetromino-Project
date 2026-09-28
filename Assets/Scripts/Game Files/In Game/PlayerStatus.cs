@@ -16,6 +16,7 @@ public class PlayerStatus : MonoBehaviour
     public float empCooldownDuration = 60f; // Duration for EMP cooldown in seconds
     public bool atkOnCooldown = false;
     public float atkCD_Time = 1f;
+    public float atkTempCD = 0f;
     public int lastComboMilestone = 0;
     public int pendingDeadLines = 0;
 
