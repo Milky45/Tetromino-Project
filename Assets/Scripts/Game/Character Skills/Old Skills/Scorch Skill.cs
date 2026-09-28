@@ -6,7 +6,7 @@ public class ScorchSkill : MonoBehaviour
     [Header("References")]
     public CharacterManager characterManager;
     public Game_Manager gameManager;
-    public GameDisplay gameDisplay;
+    //public GameDisplay gameDisplay;
     public Board_Manager boardManager;
 
     [Header("Input")]
@@ -28,14 +28,14 @@ public class ScorchSkill : MonoBehaviour
         if (characterManager.isPlayer1)
         {
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
             
         }
         else
         {
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
         }
         boardManager = gameManager.boardManager;
@@ -46,13 +46,13 @@ public class ScorchSkill : MonoBehaviour
         {
             Debug.Log("Scorch Skill Assigned as Secondary Skill");
             skillAction = playerInput.actions.FindAction("Secondary Skill");
-            gameDisplay.cost2Text.text = cost.ToString();
+            //gameDisplay.cost2Text.text = cost.ToString();
         }
         else if(isSec == false)
         {
             Debug.Log("Scorch Skill Assigned as Primary Skill");
             skillAction = playerInput.actions.FindAction("Skill");
-            gameDisplay.cost1Text.text = cost.ToString();
+            //gameDisplay.cost1Text.text = cost.ToString();
         }       
         if (skillAction != null)
            skillAction.performed += ctx => ActivateSkill();
@@ -66,11 +66,11 @@ public class ScorchSkill : MonoBehaviour
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
             if(isSec)
             {
-                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill2CooldownUpdate(cooldownTimer);
             }
             else
             {
-                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill1CooldownUpdate(cooldownTimer);
             }
 
             if (cooldownTimer <= 0f)
@@ -96,7 +96,7 @@ public class ScorchSkill : MonoBehaviour
         if (gameManager.isTimeStopped) return;
         
         gameManager.player.score -= cost;
-        gameDisplay.UpdateChips(gameManager.player.score);
+        //gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         gameManager.shaker.ChipsDeductShake();
@@ -104,7 +104,7 @@ public class ScorchSkill : MonoBehaviour
 
         ClearBottomLines();
         gameManager.shaker.boardShake();
-        StartCoroutine(gameDisplay.BackPulse(8f, "#00763bff"));
+        //StartCoroutine(gameDisplay.BackPulse(8f, "#00763bff"));
     }
 
     public void ClearBottomLines()

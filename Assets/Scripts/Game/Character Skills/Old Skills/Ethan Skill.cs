@@ -6,7 +6,7 @@ public class EthanSkill : MonoBehaviour
 {
     [Header("References")]
     public Game_Manager gameManager;
-    public GameDisplay gameDisplay;
+    //public //gameDisplay gameDisplay;
     public CharacterManager characterManager;
     public Game_Manager opponent;
     public GameObject opponentMashDisplay;
@@ -32,14 +32,14 @@ public class EthanSkill : MonoBehaviour
         if (characterManager.isPlayer1)
         {
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
             //opponent = gameManager.pvp.opponentGameManager;
         }
         else
         {
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
             //opponent = gameManager.pvp.opponentGameManager;
         }
@@ -54,13 +54,13 @@ public class EthanSkill : MonoBehaviour
         {
             Debug.Log("Ethan Skill Assigned as Secondary Skill");
             skillAction = playerInput.actions.FindAction("Secondary Skill");
-            gameDisplay.cost2Text.text = cost.ToString();
+            //gameDisplay.cost2Text.text = cost.ToString();
         }
         else if(isSec == false)
         {
             Debug.Log("Ethan Skill Assigned as Primary Skill");
             skillAction = playerInput.actions.FindAction("Skill");
-            gameDisplay.cost1Text.text = cost.ToString();
+            //gameDisplay.cost1Text.text = cost.ToString();
         }       
         if (skillAction != null)
            skillAction.performed += ctx => ActivateSkill();
@@ -75,11 +75,11 @@ public class EthanSkill : MonoBehaviour
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
             if(isSec)
             {
-                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill2CooldownUpdate(cooldownTimer);
             }
             else
             {
-                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill1CooldownUpdate(cooldownTimer);
             }
 
             if (cooldownTimer <= 0f)
@@ -106,7 +106,7 @@ public class EthanSkill : MonoBehaviour
         if (gameManager.isTimeStopped) return;
 
         gameManager.player.score -= cost;
-        gameDisplay.UpdateChips(gameManager.player.score);
+        //gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         gameManager.shaker.ChipsDeductShake();
@@ -118,7 +118,7 @@ public class EthanSkill : MonoBehaviour
         StartCoroutine(TimeStopOpponent(12f));
         gameManager.shaker.boardShake();
         opponent.shaker.boardShake();
-        StartCoroutine(gameDisplay.BackPulse(12f, "#763700"));
+        //StartCoroutine(//gameDisplay.BackPulse(12f, "#763700"));
     }
 
     public IEnumerator TimeStopOpponent(float durationSeconds)
@@ -132,7 +132,7 @@ public class EthanSkill : MonoBehaviour
         {
             gameManager.player.attackAmmo = gameManager.player.maxAmmo;
         }
-        gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
+        //gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
         opponent.isTimeStopped = true;
 
         yield return new WaitForSeconds(durationSeconds);
@@ -144,7 +144,7 @@ public class EthanSkill : MonoBehaviour
         oppMashBar.mashAnim.SetTrigger("Minimize");
         oppMashBar.bar.value = 0f;
         gameManager.player.maxAmmo = 5;
-        gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
+        //gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
 
         Debug.Log("Time unfroze.");
     }

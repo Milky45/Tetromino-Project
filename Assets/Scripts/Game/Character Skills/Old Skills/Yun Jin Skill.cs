@@ -6,7 +6,7 @@ public class YunJinSkill : MonoBehaviour
 {
     [Header("References")]
     public Game_Manager gameManager;
-    public GameDisplay gameDisplay;
+    //public GameDisplay gameDisplay;
     public CharacterManager characterManager;
 
     [Header("Input")]
@@ -42,13 +42,13 @@ public class YunJinSkill : MonoBehaviour
         if (characterManager.isPlayer1)
         {
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
         }
         else
         {
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
         }
 
@@ -63,14 +63,14 @@ public class YunJinSkill : MonoBehaviour
             YunJinAnim = characterManager.charSecDisplay.GetComponent<Animator>();
             Debug.Log("Yun Jin Skill Assigned as Secondary Skill");
             skillAction = playerInput.actions.FindAction("Secondary Skill");
-            gameDisplay.cost2Text.text = cost.ToString();
+            //gameDisplay.cost2Text.text = cost.ToString();
         }
         else if(isSec == false)
         {
             YunJinAnim = GetComponent<Animator>();
             Debug.Log("Yun Jin Skill Assigned as Primary Skill");
             skillAction = playerInput.actions.FindAction("Skill");
-            gameDisplay.cost1Text.text = cost.ToString();
+            //gameDisplay.cost1Text.text = cost.ToString();
         }        
         skillAction.performed += ctx => ActivateSkill();
     }
@@ -83,11 +83,11 @@ public class YunJinSkill : MonoBehaviour
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
             if(isSec)
             {
-                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill2CooldownUpdate(cooldownTimer);
             }
             else
             {
-                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill1CooldownUpdate(cooldownTimer);
             }
 
             if (cooldownTimer <= 0f)
@@ -111,7 +111,7 @@ public class YunJinSkill : MonoBehaviour
         switch (RockCtr)
         {
             case 1:
-                gameDisplay.Rock1.color = new Color(gameDisplay.Rock1.color.r, gameDisplay.Rock1.color.g, gameDisplay.Rock1.color.b, 0f);
+                //gameDisplay.Rock1.color = new Color(gameDisplay.Rock1.color.r, gameDisplay.Rock1.color.g, gameDisplay.Rock1.color.b, 0f);
                 Rock1Active = false;
                 // Only reset Fragile if this is the last rock (when all rocks are gone)
                 if (!Rock2Active && !Rock3Active)
@@ -121,12 +121,12 @@ public class YunJinSkill : MonoBehaviour
                 Debug.Log("Rock1 blocked the attack");
                 break;
             case 2:
-                gameDisplay.Rock2.color = new Color(gameDisplay.Rock2.color.r, gameDisplay.Rock2.color.g, gameDisplay.Rock2.color.b, 0f);
+                //gameDisplay.Rock2.color = new Color(gameDisplay.Rock2.color.r, gameDisplay.Rock2.color.g, gameDisplay.Rock2.color.b, 0f);
                 Rock2Active = false;
                 Debug.Log("Rock2 blocked the attack");
                 break;
             case 3:
-                gameDisplay.Rock3.color = new Color(gameDisplay.Rock3.color.r, gameDisplay.Rock3.color.g, gameDisplay.Rock3.color.b, 0f);
+                //gameDisplay.Rock3.color = new Color(gameDisplay.Rock3.color.r, gameDisplay.Rock3.color.g, gameDisplay.Rock3.color.b, 0f);
                 Rock3Active = false;
                 Debug.Log("Rock3 blocked the attack");
                 break;
@@ -177,7 +177,7 @@ public class YunJinSkill : MonoBehaviour
         }
         // Deduct cost on release when we actually commit to the skill
         gameManager.player.score -= cost;
-        gameDisplay.UpdateChips(gameManager.player.score);
+        //gameDisplay.UpdateChips(gameManager.player.score);
         gameManager.shaker.ChipsDeductShake();
         gameManager.shaker.CostShake();
 
@@ -196,9 +196,9 @@ public class YunJinSkill : MonoBehaviour
 
     public void ReturnRockColor()
     {
-        gameDisplay.Rock1.color = new Color(gameDisplay.Rock1.color.r, gameDisplay.Rock1.color.g, gameDisplay.Rock1.color.b, 1f);
-        gameDisplay.Rock2.color = new Color(gameDisplay.Rock2.color.r, gameDisplay.Rock2.color.g, gameDisplay.Rock2.color.b, 1f);
-        gameDisplay.Rock3.color = new Color(gameDisplay.Rock3.color.r, gameDisplay.Rock3.color.g, gameDisplay.Rock3.color.b, 1f);
+        //gameDisplay.Rock1.color = new Color(gameDisplay.Rock1.color.r, gameDisplay.Rock1.color.g, gameDisplay.Rock1.color.b, 1f);
+        //gameDisplay.Rock2.color = new Color(gameDisplay.Rock2.color.r, gameDisplay.Rock2.color.g, gameDisplay.Rock2.color.b, 1f);
+        //gameDisplay.Rock3.color = new Color(gameDisplay.Rock3.color.r, gameDisplay.Rock3.color.g, gameDisplay.Rock3.color.b, 1f);
     }
 
     public void ReturnRockIdle()
@@ -212,9 +212,9 @@ public class YunJinSkill : MonoBehaviour
 
     public void DestroyAllRocks()
     {
-        gameDisplay.Rock1.color = new Color(gameDisplay.Rock1.color.r, gameDisplay.Rock1.color.g, gameDisplay.Rock1.color.b, 0f);
-        gameDisplay.Rock2.color = new Color(gameDisplay.Rock2.color.r, gameDisplay.Rock2.color.g, gameDisplay.Rock2.color.b, 0f);
-        gameDisplay.Rock3.color = new Color(gameDisplay.Rock3.color.r, gameDisplay.Rock3.color.g, gameDisplay.Rock3.color.b, 0f);
+        //gameDisplay.Rock1.color = new Color(gameDisplay.Rock1.color.r, gameDisplay.Rock1.color.g, gameDisplay.Rock1.color.b, 0f);
+        //gameDisplay.Rock2.color = new Color(gameDisplay.Rock2.color.r, gameDisplay.Rock2.color.g, gameDisplay.Rock2.color.b, 0f);
+        //gameDisplay.Rock3.color = new Color(gameDisplay.Rock3.color.r, gameDisplay.Rock3.color.g, gameDisplay.Rock3.color.b, 0f);
         Rock1Active = false;
         Rock2Active = false;
         Rock3Active = false;

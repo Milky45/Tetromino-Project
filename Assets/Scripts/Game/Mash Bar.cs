@@ -55,7 +55,7 @@ public class MashBar : MonoBehaviour
 
     public void HideDisplayEscaped()
     {
-        gameManager.gameDisplay.mashBarDisplay.SetActive(false);
+        //gameManager.gameDisplay.mashBarDisplay.SetActive(false);
     }
 
     public void IncValue()

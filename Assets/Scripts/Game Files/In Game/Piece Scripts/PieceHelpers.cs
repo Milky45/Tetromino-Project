@@ -15,6 +15,7 @@ public class PieceHelpers : MonoBehaviour
 
     public void LockPiece()
     {
+        if (playerManager.playerActivePiece == null) return;
         playerManager.comboCounter.ComboCount();
 
         foreach (Vector2Int cell in playerManager.playerActivePiece.cells)
@@ -23,13 +24,15 @@ public class PieceHelpers : MonoBehaviour
             if (yPos > 6)
             {
                 playerManager.LoseLife();
-                Destroy(this.gameObject); // Just in case
+                // REMOVED: Destroy(this.gameObject);
                 return;
             }
         }
 
-        Destroy(this.gameObject); // Remove current piece
-        playerManager.pieceSpawner.SpawnPiece(null); // Don't do this if game is ending!
+        // Destroy ONLY the dynamically spawned active piece GameObject, NOT the Helper itself:
+        Destroy(playerManager.playerActivePiece.gameObject); 
+
+        playerManager.pieceSpawner.SpawnPiece(null);
     }
 
     public bool IsValidPosition(Vector2Int pos, Vector2Int[] testCells = null)

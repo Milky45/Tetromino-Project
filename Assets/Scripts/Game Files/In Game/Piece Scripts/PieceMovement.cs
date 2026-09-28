@@ -23,9 +23,13 @@ public class PieceMovement : MonoBehaviour
     [Header("Piece Settings")]
     public float movingTimer = 1f;
     private float gravityDelay = 1.0f;
-    private float gravityTimer = 0f;
-    private float repeatTimerLR = 0f; // For Left/Right
-    private float repeatTimerDown = 0f; // For Down
+    public float gravityTimer = 0f;
+
+    [Header("Input Handling Delays")]
+    [SerializeField] private float dasDelay = 0.15f; // Delayed Auto-Shift delay before auto-repeat
+    [SerializeField] private float arrRate = 0.03f;  // Auto Repeat Rate delay
+    private float repeatTimerLR = 0f;
+    private float repeatTimerDown = 0f;
 
     private void Awake()
     {
@@ -39,9 +43,9 @@ public class PieceMovement : MonoBehaviour
 
     private void Update()
     {
+        if (activePiece == null || gameMasterIsPaused()) return;
+
         gravityTimer += Time.deltaTime;
-        repeatTimerLR += Time.deltaTime;
-        repeatTimerDown += Time.deltaTime;
 
         if (isMoving)
         {
@@ -52,6 +56,8 @@ public class PieceMovement : MonoBehaviour
                 movingTimer = 0f;
             }
         }
+
+        HandleInput();
 
         ClearGhostPiece();
         ClearActivePiece();
@@ -69,13 +75,94 @@ public class PieceMovement : MonoBehaviour
                     return;
                 }
             }
-            gravityTimer = 0f;
             
+            // RESET GRAVITY TIMER
+            gravityTimer = 0f; 
         }
+    }
+
+    private void HandleInput()
+    {
+        // --- HARD DROP ---
+        if (hardDropAction != null && hardDropAction.WasPressedThisFrame())
+        {
+            HardDrop();
+            return;
+        }
+
+        // --- HOLD PIECE ---
+        if (holdAction != null && holdAction.WasPressedThisFrame())
+        {
+            playerManager.TryHoldPiece(activePiece.data, activePiece);
+            return;
+        }
+
+        // --- LEFT / RIGHT MOVEMENT ---
+        if (moveLeftAction != null && moveLeftAction.WasPressedThisFrame())
+        {
+            TryMove(Vector2Int.left);
+            repeatTimerLR = dasDelay;
+        }
+        else if (moveRightAction != null && moveRightAction.WasPressedThisFrame())
+        {
+            TryMove(Vector2Int.right);
+            repeatTimerLR = dasDelay;
+        }
+        else if ((moveLeftAction != null && moveLeftAction.IsPressed()) || (moveRightAction != null && moveRightAction.IsPressed()))
+        {
+            repeatTimerLR -= Time.deltaTime;
+            if (repeatTimerLR <= 0f)
+            {
+                if (moveLeftAction.IsPressed()) TryMove(Vector2Int.left);
+                else if (moveRightAction.IsPressed()) TryMove(Vector2Int.right);
+
+                repeatTimerLR = arrRate;
+            }
+        }
+
+        // --- SOFT DROP (MOVE DOWN) ---
+        if (moveDownAction != null && moveDownAction.IsPressed())
+        {
+            repeatTimerDown -= Time.deltaTime;
+            if (repeatTimerDown <= 0f)
+            {
+                if (TryMove(Vector2Int.down))
+                {
+                    gravityTimer = 0f; // Reset gravity timer when manually dropping down
+                }
+                repeatTimerDown = arrRate;
+            }
+        }
+        else
+        {
+            repeatTimerDown = 0f;
+        }
+    }
+
+    private void HardDrop()
+    {
+        while (TryMove(Vector2Int.down))
+        {
+            // Keep dropping down until reaching the floor/stack
+        }
+
+        playerManager.playerStatus.holdUsed = false;
+        pieceHelpers.LockPiece();
+
+        if (playerManager.audioManager != null)
+        {
+            playerManager.audioManager.PlaySFX(playerManager.audioManager.dropClip);
+        }
+    }
+
+    private bool gameMasterIsPaused()
+    {
+        return playerManager != null && playerManager.gameMaster != null && playerManager.gameMaster.isPaused;
     }
 
     public bool TryMove(Vector2Int direction)
     {
+        if (activePiece == null) return false;
         ClearActivePiece();
 
         Vector2Int newPos = activePiece.position + direction;
@@ -100,17 +187,18 @@ public class PieceMovement : MonoBehaviour
 
     public void ClearGhostPiece()
     {
-        playerBoard.ghost_tilemap.ClearAllTiles(); // MUCH cleaner
+        playerBoard.ghost_tilemap.ClearAllTiles();
     }
 
     public void ClearActivePiece()
     {
-        foreach (Vector2Int cell in activePiece.cells)
+        if (activePiece != null)
         {
-            Vector3Int tilePos = new Vector3Int(activePiece.position.x + cell.x, activePiece.position.y + cell.y, 0);
-            playerBoard.main_tilemap.SetTile(tilePos, null);
+            foreach (Vector2Int cell in activePiece.cells)
+            {
+                Vector3Int tilePos = new Vector3Int(activePiece.position.x + cell.x, activePiece.position.y + cell.y, 0);
+                playerBoard.main_tilemap.SetTile(tilePos, null);
+            }
         }
     }
-
-    
 }

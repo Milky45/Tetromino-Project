@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void TryHoldPiece(TetrominoData current, Piece controller)
+    public void TryHoldPiece(TetrominoData current, PlayerPiece controller)
     {   
         var activePiece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}")?.GetComponent<Piece>();
 
@@ -58,7 +58,7 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Hold already used this turn!");
             return;
         }
-        controller.Clear();
+        controller.pieceHelpers.ClearActivePiece();
 
         if (pieceSpawner.heldTetromino == null)
         {

@@ -21,6 +21,7 @@ public class PvP : MonoBehaviour
     {
         // isSolo = playerManager.isSolo;
         // assign oponent based on the opposite isPlayer1 value
+        playerInput = playerManager.playerInput;
         opponentPlayerManager = playerManager.opponentPlayerManager;
         opponentPlayerStatus = playerManager.opponentPlayerManager.playerStatus;
         // if (!isSolo)

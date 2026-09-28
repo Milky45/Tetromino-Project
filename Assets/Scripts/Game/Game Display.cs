@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameDisplay : MonoBehaviour
 {
-    public Game_Manager gameManager;
+    public PlayerManager playerManager;
     public Shaker shaker;
 
     public TextMeshProUGUI ammoText;
@@ -14,15 +14,10 @@ public class GameDisplay : MonoBehaviour
     public TextMeshProUGUI skill1CDText;
     public TextMeshProUGUI skill2CDText;
     public TextMeshProUGUI chipsText;
-    public TextMeshProUGUI cost1Text;
-    public TextMeshProUGUI cost2Text;
     public TextMeshProUGUI comboTextMain;
     public TextMeshProUGUI comboTextHighlight;
     public TextMeshProUGUI lvlText;
-    public GameObject mashBarDisplay;
 
-    public Transform mainTileMap;
-    public Transform ghostTileMap;
 
     public SpriteRenderer[] burnStack = new SpriteRenderer[3];
     public SpriteRenderer[] heartIcons = new SpriteRenderer[3];
@@ -31,11 +26,6 @@ public class GameDisplay : MonoBehaviour
 
     public SpriteRenderer backBase;
     public SpriteRenderer EMP_Icon;
-    public SpriteRenderer Rock1;
-    public SpriteRenderer Rock2;
-    public SpriteRenderer Rock3;
-    public TextMeshProUGUI RockDurUI;
-
     public void UpdateChips(int chips)
     {
         chipsText.text = $"{chips}";
@@ -112,7 +102,7 @@ public class GameDisplay : MonoBehaviour
 
     public void Ammo_Update(int ammoCount)
     {
-        ammoText.text = $"{ammoCount}/{gameManager.player.maxAmmo}";
+        ammoText.text = $"{ammoCount}/{playerManager.playerStatus.maxAmmo}";
         shaker.bulletShake();
     }
 
@@ -245,11 +235,11 @@ public class GameDisplay : MonoBehaviour
 
     public void UpdateEMPStateIcon()
     {
-        if (gameManager.player.hasEmpGrenade && !gameManager.player.empOnCooldown)
+        if (playerManager.playerStatus.hasEmpGrenade && !playerManager.playerStatus.empOnCooldown)
         {
             EMP_Icon.color = new Color(EMP_Icon.color.r, EMP_Icon.color.g, EMP_Icon.color.b, 1f);
         }
-        else if (gameManager.player.hasEmpGrenade && gameManager.player.empOnCooldown)
+        else if (playerManager.playerStatus.hasEmpGrenade && playerManager.playerStatus.empOnCooldown)
         {
             EMP_Icon.color = new Color(EMP_Icon.color.r, EMP_Icon.color.g, EMP_Icon.color.b, 0.5f);
         }
@@ -261,15 +251,15 @@ public class GameDisplay : MonoBehaviour
 
     public void UpdateComboText()
     {
-        if (gameManager.player.comboCount <= 1)
+        if (playerManager.playerStatus.comboCount <= 1)
         {
             comboTextMain.text = "";
             comboTextHighlight.text = "";
         }
         else
         {
-            comboTextMain.text = $"COMBO {gameManager.player.comboCount}x";
-            comboTextHighlight.text = $"COMBO {gameManager.player.comboCount}x";
+            comboTextMain.text = $"COMBO {playerManager.playerStatus.comboCount}x";
+            comboTextHighlight.text = $"COMBO {playerManager.playerStatus.comboCount}x";
             
         }
         

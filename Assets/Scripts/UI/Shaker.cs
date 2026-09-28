@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Shaker : MonoBehaviour
 {
-    public Game_Manager gameManager;
+    public PlayerManager playerManager;
     public Animator board;
     public Animator bullets;
     public Animator chips;
@@ -99,6 +99,6 @@ public class Shaker : MonoBehaviour
 
     public void ResetComboText()
     {
-        gameManager.gameDisplay.UpdateComboText();
+        playerManager.gameDisplay.UpdateComboText();
     }
 }

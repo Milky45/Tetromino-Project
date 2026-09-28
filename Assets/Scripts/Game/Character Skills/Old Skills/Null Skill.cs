@@ -6,7 +6,7 @@ public class NullSkill : MonoBehaviour
 {
     [Header("References")]
     public Game_Manager gameManager;
-    public GameDisplay gameDisplay;
+    //public GameDisplay gameDisplay;
     public CharacterManager characterManager;
     public Board_Manager boardManager;
 
@@ -29,14 +29,14 @@ public class NullSkill : MonoBehaviour
         if (characterManager.isPlayer1)
         {
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
 
         }
         else
         {
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
         }
         isOnCooldown = true;
@@ -48,13 +48,13 @@ public class NullSkill : MonoBehaviour
         {
             Debug.Log("Null Skill Assigned as Secondary Skill");
             skillAction = playerInput.actions.FindAction("Secondary Skill");
-            gameDisplay.cost2Text.text = cost.ToString();
+            //gameDisplay.cost2Text.text = cost.ToString();
         }
         else if(isSec == false)
         {
             Debug.Log("Null Skill Assigned as Primary Skill");
             skillAction = playerInput.actions.FindAction("Skill");
-            gameDisplay.cost1Text.text = cost.ToString();
+            //gameDisplay.cost1Text.text = cost.ToString();
         }
         if (skillAction != null)
            skillAction.performed += ctx => ActivateSkill();
@@ -68,11 +68,11 @@ public class NullSkill : MonoBehaviour
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
             if(isSec)
             {
-                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill2CooldownUpdate(cooldownTimer);
             }
             else
             {
-                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill1CooldownUpdate(cooldownTimer);
             }
 
             if (cooldownTimer <= 0f)
@@ -99,7 +99,7 @@ public class NullSkill : MonoBehaviour
         if (gameManager.isTimeStopped) return;
 
         gameManager.player.score -= cost;
-        gameDisplay.UpdateChips(gameManager.player.score);
+        //gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
         gameManager.shaker.ChipsDeductShake();
@@ -113,7 +113,7 @@ public class NullSkill : MonoBehaviour
         // Freeze gravity for a short duration and add half of current ammo
         StartCoroutine(FreezeGravityAndAddAmmoCoroutine(12f));
         gameManager.shaker.boardShake();
-        StartCoroutine(gameDisplay.BackPulse(12f, "#720076ff"));
+        //StartCoroutine(gameDisplay.BackPulse(12f, "#720076ff"));
     }
 
     private IEnumerator FreezeGravityAndAddAmmoCoroutine(float durationSeconds)
@@ -123,7 +123,7 @@ public class NullSkill : MonoBehaviour
         {
             gameManager.player.attackAmmo = gameManager.player.maxAmmo;
         }
-        gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
+        //gameDisplay.Ammo_Update(gameManager.player.attackAmmo);
 
         // Freeze gravity by setting a very large delay and restore it after duration
         float originalDelay = gameManager.currentGravityDelay;

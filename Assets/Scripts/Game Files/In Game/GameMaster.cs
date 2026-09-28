@@ -7,7 +7,8 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private PlayerManager player1Manager;
     [SerializeField] private PlayerManager player2Manager;
 
-    [SerializeField] private PieceHelpers pieceHelpers;
+    [SerializeField] private PieceHelpers p1PieceHelpers;
+    [SerializeField] private PieceHelpers p2PieceHelpers;
 
     [Header("Game State")]
     [SerializeField] private bool isGameOver = false;
@@ -35,8 +36,8 @@ public class GameMaster : MonoBehaviour
         player1Manager.opponentPlayerManager = player2Manager;
         player2Manager.opponentPlayerManager = player1Manager;
         // assign the playerMangers' piece spawners some piece helpers
-        player1Manager.pieceSpawner.pieceHelpers = pieceHelpers;
-        player2Manager.pieceSpawner.pieceHelpers = pieceHelpers;
+        player1Manager.pieceSpawner.pieceHelpers = p1PieceHelpers;
+        player2Manager.pieceSpawner.pieceHelpers = p2PieceHelpers;
     }
 
     public void ReportPlayerGameLoss(bool isPlayer1)

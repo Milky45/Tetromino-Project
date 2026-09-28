@@ -26,7 +26,7 @@ public class TetroSkill : MonoBehaviour
     public bool isOnCooldown = true;
 
     [Header("Cooldown UI")]
-    public GameDisplay gameDisplay;
+    //public GameDisplay gameDisplay;
     private Coroutine pulseRoutine;
 
     [Header("Misc")]
@@ -45,7 +45,7 @@ public class TetroSkill : MonoBehaviour
             BO_Renderer = characterManager.blindOverlay.GetComponent<SpriteRenderer>();
 
             gameManager = GameObject.Find("Game Manager P1").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 1").GetComponent<PlayerInput>();
         }
         else
@@ -57,7 +57,7 @@ public class TetroSkill : MonoBehaviour
             BO_Renderer = blindOverlay.GetComponent<SpriteRenderer>();
 
             gameManager = GameObject.Find("Game Manager P2").GetComponent<Game_Manager>();
-            gameDisplay = gameManager.gameDisplay;
+            //gameDisplay = gameManager.gameDisplay;
             playerInput = GameObject.Find("Player 2").GetComponent<PlayerInput>();
         }
 
@@ -74,13 +74,13 @@ public class TetroSkill : MonoBehaviour
         {
             Debug.Log("Tetro Skill Assigned as Secondary Skill");
             skillAction = playerInput.actions.FindAction("Secondary Skill");
-            gameDisplay.cost2Text.text = cost.ToString();
+            //gameDisplay.cost2Text.text = cost.ToString();
         }
         else if(isSec == false)
         {
             Debug.Log("Tetro Skill Assigned as Primary Skill");
             skillAction = playerInput.actions.FindAction("Skill");
-            gameDisplay.cost1Text.text = cost.ToString();
+            //gameDisplay.cost1Text.text = cost.ToString();
         }      
         if (skillAction != null)
         skillAction.performed += ctx => BallAnim();
@@ -99,11 +99,11 @@ public class TetroSkill : MonoBehaviour
             cooldownTimer = Mathf.Max(cooldownTimer, 0f);
             if(isSec)
             {
-                gameDisplay.Skill2CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill2CooldownUpdate(cooldownTimer);
             }
             else
             {
-                gameDisplay.Skill1CooldownUpdate(cooldownTimer);
+                //gameDisplay.Skill1CooldownUpdate(cooldownTimer);
             }
 
             // Turn off cooldown when timer ends
@@ -138,7 +138,7 @@ public class TetroSkill : MonoBehaviour
         
         ballRenderer.enabled = true;
         gameManager.player.score -= cost;
-        gameDisplay.UpdateChips(gameManager.player.score);
+        //gameDisplay.UpdateChips(gameManager.player.score);
         isOnCooldown = true;
         cooldownTimer = cooldownTime;
 

@@ -21,11 +21,30 @@ public class PieceRotation : MonoBehaviour
         rotateRightAction = playerInput.actions.FindAction("Rotate Right");
     }
 
+    private void Update()
+    {
+        if (playerManager.playerActivePiece == null) return;
+
+        // Poll single presses without callbacks
+        if (rotateLeftAction != null && rotateLeftAction.WasPressedThisFrame())
+        {
+            TryRotate(-1);
+        }
+        else if (rotateRightAction != null && rotateRightAction.WasPressedThisFrame())
+        {
+            TryRotate(1);
+        }
+    }
+
     private void TryRotate(int direction)
     {
-        if (Game_Manager.isPaused) return;
+        if (playerManager.gameMaster != null && playerManager.gameMaster.isPaused) return;
         
-        playerManager.audioManager.PlaySFX(playerManager.audioManager.rotateClip);
+        if (playerManager.audioManager != null)
+        {
+            playerManager.audioManager.PlaySFX(playerManager.audioManager.rotateClip);
+        }
+
         pieceHelpers.ClearActivePiece();
         Vector2Int[] rotatedCells = new Vector2Int[playerManager.playerActivePiece.cells.Length];
 
@@ -45,7 +64,7 @@ public class PieceRotation : MonoBehaviour
 
                 rotatedCells[i] = new Vector2Int(rx, ry);
             }
-            else if (playerManager.playerActivePiece.data.tetromino == TetrominoType.O) // o block shouldn't rotate
+            else if (playerManager.playerActivePiece.data.tetromino == TetrominoType.O) // O block shouldn't rotate
             {
                 pieceHelpers.Set();
                 return;
@@ -55,7 +74,6 @@ public class PieceRotation : MonoBehaviour
                 // Normal rotation (standard SRS)
                 rotatedCells[i] = new Vector2Int(-direction * y, direction * x);
             }
-            
         }
 
         // Try rotating in place first
@@ -93,7 +111,6 @@ public class PieceRotation : MonoBehaviour
                 }
             }
         }
-
         else // Wall kicks for other tetrominoes
         {
             Vector2Int[] genericKicks = new Vector2Int[]
