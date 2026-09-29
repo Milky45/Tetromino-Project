@@ -25,7 +25,7 @@ public class GameOverManager : MonoBehaviour
 
     private void Start()
     {
-        if (!isSolo) { Invoke(nameof(TimedGameOver), 400f); }
+        //if (!isSolo) { Invoke(nameof(TimedGameOver), 400f); }
     }
 
     public void TimedGameOver()

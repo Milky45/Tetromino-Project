@@ -17,7 +17,7 @@ public class PieceHelpers : MonoBehaviour
     {
         if (playerManager.playerActivePiece == null) return;
         
-        int topThreshold = playerBoard != null ? (playerBoard.boardSize.y / 2 - 2) : 10;
+        int topThreshold = playerBoard != null ? (playerBoard.boardSize.y / 2 - 4) : 10;
         bool toppedOut = false;
 
         foreach (Vector2Int cell in playerManager.playerActivePiece.cells)

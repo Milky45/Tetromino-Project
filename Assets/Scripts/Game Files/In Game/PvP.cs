@@ -104,7 +104,7 @@ public class PvP : MonoBehaviour
             }
 
             opponentPlayerManager.pvp.ReceiveDeadLine();
-            playerManager.audioManager.PlaySFX(playerManager.audioManager.attack);
+            //playerManager.audioManager.PlaySFX(playerManager.audioManager.attack);
 
             if (opponentPiece != null && opponentPiece.pieceHelpers != null)
             {

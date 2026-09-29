@@ -1,24 +1,37 @@
-using System.Runtime.CompilerServices;
+using System.Collections;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
     [Header("Player Managers")]
-    [SerializeField] private PlayerManager player1Manager;
-    [SerializeField] private PlayerManager player2Manager;
+    [SerializeField] public PlayerManager player1Manager;
+    [SerializeField] public PlayerManager player2Manager;
 
     [SerializeField] private PieceHelpers p1PieceHelpers;
     [SerializeField] private PieceHelpers p2PieceHelpers;
 
     [Header("Game State")]
-    [SerializeField] private bool isGameOver = false;
-    public int playerWinnerID = 0;
+    public bool isGameOver = false;
+    public int playerWinnerID = 0; // 1 = P1 Wins, 2 = P2 Wins
     public bool isPaused = false;
 
     [Header("Game Settings")]
     [SerializeField] private int scorePerLine = 100;
-    [SerializeField] private int initialLevel = 1;
-    [SerializeField] private float levelSpeedMultiplier = 0.8f;
+
+    [Header("Gravity System")]
+    [Tooltip("Starting gravity delay in seconds per step.")]
+    [SerializeField] private float baseGravityDelay = 1.0f;
+    [Tooltip("Minimum cap so gravity doesn't reach 0s or drop too fast.")]
+    [SerializeField] private float minGravityDelay = 0.05f;
+    [Tooltip("Multiplier applied every speed increase interval.")]
+    [SerializeField] private float levelSpeedMultiplier = 0.85f;
+    [Tooltip("Time in seconds between gravity speed increases.")]
+    [SerializeField] private float gravityIncreaseInterval = 60f;
+
+    [Header("Gravity Tracking")]
+    public float currentGravityDelay;
+    public float gravityTimer = 0f;
+    public int currentLevel = 1;
 
     [Header("Game Debugging: Player 1")]
     public bool disableSpawnForP1 = false;
@@ -32,99 +45,131 @@ public class GameMaster : MonoBehaviour
 
     private void Awake()
     {
-        // assign their opps
-        player1Manager.opponentPlayerManager = player2Manager;
-        player2Manager.opponentPlayerManager = player1Manager;
-        // assign the playerMangers' piece spawners some piece helpers
-        player1Manager.pieceSpawner.pieceHelpers = p1PieceHelpers;
-        player2Manager.pieceSpawner.pieceHelpers = p2PieceHelpers;
+        // Assign opponent references
+        if (player1Manager != null && player2Manager != null)
+        {
+            player1Manager.opponentPlayerManager = player2Manager;
+            player2Manager.opponentPlayerManager = player1Manager;
+        }
+
+        if (player1Manager?.pieceSpawner != null) player1Manager.pieceSpawner.pieceHelpers = p1PieceHelpers;
+        if (player2Manager?.pieceSpawner != null) player2Manager.pieceSpawner.pieceHelpers = p2PieceHelpers;
+    }
+
+    private void Start()
+    {
+        // Initialize base gravity delay at start
+        currentGravityDelay = baseGravityDelay;
+        UpdatePlayerGravity();
     }
 
     private void Update()
     {
+        if (isGameOver || isPaused) return;
 
-        player1Manager.pieceSpawner.disableSpawn = disableSpawnForP1;
-        player2Manager.pieceSpawner.disableSpawn = disableSpawnForP2;
+        // Sync debugging flags to spawners
+        if (player1Manager?.pieceSpawner != null) player1Manager.pieceSpawner.disableSpawn = disableSpawnForP1;
+        if (player2Manager?.pieceSpawner != null) player2Manager.pieceSpawner.disableSpawn = disableSpawnForP2;
 
+        // --- Gravity Timer System ---
+        gravityTimer += Time.deltaTime;
+        if (gravityTimer >= gravityIncreaseInterval)
+        {
+            gravityTimer = 0f;
+            IncreaseGravity();
+        }
+    }
+
+    private void IncreaseGravity()
+    {
+        currentLevel++;
+        // Multiply by levelSpeedMultiplier and ensure it doesn't fall below minGravityDelay
+        currentGravityDelay = Mathf.Max(minGravityDelay, currentGravityDelay * levelSpeedMultiplier);
+        
+        Debug.Log($"[GRAVITY INCREASED] Level {currentLevel}! New Gravity Delay: {currentGravityDelay:F3}s");
+        
+        UpdatePlayerGravity();
+    }
+
+    private void UpdatePlayerGravity()
+    {
+        // Set current gravity delay directly onto both PlayerBoards
+        if (player1Manager != null && player1Manager.playerBoard != null)
+        {
+            player1Manager.playerBoard.currentgravityDelay = currentGravityDelay;
+        }
+
+        if (player2Manager != null && player2Manager.playerBoard != null)
+        {
+            player2Manager.playerBoard.currentgravityDelay = currentGravityDelay;
+        }
     }
 
     public void ReportPlayerGameLoss(bool isPlayer1)
     {
-        // if true, then its player 1 who lost
-        // set the playerWinner into 2 indicating that p2 won, playerWinner = 1 if p1 wins
-        if (isPlayer1)
-        {
-            playerWinnerID = 2;
-        }
-        else
-        {
-            playerWinnerID = 1;
-        }
+        if (isGameOver) return;
+
+        playerWinnerID = isPlayer1 ? 2 : 1;
+        GameOver();
     }
 
     public void CheckCatchUpCondition(PlayerManager playerManager)
     {
-        PlayerStatus playerStatus = playerManager.playerStatus;
-        PlayerBoard playerBoard = playerManager.playerBoard;
+        PlayerStatus fallenPlayerStatus = playerManager.playerStatus;
 
-
-        // If this player has higher or equal score, opponent can still catch up
-        if (playerStatus.score >= playerManager.opponentPlayerManager.playerStatus.score)
+        if (fallenPlayerStatus.score >= playerManager.opponentPlayerManager.playerStatus.score)
         {
-            isGameOver = true;
-            if (playerBoard != null)
-            {
-                playerBoard.ClearAll();
-                if (playerBoard.ghost_tilemap != null) playerBoard.ghost_tilemap.ClearAllTiles();
-            }
-            
-            // Clear pieces
-            GameObject Piece = GameObject.Find($"ActivePiece{(playerStatus.isPlayer1 ? "P1" : "P2")}");
-            if (Piece != null) Destroy(Piece);
-            
-            if (playerManager.pieceSpawner != null) playerManager.pieceSpawner.heldTetromino = null;
-            playerStatus.holdUsed = false;
-            playerStatus.lastComboMilestone = 0;
-            
-            string playerId = playerStatus.isPlayer1 ? "P1" : "P2";
-            string opponentId = playerStatus.isPlayer1 ? "P2" : "P1";
-            Debug.Log($"{playerId} ran out of lives with score {playerStatus.score}. {opponentId} can still catch up!");
-            
-            // Let the PvP system handle the catch-up phase
+            string fallenId = fallenPlayerStatus.isPlayer1 ? "P1" : "P2";
+            string opponentId = fallenPlayerStatus.isPlayer1 ? "P2" : "P1";
+            Debug.Log($"[CATCH-UP] {fallenId} ran out of lives with score {fallenPlayerStatus.score}. {opponentId} can still catch up!");
+
             StartCoroutine(WaitForCatchUpCompletion(playerManager));
         }
         else
         {
-            // This player has lower score and is out of lives - they lost
-            ReportPlayerGameLoss(playerStatus.isPlayer1);
+            ReportPlayerGameLoss(fallenPlayerStatus.isPlayer1);
         }
     }
 
-    private System.Collections.IEnumerator WaitForCatchUpCompletion(PlayerManager playerManager)
+    private IEnumerator WaitForCatchUpCompletion(PlayerManager playerManager)
     {
         PlayerStatus catchingUpPlayer = playerManager.opponentPlayerManager.playerStatus;
         PlayerStatus fallenPlayer = playerManager.playerStatus;
         int targetScore = fallenPlayer.score;
-        
+
         string catchingPlayerId = catchingUpPlayer.isPlayer1 ? "P1" : "P2";
-        Debug.Log($"Catch-up phase started! {catchingPlayerId} needs to reach {targetScore} points.");
-        
-        // Wait while opponent is playing catch-up
+
         while (catchingUpPlayer.lives > 0 && catchingUpPlayer.score < targetScore)
         {
             yield return null;
         }
 
-        // Catch-up phase ended
         if (catchingUpPlayer.score >= targetScore)
         {
-            Debug.Log($"{catchingPlayerId} successfully caught up! Score: {catchingUpPlayer.score}");
+            Debug.Log($"[CATCH-UP SUCCESS] {catchingPlayerId} reached {catchingUpPlayer.score} pts!");
             ReportPlayerGameLoss(fallenPlayer.isPlayer1);
         }
         else
         {
-            Debug.Log($"{catchingPlayerId} failed to catch up with {fallenPlayer}! Score: {catchingUpPlayer.score}");
+            Debug.Log($"[CATCH-UP FAILED] {catchingPlayerId} failed to catch up!");
             ReportPlayerGameLoss(catchingUpPlayer.isPlayer1);
         }
+    }
+
+    public void GameOver()
+    {
+        isGameOver = true;
+
+        string winnerStr = playerWinnerID == 1 ? "Player 1" : (playerWinnerID == 2 ? "Player 2" : "No One");
+        Debug.Log($"=======================================");
+        Debug.Log($"             GAME OVER                 ");
+        Debug.Log($"          WINNER: {winnerStr}          ");
+        Debug.Log($"=======================================");
+
+        if (player1Manager?.playerInput != null) player1Manager.playerInput.DeactivateInput();
+        if (player2Manager?.playerInput != null) player2Manager.playerInput.DeactivateInput();
+
+        disableSpawnForP1 = true;
+        disableSpawnForP2 = true;
     }
 }
